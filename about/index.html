@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/nicepeng/nicepeng.github.io/img/fluid.png">
-  <link rel="icon" href="/nicepeng/nicepeng.github.io/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -22,7 +22,7 @@
     <meta name="description" content="你有没有过这种经历：  领导扔来几十个 Excel 表格，让你合并统计数据，手动复制粘贴要熬到半夜； 想收集某个网站的商品价格、招聘信息，一页页翻到手酸，还容易漏看； 刷到各种 AI 工具、自动化脚本，觉得很神奇，但心里总打鼓：“这是程序员才会的东西吧？我零基础能学会吗？”  如果你有过这些想法，那 Python 绝对是你值得花时间学习的技能。 很多人对编程有刻板印象：觉得它难、复杂，要英语好、数">
 <meta property="og:type" content="website">
 <meta property="og:title" content="01 开篇导读：Python 到底能做什么？零基础该怎么学？">
-<meta property="og:url" content="https://github.com/nicepeng/nicepeng.github.io/about/index.html">
+<meta property="og:url" content="https://nicepeng.github.io/about/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="你有没有过这种经历：  领导扔来几十个 Excel 表格，让你合并统计数据，手动复制粘贴要熬到半夜； 想收集某个网站的商品价格、招聘信息，一页页翻到手酸，还容易漏看； 刷到各种 AI 工具、自动化脚本，觉得很神奇，但心里总打鼓：“这是程序员才会的东西吧？我零基础能学会吗？”  如果你有过这些想法，那 Python 绝对是你值得花时间学习的技能。 很多人对编程有刻板印象：觉得它难、复杂，要英语好、数">
 <meta property="og:locale" content="zh_CN">
@@ -53,12 +53,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/nicepeng/nicepeng.github.io/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/nicepeng/nicepeng.github.io/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/nicepeng/nicepeng.github.io/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -67,15 +67,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"github.com","root":"/nicepeng/nicepeng.github.io/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/nicepeng/nicepeng.github.io/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"nicepeng.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/nicepeng/nicepeng.github.io/js/utils.js" ></script>
-  <script  src="/nicepeng/nicepeng.github.io/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
   
@@ -108,7 +108,7 @@
 <div class="header-inner" style="height: 60vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/nicepeng/nicepeng.github.io/">
+    <a class="navbar-brand" href="/">
       <strong>nicepeng</strong>
     </a>
 
@@ -127,7 +127,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/nicepeng/nicepeng.github.io/" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -139,7 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/nicepeng/nicepeng.github.io/archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -151,7 +151,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/nicepeng/nicepeng.github.io/categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -163,7 +163,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/nicepeng/nicepeng.github.io/tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -175,7 +175,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/nicepeng/nicepeng.github.io/about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -213,7 +213,7 @@
           
           
             <div class="col-4 mobile-grid-cell">
-              <a href="/nicepeng/nicepeng.github.io/" target="_self">
+              <a href="/" target="_self">
                 <div class="mobile-grid-item">
                   <i class="iconfont icon-home-fill"></i>
                   <span>首页</span>
@@ -227,7 +227,7 @@
           
           
             <div class="col-4 mobile-grid-cell">
-              <a href="/nicepeng/nicepeng.github.io/archives/" target="_self">
+              <a href="/archives/" target="_self">
                 <div class="mobile-grid-item">
                   <i class="iconfont icon-archive-fill"></i>
                   <span>归档</span>
@@ -241,7 +241,7 @@
           
           
             <div class="col-4 mobile-grid-cell">
-              <a href="/nicepeng/nicepeng.github.io/categories/" target="_self">
+              <a href="/categories/" target="_self">
                 <div class="mobile-grid-item">
                   <i class="iconfont icon-category-fill"></i>
                   <span>分类</span>
@@ -255,7 +255,7 @@
           
           
             <div class="col-4 mobile-grid-cell">
-              <a href="/nicepeng/nicepeng.github.io/tags/" target="_self">
+              <a href="/tags/" target="_self">
                 <div class="mobile-grid-item">
                   <i class="iconfont icon-tags-fill"></i>
                   <span>标签</span>
@@ -269,7 +269,7 @@
           
           
             <div class="col-4 mobile-grid-cell">
-              <a href="/nicepeng/nicepeng.github.io/about/" target="_self">
+              <a href="/about/" target="_self">
                 <div class="mobile-grid-item">
                   <i class="iconfont icon-user-fill"></i>
                   <span>关于</span>
@@ -308,7 +308,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/nicepeng/nicepeng.github.io/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -403,7 +403,7 @@
 <li>批量处理图片、视频，比如加水印、转格式、剪辑片段。</li>
 </ul>
 <p>说白了，只要是有规律、重复做的事，基本都能用 Python 帮你完成。</p>
-<p><img src="https://x08gmb9mcg3.feishu.cn/space/api/box/stream/download/asynccode/?code=MDI4OGM3ZjlkMTJmMjFhNjM5YjBmMDIzYjBiMjI0OWVfR2JVeU83V0J5bG5TVG5EQzRUVFRQUnJ5c0tQNmlCeHJfVG9rZW46SU5wM2JKQUZxb2RTODZ4Wml3VWNZNnp0bkFjXzE3ODQ3MjM1NTg6MTc4NDcyNzE1OF9WNA&add_watermark=true&scene_type=CCM" srcset="/nicepeng/nicepeng.github.io/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://x08gmb9mcg3.feishu.cn/space/api/box/stream/download/asynccode/?code=MDI4OGM3ZjlkMTJmMjFhNjM5YjBmMDIzYjBiMjI0OWVfR2JVeU83V0J5bG5TVG5EQzRUVFRQUnJ5c0tQNmlCeHJfVG9rZW46SU5wM2JKQUZxb2RTODZ4Wml3VWNZNnp0bkFjXzE3ODQ3MjM1NTg6MTc4NDcyNzE1OF9WNA&add_watermark=true&scene_type=CCM" srcset="/img/loading.gif" lazyload alt="img"></p>
 <h1 id="二、零基础最关心的-4-个问题，今天给你说透"><a href="#二、零基础最关心的-4-个问题，今天给你说透" class="headerlink" title="二、零基础最关心的 4 个问题，今天给你说透"></a>二、零基础最关心的 4 个问题，今天给你说透</h1><p>每次聊到学 Python，新手总会有一堆顾虑。我挑了问得最多的 4 个，一次性给你讲明白，打消你的担心。</p>
 <p><strong>1 英语不好，能学 Python 吗？</strong></p>
 <p><strong>完全可以。</strong></p>
@@ -554,8 +554,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/nicepeng/nicepeng.github.io/js/events.js" ></script>
-<script  src="/nicepeng/nicepeng.github.io/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -577,15 +577,15 @@
 
 
   
-    <script  src="/nicepeng/nicepeng.github.io/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
 
 
-  <script defer src="/nicepeng/nicepeng.github.io/js/openkounter.js" ></script>
+  <script defer src="/js/openkounter.js" ></script>
 
-  <script  src="/nicepeng/nicepeng.github.io/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -593,7 +593,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/nicepeng/nicepeng.github.io/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   
