@@ -19,24 +19,29 @@
   <meta name="author" content="nicepeng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="你有没有过这种经历：  领导扔来几十个 Excel 表格，让你合并统计数据，手动复制粘贴要熬到半夜； 想收集某个网站的商品价格、招聘信息，一页页翻到手酸，还容易漏看； 刷到各种 AI 工具、自动化脚本，觉得很神奇，但心里总打鼓：“这是程序员才会的东西吧？我零基础能学会吗？”  如果你有过这些想法，那 Python 绝对是你值得花时间学习的技能。 很多人对编程有刻板印象：觉得它难、复杂，要英语好、">
+    <meta name="description" content="上一篇我们聊了 Python 能做什么、零基础该怎么学，很多同学已经摩拳擦掌，想亲手写代码试试了。 学编程的第一步，永远是先把「干活的工具」准备好。很多新手还没开始写代码，就倒在了环境搭建这一步：要么下载错了版本，要么装完运行不了，折腾半天没搞定，直接劝退。 别担心，今天这篇我会用最直白的步骤，带你从零搭好 Python 开发环境。全程跟着点鼠标就行，哪怕你完全不懂电脑，也能 10 分钟搞定，顺利">
 <meta property="og:type" content="article">
-<meta property="og:title" content="01 | 开篇导读：Python 到底能做什么？零基础该怎么学？">
-<meta property="og:url" content="https://nicepeng.github.io/2026/07/22/Python%E5%9F%BA%E7%A1%8001/index.html">
+<meta property="og:title" content="02 | Python 开发环境搭建：10 分钟搞定，写出你的第一行代码">
+<meta property="og:url" content="https://nicepeng.github.io/2026/07/23/02-python%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="你有没有过这种经历：  领导扔来几十个 Excel 表格，让你合并统计数据，手动复制粘贴要熬到半夜； 想收集某个网站的商品价格、招聘信息，一页页翻到手酸，还容易漏看； 刷到各种 AI 工具、自动化脚本，觉得很神奇，但心里总打鼓：“这是程序员才会的东西吧？我零基础能学会吗？”  如果你有过这些想法，那 Python 绝对是你值得花时间学习的技能。 很多人对编程有刻板印象：觉得它难、复杂，要英语好、">
+<meta property="og:description" content="上一篇我们聊了 Python 能做什么、零基础该怎么学，很多同学已经摩拳擦掌，想亲手写代码试试了。 学编程的第一步，永远是先把「干活的工具」准备好。很多新手还没开始写代码，就倒在了环境搭建这一步：要么下载错了版本，要么装完运行不了，折腾半天没搞定，直接劝退。 别担心，今天这篇我会用最直白的步骤，带你从零搭好 Python 开发环境。全程跟着点鼠标就行，哪怕你完全不懂电脑，也能 10 分钟搞定，顺利">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i-blog.csdnimg.cn/direct/4f5d0415176e4200b6b0d7bcddd8b688.png">
-<meta property="article:published_time" content="2026-07-22T12:46:28.000Z">
-<meta property="article:modified_time" content="2026-07-23T13:27:29.517Z">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/07/23/Ztr5/pasted-image-1784813356651.webp">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/07/23/9oZl/pasted-image-1784813405704.webp">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/07/23/5hFr/pasted-image-1784813475647.webp">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/07/23/Jpn7/pasted-image-1784813500209.webp">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/07/23/The3/pasted-image-1784813531558.webp">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/07/23/xqD2/pasted-image-1784813581385.webp">
+<meta property="article:published_time" content="2026-07-23T13:20:41.000Z">
+<meta property="article:modified_time" content="2026-07-23T13:35:30.753Z">
 <meta property="article:author" content="nicepeng">
-<meta property="article:tag" content="原创">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://i-blog.csdnimg.cn/direct/4f5d0415176e4200b6b0d7bcddd8b688.png">
+<meta name="twitter:image" content="https://files.seeusercontent.com/2026/07/23/Ztr5/pasted-image-1784813356651.webp">
   
   
   
-  <title>01 | 开篇导读：Python 到底能做什么？零基础该怎么学？ - Hexo</title>
+  <title>02 | Python 开发环境搭建：10 分钟搞定，写出你的第一行代码 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -321,7 +326,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="01 | 开篇导读：Python 到底能做什么？零基础该怎么学？"></span>
+            <span id="subtitle" data-typed-text="02 | Python 开发环境搭建：10 分钟搞定，写出你的第一行代码"></span>
           
         </div>
 
@@ -332,8 +337,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-07-22 20:46" pubdate>
-          2026年7月22日 晚上
+        <time datetime="2026-07-23 21:20" pubdate>
+          2026年7月23日 晚上
         </time>
       </span>
     
@@ -344,7 +349,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.3k 字
+          4.6k 字
         
       </span>
     
@@ -355,7 +360,7 @@
         
         
         
-          37 分钟
+          39 分钟
         
       </span>
     
@@ -394,145 +399,158 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">01 | 开篇导读：Python 到底能做什么？零基础该怎么学？</h1>
+            <h1 id="seo-header">02 | Python 开发环境搭建：10 分钟搞定，写出你的第一行代码</h1>
             
             
               <div class="markdown-body">
                 
-                <hr>
-<p>你有没有过这种经历：</p>
-<ul>
-<li>领导扔来几十个 Excel 表格，让你合并统计数据，手动复制粘贴要熬到半夜；</li>
-<li>想收集某个网站的商品价格、招聘信息，一页页翻到手酸，还容易漏看；</li>
-<li>刷到各种 AI 工具、自动化脚本，觉得很神奇，但心里总打鼓：“这是程序员才会的东西吧？我零基础能学会吗？”</li>
-</ul>
-<p>如果你有过这些想法，那 Python 绝对是你值得花时间学习的技能。</p>
-<p>很多人对编程有刻板印象：觉得它难、复杂，要英语好、数学好才能学。但 Python 恰恰打破了这个偏见 —— 它是所有编程语言里，对新手最友好、最容易上手的一个。</p>
-<p>今天这篇文章，我就用大白话跟你聊透三个问题：</p>
-<ol>
-<li>Python 到底是什么？它能帮你做什么？</li>
-<li>零基础学 Python，常见的顾虑到底是不是真的？</li>
-<li>新手该怎么学，才能少走弯路、越学越有动力？</li>
-</ol>
-<p>看完你就会发现：编程离你一点都不远，普通人学会 Python，真的能解决很多现实里的麻烦。</p>
-<h1 id="一、Python-到底能做什么？不只是程序员的专利"><a href="#一、Python-到底能做什么？不只是程序员的专利" class="headerlink" title="一、Python 到底能做什么？不只是程序员的专利"></a>一、Python 到底能做什么？不只是程序员的专利</h1><p>很多人以为 “学 Python &#x3D; 当程序员”，其实完全不是。</p>
-<p>Python 更像一个 “万能工具”：程序员用它做开发，运营用它做数据分析，行政用它做办公自动化，学生用它做课题研究，甚至普通人也能用它写点小脚本，给自己的生活省事。</p>
-<p>我挑几个最贴近日常的方向，给你举点真实的例子，你就能感受到它的用处了。</p>
-<p><strong>1 自动化办公：把重复的活交给电脑</strong></p>
-<p>这是对普通人最实用、见效最快的一个方向。</p>
-<p>你是不是经常做这些事：</p>
-<ul>
-<li>把几十个 Excel 表格里的数据合并到一起，逐条复制粘贴；</li>
-<li>给上百个客户挨个发邮件，还要附上不同的附件；</li>
-<li>批量给文件重命名、整理文件夹，手动改到眼花。</li>
-</ul>
-<p>这些 “没技术含量但费时间” 的重复劳动，用 Python 都能自动化解决。</p>
-<p>比如用 Python 写一段十几行的脚本，几分钟就能跑完你半天的工作量，还不会因为手滑出错。HR 算工资、财务做报表、运营整理数据，几乎所有坐办公室的岗位，都能靠它提升效率。</p>
-<p><strong>2</strong>  <strong>网络爬虫：批量获取网上的公开信息</strong></p>
-<p>很多人一听 “爬虫” 就觉得是黑客技术，其实没那么玄乎。</p>
-<p>简单说，爬虫就是帮你 “批量浏览网页，自动提取你要的信息”。比如：</p>
-<ul>
-<li>想找工作，爬取各个招聘网站的岗位信息，统一对比薪资和要求；</li>
-<li>想做电商，批量抓取同类商品的价格、销量，做市场分析；</li>
-<li>做自媒体，爬取热点新闻、用户评论，整理成素材。</li>
-</ul>
-<p>当然要强调一句：爬虫只能爬取公开的、合法的数据，不能爬取隐私信息，也不能恶意攻击网站。新手入门阶段，完全够用了。</p>
-<p><strong>3</strong> <strong>数据分析与可视化：从杂乱数据里看出规律</strong></p>
-<p>现在不管什么行业，都讲究 “用数据说话”。</p>
-<p>Excel 处理几千行数据还行，一旦数据量到了几万、几十万行，就很容易卡顿出错。用 Python 处理就轻松很多：</p>
-<ul>
-<li>几行代码就能完成数据清洗、筛选、统计；</li>
-<li>能直接生成各种柱状图、折线图、饼图，甚至动态可视化图表；</li>
-<li>运营可以分析用户增长、渠道转化，销售可以看业绩趋势、产品销量。</li>
-</ul>
-<p>不用复杂的公式，逻辑清晰，上手也快。</p>
-<p><strong>4 AI 与人工智能：搭上当下的风口</strong></p>
-<p>现在 AI 这么火，而 Python 正是 AI 领域的 “通用语言”。</p>
-<p>不管是调用 ChatGPT、通义千问的 API 做自己的小工具，还是用 Stable Diffusion 生成图片，甚至入门机器学习、深度学习，基本都离不开 Python。</p>
-<p>你不用成为算法工程师，哪怕只会基础的 Python 用法，也能把各种 AI 工具串起来，做出自己的实用小工具，比只会用现成软件的人效率高得多。</p>
-<p><strong>5 更多有趣的玩法</strong></p>
-<p>除了上面这些，Python 能做的事还有很多：</p>
-<ul>
-<li>用 Django、FastAPI 快速开发网站、小程序后端；</li>
-<li>写简单的小游戏，比如贪吃蛇、猜数字；</li>
-<li>自动化运维，批量管理服务器、监控程序运行；</li>
-<li>批量处理图片、视频，比如加水印、转格式、剪辑片段。</li>
-</ul>
-<p>说白了，只要是有规律、重复做的事，基本都能用 Python 帮你完成。</p>
-<p><img src="https://i-blog.csdnimg.cn/direct/4f5d0415176e4200b6b0d7bcddd8b688.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="二、零基础最关心的-4-个问题，今天给你说透"><a href="#二、零基础最关心的-4-个问题，今天给你说透" class="headerlink" title="二、零基础最关心的 4 个问题，今天给你说透"></a>二、零基础最关心的 4 个问题，今天给你说透</h1><p>每次聊到学 Python，新手总会有一堆顾虑。我挑了问得最多的 4 个，一次性给你讲明白，打消你的担心。</p>
-<p><strong>1 英语不好，能学 Python 吗？</strong></p>
-<p><strong>完全可以。</strong></p>
-<p>Python 的语法里，常用的关键词也就几十个，比如 <code>print</code>（打印）、<code>if</code>（如果）、<code>for</code>（循环），都是非常简单的单词，多敲几遍自然就记住了。</p>
-<p>至于报错信息看不懂，直接用翻译软件复制粘贴就行，现在很多代码编辑器也有中文插件。编程的核心是逻辑思维，不是英语能力 —— 英语好是加分项，不是必备项。</p>
-<p><strong>2 数学不好，能学吗？</strong></p>
-<p>入门和日常使用，完全不需要高深数学。</p>
-<p>很多人觉得编程要高数、线性代数都学好，其实是把 “编程” 和 “算法开发” 搞混了。</p>
-<p>如果你只是想做自动化办公、写爬虫、做普通数据分析、开发简单网站，小学初中的数学水平就完全够用了。只有做机器学习、算法优化这些专业方向，才需要扎实的数学基础。</p>
-<p>新手入门阶段，根本不用担心这一点。</p>
-<p><strong>3 零基础学 Python 难不难？</strong></p>
-<p>不要没开始走出第一步就把自己给打败了。任何事，只有去做了才知道对自己难不难。</p>
-<p>在所有编程语言里，Python 对新手是最友好的。</p>
-<p>它的语法非常接近自然语言，读代码就像读简化的英语句子一样。比如想打印 “Hello World”，只需要写：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># Python 实现 </span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Hello World&quot;</span>)<br>// Java 实现<br>public <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br>    public static void main (String[] args) &#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello World&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>上一篇我们聊了 Python 能做什么、零基础该怎么学，很多同学已经摩拳擦掌，想亲手写代码试试了。</p>
+<p>学编程的第一步，永远是先把「干活的工具」准备好。很多新手还没开始写代码，就倒在了环境搭建这一步：要么下载错了版本，要么装完运行不了，折腾半天没搞定，直接劝退。</p>
+<p>别担心，今天这篇我会用最直白的步骤，带你从零搭好 Python 开发环境。全程跟着点鼠标就行，哪怕你完全不懂电脑，也能 10 分钟搞定，顺利写出你的第一行 <code>Hello World</code>。</p>
+<h1 id="一、Python-解释器下载与安装"><a href="#一、Python-解释器下载与安装" class="headerlink" title="一、Python 解释器下载与安装"></a>一、Python 解释器下载与安装</h1><p>电脑本身只认识 0 和 1，看不懂我们写的 Python 代码。 解释器的作用，就是把我们写的 Python 代码，翻译成电脑能听懂的指令，让代码真正跑起来。</p>
+<p>简单说：没有解释器，你写的代码就是一堆纯文本，根本运行不了。</p>
+<p>我们先装最核心的解释器，分 Windows 和 Mac 两个系统来讲，照着步骤点就行。</p>
+<h2 id="👉-Windows-系统安装步骤"><a href="#👉-Windows-系统安装步骤" class="headerlink" title="👉 Windows 系统安装步骤"></a><strong>👉 Windows 系统安装步骤</strong></h2><h3 id="1-1-官网下载安装包"><a href="#1-1-官网下载安装包" class="headerlink" title="1.1 官网下载安装包"></a>1.1 官网下载安装包</h3><p>打开 Python 官方下载页：<a target="_blank" rel="noopener" href="https://www.python.org/downloads/windows/">https://www.python.org/downloads/windows/</a></p>
+<p>往下翻，找到「<strong>Stable Releases</strong>」（稳定版本），推荐下载 Python 3.11.x 或 3.12.x 的稳定版（不用追求最新的测试版，稳定版兼容性最好）。</p>
+<p>点击对应的「Windows installer (64-bit)」下载，现在的电脑基本都是 64 位系统，直接下这个就行。</p>
+<p><img src="https://files.seeusercontent.com/2026/07/23/Ztr5/pasted-image-1784813356651.webp" srcset="/img/loading.gif" lazyload alt="pasted-image-1784813356651.webp"></p>
+<p><img src="https://files.seeusercontent.com/2026/07/23/9oZl/pasted-image-1784813405704.webp" srcset="/img/loading.gif" lazyload alt="pasted-image-1784813405704.webp"></p>
+<h3 id="1-2-安装：这一步千万注意！"><a href="#1-2-安装：这一步千万注意！" class="headerlink" title="1.2 安装：这一步千万注意！"></a>1.2 安装：这一步千万注意！</h3><p>下载完成后，双击打开安装包。</p>
+<p>⚠️ 重中之重：一定要勾选最下方的「Add Python.exe to PATH」！</p>
+<p>这是新手最容易踩的坑！不勾选的话，后续电脑找不到 Python，输命令会报错，新手很难自己解决。</p>
+<p>勾好之后，直接点「Install Now」默认安装就行，它会自动装到 C 盘，不用改路径，省得麻烦。</p>
+<p>等进度条走完，出现「Setup was successful」就说明安装成功了，点 Close 关掉就行。</p>
+<h3 id="1-3-验证：确认装好了"><a href="#1-3-验证：确认装好了" class="headerlink" title="1.3 验证：确认装好了"></a>1.3 验证：确认装好了</h3><p>按键盘 <code>Win + R</code> 键，弹出运行框，输入 <code>cmd</code> 回车，打开黑色的「命令提示符」窗口。</p>
+<p><img src="https://files.seeusercontent.com/2026/07/23/5hFr/pasted-image-1784813475647.webp" srcset="/img/loading.gif" lazyload alt="pasted-image-1784813475647.webp"></p>
+<p>在窗口里输入下面这行命令，然后回车：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Bash">python --version<br></code></pre></td></tr></table></figure>
 
-<p>同样一个功能，其他语言可能要写好几行，Python 往往一行就能搞定。它去掉了很多复杂的语法规则，不用纠结各种符号和格式，新手能快速写出能运行的代码，很容易获得成就感。</p>
-<p><strong>4 学完 Python 能找工作吗？</strong></p>
-<p>系统学习、选对方向，完全可以，但只学基础语法不够。</p>
-<p>实话实说：只会写基础的循环、列表，肯定找不到工作。但如果你沿着一个方向深入学，比如：</p>
-<ul>
-<li>走后端开发：学完 Python 基础，再学 Django&#x2F;FastAPI、数据库、项目实战；</li>
-<li>走数据分析：学 Pandas、NumPy、可视化工具、SQL、业务分析思维；</li>
-<li>走测试开发：学自动化测试、接口测试、测试框架。</li>
-<li>走人工智能：TensorFlow、PyTorch、scikit-learn 等主流机器学习库都提供了 Python 接口。</li>
-</ul>
-<p>退一步说，哪怕不转行，学会 Python 也能帮你在现有工作里提升效率、脱颖而出，增加自己的职场竞争力 —— 这本身就很有价值。</p>
-<h1 id="三、零基础学-Python-的正确姿势：少走弯路的-5-条建议"><a href="#三、零基础学-Python-的正确姿势：少走弯路的-5-条建议" class="headerlink" title="三、零基础学 Python 的正确姿势：少走弯路的 5 条建议"></a>三、零基础学 Python 的正确姿势：少走弯路的 5 条建议</h1><p>很多人学不好 Python，不是笨，是从一开始方法就错了。我见过太多人 “收藏了一堆教程，看了半个月还停留在 Hello World”，最后不了了之。</p>
-<p>给你 5 条最核心的学习建议，照着做，效率至少翻一倍。</p>
-<p><strong>① 别死记硬背，动手敲才是王道</strong></p>
-<p>编程是一门技能，不是知识点。就像学游泳、学开车，看再多理论不下水、不上车，永远学不会。</p>
-<p>很多人喜欢对着教程看，觉得 “我看懂了”，结果真自己写的时候，连个括号都能写错。</p>
-<p>正确的做法是：看到一段代码，就亲手敲到编辑器里运行一遍；改一改参数，看看效果有什么不一样。 哪怕是抄，也要亲手敲。敲得多了，语法自然就记住了，理解也会更深。</p>
-<p><strong>② 别追求 “看完再练”，边学边练，步步为营</strong></p>
-<p>很多人有个坏习惯：收藏几十 G 的视频教程，想着 “我先把基础全部看完，再动手做项目”。</p>
-<p>结果往往是：看到后面，前面的知识点全忘了；越看越觉得抽象，越学越没信心，最后直接放弃。</p>
-<p>学习编程，一定要学一个知识点，就做一个小练习。比如学完循环，就写个九九乘法表；学完列表，就做个简单的学生信息录入。</p>
-<p>小步快跑，学练结合，每一步都有成就感，才能坚持下去。</p>
-<p><strong>③ 别怕报错，报错是编程的常态</strong></p>
-<p>很多新手一看到红色的报错信息就慌，觉得 “我太笨了，又写错了”。</p>
-<p>其实大可不必。哪怕是工作十年的程序员，写代码也会天天报错。</p>
-<p>报错不是坏事，它是电脑在跟你说话：“这里有问题，具体是什么问题，我告诉你了，你改一下就好。” 学会读报错信息、学会搜索解决问题，本身就是编程能力的一部分。</p>
-<p>以后再遇到报错，别急着烦躁，先看看报错提示说的是什么 —— 绝大多数问题，你能碰到前人就一定能碰到，网上都有现成的解决方案。</p>
-<p><strong>④ 从小案例入手，别一开始就想做 “大项目”</strong></p>
-<p>刚学了两天基础，就想写个游戏、做个电商网站，这是新手最容易踩的坑。</p>
-<p>目标太大，很容易因为做不出来而受挫，进而怀疑自己，最后放弃。</p>
-<p>正确的节奏是：从最简单的小案例开始，逐步升级难度。</p>
-<ul>
-<li>第一天：写 Hello World，学会打印输出；</li>
-<li>第一周：写猜数字游戏、成绩判定程序；</li>
-<li>第二周：做个简单的学生信息管理系统；</li>
-<li>一个月后：尝试写爬虫、批量处理 Excel。</li>
-</ul>
-<p>每完成一个小项目，都会获得一份成就感，而这些成就感，就是你坚持学下去的动力。</p>
-<p><strong>⑤ 循序渐进，不要跳着学</strong></p>
-<p>Python 的知识点是环环相扣的：变量没学好，学循环就会吃力；数据结构没吃透，学函数就会懵。</p>
-<p>很多人图快，觉得 “这个知识点简单，我跳过”，结果学到后面，处处是漏洞，越学越费劲。</p>
-<p>学习没有捷径，稳扎稳打才是最快的方式。跟着专栏的节奏，一篇一篇往下学，把每一个知识点都搞懂、练熟，后面只会越学越快。</p>
-<h1 id="四、这个专栏，会怎么带你学-Python？"><a href="#四、这个专栏，会怎么带你学-Python？" class="headerlink" title="四、这个专栏，会怎么带你学 Python？"></a>四、这个专栏，会怎么带你学 Python？</h1><p>最后跟大家说一下这个专栏的定位和安排，让你心里有数，知道跟着专栏能学到什么。</p>
-<p>这个专栏的核心定位是：零基础友好、案例驱动、循序渐进、从入门到实战。</p>
-<h3 id="你能获得什么？"><a href="#你能获得什么？" class="headerlink" title="你能获得什么？"></a>你能获得什么？</h3><ol>
-<li>大白话讲解，没有听不懂的术语 每一个知识点我都会用生活化的例子解释，不会扔一堆专业术语让你猜。哪怕你完全没接触过编程，也能看懂。</li>
-<li>每篇都有实战案例，看完就能动手写 不讲空洞的理论，每个知识点都会搭配贴近日常的小案例。看完文章，你就能亲手写出能运行的代码，当场获得正反馈。</li>
-<li>新手避坑指南，少走弯路 我会把新手容易踩的坑、常见的错误写法，都提前给你指出来，帮你避开很多人走过的弯路。</li>
-<li>完整的学习路线，从入门到项目实战，我们会从环境搭建开始，一步步讲完基础语法、核心数据结构、函数、面向对象、进阶特性，最后带你完成 4 个完整的实战项目。</li>
+<p>如果出现类似 <code>Python 3.13.9</code> 的版本号，恭喜你，安装成功了！</p>
+<blockquote>
+<p>如果提示「’python’ 不是内部或外部命令」，大概率是没勾 PATH。不用慌，最简单的解决办法是：重装一遍安装包，记得一定要勾选「Add Python to PATH」。</p>
+</blockquote>
+<p><img src="https://files.seeusercontent.com/2026/07/23/Jpn7/pasted-image-1784813500209.webp" srcset="/img/loading.gif" lazyload alt="pasted-image-1784813500209.webp"></p>
+<p>如果忘记勾选了，也有补救措施——配置环境变量</p>
+<p>右键–&gt;此电脑–&gt;属性–&gt;高级系统设置–&gt;环境变量，在系统变量中找到 Path，点击编辑，新建，添加 python 的安装路径，完成后点击确定，重启命令行窗口，再重试是否安装成功。</p>
+<p><img src="https://files.seeusercontent.com/2026/07/23/The3/pasted-image-1784813531558.webp" srcset="/img/loading.gif" lazyload alt="pasted-image-1784813531558.webp"></p>
+<h2 id="👉-Mac-系统安装步骤"><a href="#👉-Mac-系统安装步骤" class="headerlink" title="👉 Mac 系统安装步骤"></a>👉 Mac 系统安装步骤</h2><p>Mac 电脑自带 Python 2.x 版本，但这个版本早就淘汰了，我们必须装 Python 3。</p>
+<p>方法一：官网安装包（新手推荐，最简单）</p>
+<ol>
+<li>打开官网下载页：<a href="https://link.wtturl.cn/?target=https://www.python.org/downloads/macos/&scene=im&aid=497858&lang=zh">https://www.python.org/downloads/macos/</a></li>
+<li>找到稳定版（推荐 3.11.x&#x2F; 3.12.x），点击「macOS 64-bit universal2 installer」下载。</li>
+<li>下载完成后双击 pkg 安装包，一路点「继续」「安装」，输入电脑密码确认即可。</li>
+<li>验证安装：打开「启动台 - 其他 - 终端」，输入命令回车：</li>
 </ol>
-<p>跟着专栏走下来，你不仅能掌握 Python 语法，还能拥有自己的项目作品，不管是提升工作效率，还是为后续深入学习打基础，都足够用。</p>
-<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>其实编程没你想的那么高大上，也没那么难。</p>
-<p>它本质上就是一个工具，就像 Word、Excel 一样。学会了，就能帮你解决问题、节省时间、提升效率。</p>
-<p>不用怕自己零基础，不用怕学不会 —— 每一个程序员，都是从写下第一行 <code>print(&quot;Hello World&quot;)</code> 开始的。</p>
-<p>下一篇文章，我会带你一步步搞定 Python 环境搭建，手把手教你写出属于你的第一行代码，真正开启 Python 学习之路。</p>
-<p>如果觉得有用，欢迎关注，跟着我们一起从零开始学 Python。</p>
-<p>我们下篇见！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Bash">python3 --version<br></code></pre></td></tr></table></figure>
+
+<p>出现版本号就说明装好了。</p>
+<blockquote>
+<p>注意：Mac 里默认 <code>python</code> 命令指向自带的旧版本，我们要用 <code>python3</code> 命令来运行 Python 3，后面写代码都要记住这一点。</p>
+</blockquote>
+<p>方法二：Homebrew 安装（有一定基础可选）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Bash">brew install python3<br></code></pre></td></tr></table></figure>
+
+<p>新手直接用第一种安装包方式就行，简单不容易出错。</p>
+<h1 id="二、安装-PyCharm"><a href="#二、安装-PyCharm" class="headerlink" title="二、安装 PyCharm"></a>二、安装 PyCharm</h1><p>PyCharm 是专门做 Python 开发的 IDE，功能更专业，也是目前企业里使用最多的 Python 开发工具。</p>
+<h3 id="2-1-版本说明"><a href="#2-1-版本说明" class="headerlink" title="2.1 版本说明"></a>2.1 版本说明</h3><p>PyCharm 分为两个版本：</p>
+<ul>
+<li>社区版（Community）：完全免费，核心功能齐全，新手学习、日常开发完全够用，推荐所有人优先选这个。</li>
+<li>专业版（Professional）：收费，多了 Web 开发、数据库集成、远程开发等高级功能，学生可以凭教育邮箱免费申请，新手暂时用不上。</li>
+</ul>
+<h3 id="2-2-下载安装"><a href="#2-2-下载安装" class="headerlink" title="2.2 下载安装"></a>2.2 下载安装</h3><p>打开 PyCharm 官方下载页：<a href="https://link.wtturl.cn/?target=https://www.jetbrains.com/pycharm/download/&scene=im&aid=497858&lang=zh">https://www.jetbrains.com/pycharm/download/</a></p>
+<p>网站会自动识别你的操作系统，找到「Community」社区版，点击「Download」下载即可。</p>
+<p><img src="https://files.seeusercontent.com/2026/07/23/xqD2/pasted-image-1784813581385.webp" srcset="/img/loading.gif" lazyload alt="pasted-image-1784813581385.webp"></p>
+<p><strong>Windows 系统安装步骤</strong></p>
+<p>下载完成后，双击安装包运行，点击「Next」下一步；</p>
+<p>选择安装路径，默认装在 C 盘，也可以自己改到其他盘，注意路径里不要有中文和空格，然后点「Next」；</p>
+<p>安装选项页，建议把这几个都勾上：</p>
+<ul>
+<li>✅ Create Desktop Shortcut：创建桌面快捷方式</li>
+<li>✅ Add “Open Folder as Project”：右键文件夹可以直接用 PyCharm 打开</li>
+<li>✅ Add launchers dir to the PATH：添加到系统环境变量</li>
+<li>.py 关联选项可以按需勾选，勾完点「Next」；</li>
+</ul>
+<p>直接点「Install」开始安装，等待进度条走完；</p>
+<p>安装完成后，勾选「Run PyCharm Community Edition」，点「Finish」启动软件。</p>
+<p><strong>Mac</strong> <strong>系统安装步骤</strong></p>
+<p>下载完成后打开 dmg 安装包，直接把 PyCharm 图标拖到「应用程序」文件夹里；</p>
+<p>打开启动台，找到 PyCharm 点击启动，首次打开会提示是否导入设置，选「Do not import settings」，点 OK 即可。</p>
+<h3 id="2-3-启动配置"><a href="#2-3-启动配置" class="headerlink" title="2.3 启动配置"></a>2.3 启动配置</h3><p>第一次打开 PyCharm，会进入配置向导，跟着走就行：</p>
+<ul>
+<li>选择主题：左边 Darcula 是黑色主题，右边 Light 是白色主题，选自己看着舒服的就行，点「Next」；</li>
+<li>特色插件页面，新手直接点「Start using PyCharm」跳过，不用额外安装。</li>
+</ul>
+<p>⚠️ 接下来这一步非常关键！PyCharm 本身只是写代码的工具，必须绑定我们之前安装的 Python 解释器，代码才能运行。</p>
+<p>我们通过创建第一个项目来完成配置：</p>
+<ol>
+<li>点击欢迎页的「New Project」新建项目；</li>
+<li>Location 是项目保存路径，自己选一个纯英文的文件夹，比如 <code>G:\python_project\first_demo</code>；</li>
+<li>重点看「Interpreter Type」选项：<ol>
+<li>选择「Project venv」（之前配置好的解释器）；</li>
+<li>找到我们之前安装的 Python 解释器路径;</li>
+<li>选好后点「OK」确认；</li>
+</ol>
+</li>
+<li>取消勾选「Create a welcome script」，然后点「Create」创建项目。</li>
+</ol>
+<p>到这里，PyCharm 的环境就配置完成了。</p>
+<h1 id="三、写出第一个-Python-程序"><a href="#三、写出第一个-Python-程序" class="headerlink" title="三、写出第一个 Python 程序"></a>三、写出第一个 Python 程序</h1><p>工具都装好了，现在我们来写第一行代码，真正跑起来试试。</p>
+<h2 id="4-1-方式一：交互式模式（临时测试用）"><a href="#4-1-方式一：交互式模式（临时测试用）" class="headerlink" title="4.1 方式一：交互式模式（临时测试用）"></a>4.1 方式一：交互式模式（临时测试用）</h2><p>先试最简单的交互式模式，输一行代码就立刻出结果，适合临时测试小段代码。</p>
+<ul>
+<li>Windows：按 <code>Win+R</code> 输 <code>cmd</code> 打开命令提示符，输入 <code>python</code> 回车；</li>
+<li>Mac：打开终端，输入 <code>python3</code> 回车。</li>
+</ul>
+<p>进入后会出现 <code>&gt;&gt;&gt;</code> 符号，这就说明进入了 Python 交互模式。</p>
+<p>输入下面这行代码，然后回车：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Hello World!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>你会看到屏幕立刻输出了 <code>Hello World!</code> —— 恭喜你，你的第一行 Python 代码运行成功了！</p>
+<blockquote>
+<p>小提示：想退出交互模式，输入 <code>exit()</code> 回车就行。</p>
+</blockquote>
+<h2 id="4-2-方式二：脚本文件运行（正式开发都用这个）"><a href="#4-2-方式二：脚本文件运行（正式开发都用这个）" class="headerlink" title="4.2 方式二：脚本文件运行（正式开发都用这个）"></a>4.2 方式二：脚本文件运行（正式开发都用这个）</h2><p>交互模式只能临时用，我们写完整代码，都会保存成 <code>.py</code> 后缀的脚本文件，随时可以运行。</p>
+<p>打开 PyCharm，在左侧项目文件列表里，右键你的项目文件夹 → 「New」→ 「Python File」；</p>
+<p>输入文件名，比如 <code>hello</code>（不用加后缀，它会自动补 .py），回车确认；</p>
+<p>在文件里写入代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Hello World!&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;我开始学 Python 啦！&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>运行代码有三种方法，选一个顺手的就行：</p>
+<ul>
+<li>右键代码空白处，选择「Run ‘hello’」；</li>
+<li>点击代码行号旁边的绿色小三角，选择「Run ‘hello’」；</li>
+<li>用快捷键：Windows 按 <code>Shift+F10</code>，Mac 按 <code>Control+R</code>。</li>
+</ul>
+<p>下方控制台就会输出运行结果，你的第一个 PyCharm 项目就跑通了！</p>
+<p><strong>小进阶：做个简单的****人机交互</strong></p>
+<p>我们再加两行代码，让程序能和你互动，感受一下编程的乐趣：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">name = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入你的名字：&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;你好，<span class="hljs-subst">&#123;name&#125;</span>！欢迎来到 Python 的世界！&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>运行后，终端会让你输入名字，输完回车，它就会跟你打招呼。</p>
+<p>是不是很有意思？这就是编程的魅力：你告诉电脑规则，它就会按照你的指令执行。</p>
+<h1 id="四、新手避坑：环境搭建最常见的-5个问题"><a href="#四、新手避坑：环境搭建最常见的-5个问题" class="headerlink" title="四、新手避坑：环境搭建最常见的 5个问题"></a>四、新手避坑：环境搭建最常见的 5个问题</h1><p>很多人第一次装环境都会踩坑，我把最常见的问题列出来，遇到了直接对照解决。</p>
+<p>4.1 输 python 提示「不是内部或外部命令」</p>
+<ul>
+<li>Windows：99% 是安装时没勾选「Add Python to PATH」。最简单的解决办法：重装一遍安装包，一定要记得勾上。（如果不想重新安装，也可以手动配置环境变量，上面有教程）</li>
+<li>Mac：自带的是 Python 2，要用 <code>python3</code> 命令，不要直接输 <code>python</code>。</li>
+</ul>
+<p>4.2 代码运行报错，提示找不到文件</p>
+<p>大概率是文件路径里有中文、空格或者特殊字符，比如你把文件存在了「桌面 &#x2F; 我的代码」文件夹里。 新手先把代码存在纯英文路径的文件夹里，比如 <code>D:\code\python</code>，避免各种奇奇怪怪的问题。</p>
+<p>4.3 文件名命名为 python.py&#x2F;print.py</p>
+<p>绝对不要用 Python 的关键字、命令名当文件名，会和系统本身的功能冲突，导致运行报错。 起名就用简单的英文，比如 <code>hello.py</code>、<code>test.py</code> 就好。</p>
+<p>4.4 PyCharm 提示「No Python interpreter configured」</p>
+<p>这是新手用 PyCharm 最常见的报错，意思是没配置 Python 解释器。</p>
+<p>解决方法：点击 PyCharm 右下角的「No Interpreter」→ 「Add New Interpreter」→「System Interpreter」，选择你安装的 python.exe 路径即可。</p>
+<p>4.5 PyCharm 创建项目后运行特别慢</p>
+<p>如果选了「New environment using Virtualenv」创建虚拟环境，首次加载会慢一些。新手入门阶段直接用系统解释器就行，不用创建虚拟环境，后面进阶篇我们会讲虚拟环境的用法。</p>
+<h1 id="五、今天的动手练习"><a href="#五、今天的动手练习" class="headerlink" title="五、今天的动手练习"></a>五、今天的动手练习</h1><p>学编程光看不练等于白学，今天的任务很简单，务必亲手完成：</p>
+<ol>
+<li>按照步骤装好 Python 解释器，PyCharm 代码编辑器安装配置完成，验证版本号正常；</li>
+<li>用脚本文件方式，成功运行出 <code>Hello World</code>；</li>
+<li>修改代码，让程序输出你的名字、年龄，再试试用 <code>input()</code> 做个简单的问答。</li>
+</ol>
+<p>完成这三步，你就已经正式跨进 Python 的大门了。</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>恭喜你，到这里你已经拥有了完整的 Python 开发环境，还写出了人生中第一行可运行的代码。</p>
+<p>很多人觉得编程难，其实最难的从来不是代码本身，而是迈出第一步的勇气。当你亲眼看到自己写的代码跑起来、输出结果的时候，那种成就感，就是你坚持学下去的最好动力。</p>
 
                 
               </div>
@@ -566,7 +584,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%8E%9F%E5%88%9B/" class="print-no-link">#原创</a>
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
       
     </div>
   
@@ -578,8 +596,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>01 | 开篇导读：Python 到底能做什么？零基础该怎么学？</div>
-      <div>https://nicepeng.github.io/2026/07/22/Python基础01/</div>
+      <div>02 | Python 开发环境搭建：10 分钟搞定，写出你的第一行代码</div>
+      <div>https://nicepeng.github.io/2026/07/23/02-python安装/</div>
     </div>
     <div class="license-meta">
       
@@ -591,7 +609,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年7月22日</div>
+          <div>2026年7月23日</div>
         </div>
       
       
@@ -623,18 +641,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/07/22/01-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="01 | 并发编程入门：一文吃透进程与线程，手写 4 种线程创建方式">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">01 | 并发编程入门：一文吃透进程与线程，手写 4 种线程创建方式</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/07/22/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2026/07/22/01-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="01 | 并发编程入门：一文吃透进程与线程，手写 4 种线程创建方式">
+                        <span class="hidden-mobile">01 | 并发编程入门：一文吃透进程与线程，手写 4 种线程创建方式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
