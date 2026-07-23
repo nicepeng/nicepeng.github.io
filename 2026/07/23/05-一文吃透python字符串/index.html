@@ -1,0 +1,1416 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="nicepeng">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="上一篇我们系统讲解了 Python 全量数据类型与运算符，其中字符串是日常开发中使用频率最高的序列类型 —— 爬虫数据提取、办公文本处理、数据分析清洗、用户交互输出，几乎所有场景都离不开字符串操作。 很多初学者觉得字符串简单，无非是写写文字、拼拼接接，但真正用到时总会踩坑：切片越界、编码乱码、正则匹配不准、拼接效率低下等等。本质上是只记住了零散的 API，没有理解字符串的核心特性和底层逻辑。 今天">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05 | 一文吃透python字符串">
+<meta property="og:url" content="https://nicepeng.github.io/2026/07/23/05-%E4%B8%80%E6%96%87%E5%90%83%E9%80%8Fpython%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="上一篇我们系统讲解了 Python 全量数据类型与运算符，其中字符串是日常开发中使用频率最高的序列类型 —— 爬虫数据提取、办公文本处理、数据分析清洗、用户交互输出，几乎所有场景都离不开字符串操作。 很多初学者觉得字符串简单，无非是写写文字、拼拼接接，但真正用到时总会踩坑：切片越界、编码乱码、正则匹配不准、拼接效率低下等等。本质上是只记住了零散的 API，没有理解字符串的核心特性和底层逻辑。 今天">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-23T14:45:38.000Z">
+<meta property="article:modified_time" content="2026-07-23T14:48:52.014Z">
+<meta property="article:author" content="nicepeng">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>05 | 一文吃透python字符串 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nicepeng.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>nicepeng</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="05 | 一文吃透python字符串"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-23 22:45" pubdate>
+          2026年7月23日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          18k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          149 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">05 | 一文吃透python字符串</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>上一篇我们系统讲解了 Python 全量数据类型与运算符，其中字符串是日常开发中使用频率最高的序列类型 —— 爬虫数据提取、办公文本处理、数据分析清洗、用户交互输出，几乎所有场景都离不开字符串操作。</p>
+<p>很多初学者觉得字符串简单，无非是写写文字、拼拼接接，但真正用到时总会踩坑：切片越界、编码乱码、正则匹配不准、拼接效率低下等等。本质上是只记住了零散的 API，没有理解字符串的核心特性和底层逻辑。</p>
+<p>今天这篇文章，我们从字符串的核心本质出发，系统覆盖索引切片、高频方法、格式化方式、字符编码原理、正则表达式基础应用五大核心模块，搭配实战案例与避坑指南，最后附上深度练习题与完整解析，帮你彻底掌握 Python 字符串。</p>
+<h1 id="一、字符串的核心本质：不可变的-Unicode-字符序列"><a href="#一、字符串的核心本质：不可变的-Unicode-字符序列" class="headerlink" title="一、字符串的核心本质：不可变的 Unicode 字符序列"></a>一、字符串的核心本质：不可变的 Unicode 字符序列</h1><h2 id="1-1-定义方式"><a href="#1-1-定义方式" class="headerlink" title="1.1 定义方式"></a>1.1 定义方式</h2><p>Python 中字符串有 4 种常见定义方式，分别适配不同场景：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 1. 单引号：适合字符串内部包含双引号的场景</span><br>s1 = <span class="hljs-string">&#x27;他说：&quot;今天学Python&quot;&#x27;</span><br><br><span class="hljs-comment"># 2. 双引号：适合字符串内部包含单引号的场景（最常用）</span><br>s2 = <span class="hljs-string">&quot;I&#x27;m learning Python&quot;</span><br><br><span class="hljs-comment"># 3. 三引号：支持换行，适合多行文本、文档注释</span><br>s3 = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">第一行文本</span><br><span class="hljs-string">第二行文本</span><br><span class="hljs-string">第三行文本</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 4. 原始字符串 r&quot;&quot;：转义字符失效，适合文件路径、正则表达式</span><br>path = <span class="hljs-string">r&quot;C:\Users\code\test.py&quot;</span>  <span class="hljs-comment"># 不用写双反斜杠</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>💡 新手避坑：单双引号没有功能区别，只有场景适配差异；千万不要混用引号，否则会直接报语法错误。</p>
+</blockquote>
+<h2 id="1-2-核心特性：不可变性"><a href="#1-2-核心特性：不可变性" class="headerlink" title="1.2 核心特性：不可变性"></a>1.2 核心特性：不可变性</h2><p>字符串是不可变对象—— 字符串一旦在内存中创建，它的内容就永远不能修改。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;abc&quot;</span><br>s[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;d&quot;</span>  <span class="hljs-comment"># 报错：TypeError: &#x27;str&#x27; object does not support item assignment</span><br></code></pre></td></tr></table></figure>
+
+<p>我们平时的 “修改字符串”，本质上是创建了一个全新的字符串对象，再把变量标签贴到新对象上，原字符串对象并没有被修改。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;hello&quot;</span><br>s = s + <span class="hljs-string">&quot; world&quot;</span>  <span class="hljs-comment"># 不是修改原字符串，是生成了新的&quot;hello world&quot;字符串</span><br></code></pre></td></tr></table></figure>
+
+<p>这个特性直接决定了字符串拼接的性能差异，后面我们会详细讲解。</p>
+<h2 id="1-3-补充：字符串驻留机制"><a href="#1-3-补充：字符串驻留机制" class="headerlink" title="1.3 补充：字符串驻留机制"></a>1.3 补充：字符串驻留机制</h2><p>Python 为了节省内存，对符合规则的字符串做了驻留（intern）优化：相同内容的字符串只会在内存中保存一份，多个变量共享同一个对象。</p>
+<ul>
+<li>触发条件：仅包含字母、数字、下划线的字符串会自动驻留</li>
+<li>特殊情况：空字符串、单个字符也会驻留</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python">a = <span class="hljs-string">&quot;python_123&quot;</span><br>b = <span class="hljs-string">&quot;python_123&quot;</span><br><span class="hljs-built_in">print</span>(a <span class="hljs-keyword">is</span> b)  <span class="hljs-comment"># True，指向同一个内存对象</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ 注意：驻留是 Python 的性能优化机制，绝对不要依赖这个特性做逻辑判断，判断字符串内容是否相等一律用 <code>==</code>。</p>
+</blockquote>
+<h1 id="二、索引与切片：精准定位字符串内容"><a href="#二、索引与切片：精准定位字符串内容" class="headerlink" title="二、索引与切片：精准定位字符串内容"></a>二、索引与切片：精准定位字符串内容</h1><p>字符串是有序的字符序列，每个字符都有对应的位置编号（索引），我们可以通过索引获取单个字符，通过切片获取一段子串。</p>
+<h2 id="2-1-索引：定位单个字符"><a href="#2-1-索引：定位单个字符" class="headerlink" title="2.1 索引：定位单个字符"></a>2.1 索引：定位单个字符</h2><p>Python 的索引分为正索引和负索引两种：</p>
+<ul>
+<li>正索引：从左往右数，从 <code>0</code> 开始计数</li>
+<li>负索引：从右往左数，从 <code>-1</code> 开始计数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;Python&quot;</span><br><span class="hljs-comment"># 正索引： P y t h o n</span><br><span class="hljs-comment">#          0 1 2 3 4 5</span><br><span class="hljs-comment"># 负索引： -6-5-4-3-2-1</span><br><br><span class="hljs-built_in">print</span>(s[<span class="hljs-number">0</span>])   <span class="hljs-comment"># P，第一个字符</span><br><span class="hljs-built_in">print</span>(s[-<span class="hljs-number">1</span>])  <span class="hljs-comment"># n，最后一个字符</span><br><span class="hljs-built_in">print</span>(s[<span class="hljs-number">3</span>])   <span class="hljs-comment"># h</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>❌ 新手必踩坑：索引越界</p>
+<p>如果索引超出了字符串的长度范围，会直接报 <code>IndexError: string index out of range</code> 错误。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;Python&quot;</span><br><span class="hljs-built_in">print</span>(s[<span class="hljs-number">10</span>])  <span class="hljs-comment"># 报错，字符串长度只有6，最大正索引是5</span><br></code></pre></td></tr></table></figure></blockquote>
+<h2 id="2-2-切片：截取一段子串"><a href="#2-2-切片：截取一段子串" class="headerlink" title="2.2 切片：截取一段子串"></a>2.2 切片：截取一段子串</h2><p>切片语法：<code>字符串[start:end:step]</code></p>
+<ul>
+<li><code>start</code>：起始索引（包含该位置字符），缺省默认从 0 开始</li>
+<li><code>end</code>：结束索引（不包含该位置字符，左闭右开），缺省默认到字符串末尾</li>
+<li><code>step</code>：步长，每隔几个字符取一次，缺省默认值为 1；步长为负时从右往左取</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;abcdefg&quot;</span><br><br><span class="hljs-comment"># 基础用法</span><br><span class="hljs-built_in">print</span>(s[<span class="hljs-number">1</span>:<span class="hljs-number">4</span>])    <span class="hljs-comment"># bcd，索引1到3的字符（左闭右开）</span><br><span class="hljs-built_in">print</span>(s[:<span class="hljs-number">3</span>])     <span class="hljs-comment"># abc，前3个字符（从开头到索引2）</span><br><span class="hljs-built_in">print</span>(s[<span class="hljs-number">3</span>:])     <span class="hljs-comment"># defg，从索引3到结尾</span><br><span class="hljs-built_in">print</span>(s[:])      <span class="hljs-comment"># abcdefg，复制整个字符串</span><br><br><span class="hljs-comment"># 步长用法</span><br><span class="hljs-built_in">print</span>(s[::<span class="hljs-number">2</span>])    <span class="hljs-comment"># aceg，隔一个取一个</span><br><span class="hljs-built_in">print</span>(s[::-<span class="hljs-number">1</span>])   <span class="hljs-comment"># gfedcba，字符串倒序（最常用技巧）</span><br><span class="hljs-built_in">print</span>(s[<span class="hljs-number">5</span>:<span class="hljs-number">1</span>:-<span class="hljs-number">1</span>]) <span class="hljs-comment"># fedc，从右往左取，步长为负</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-3-切片核心特性与避坑"><a href="#2-3-切片核心特性与避坑" class="headerlink" title="2.3 切片核心特性与避坑"></a>2.3 切片核心特性与避坑</h2><p><strong>① 切片永远不会报错</strong>：哪怕 start&#x2F;end 超出字符串长度，也只会返回能取到的内容，不会像索引那样报越界错误</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;abc&quot;</span><br><span class="hljs-built_in">print</span>(s[<span class="hljs-number">1</span>:<span class="hljs-number">100</span>])  <span class="hljs-comment"># bc，不会报错</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>② 切片返回的是新字符串</strong>：原字符串不会被修改，符合不可变特性</p>
+<p><strong>③ 步长为负时，start 必须大于 end</strong>：否则会返回空字符串，新手很容易写反</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-built_in">print</span>(s[<span class="hljs-number">1</span>:<span class="hljs-number">4</span>:-<span class="hljs-number">1</span>])  <span class="hljs-comment"># 空字符串，步长为负但start &lt; end</span><br></code></pre></td></tr></table></figure>
+
+<p>④ 常用切片技巧汇总：</p>
+<table>
+<thead>
+<tr>
+<th>需求</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字符串倒序</td>
+<td>s[::-1]</td>
+</tr>
+<tr>
+<td>取前 n 个字符</td>
+<td>s[:n]</td>
+</tr>
+<tr>
+<td>取后 n 个字符</td>
+<td>s[-n:]</td>
+</tr>
+<tr>
+<td>去掉第一个字符</td>
+<td>s[1:]</td>
+</tr>
+<tr>
+<td>去掉最后一个字符</td>
+<td>s[:-1]</td>
+</tr>
+<tr>
+<td>隔一个取一个</td>
+<td>s[::2]</td>
+</tr>
+</tbody></table>
+<h1 id="三、字符串高频操作与内置方法"><a href="#三、字符串高频操作与内置方法" class="headerlink" title="三、字符串高频操作与内置方法"></a>三、字符串高频操作与内置方法</h1><p>Python 为字符串提供了非常丰富的内置方法，我们按功能分类讲解最常用的核心方法，不用死记硬背，用多了自然熟练。</p>
+<h2 id="3-1-拼接与重复"><a href="#3-1-拼接与重复" class="headerlink" title="3.1 拼接与重复"></a>3.1 拼接与重复</h2><p>（1）+ 号拼接</p>
+<p>最直观的拼接方式，适合少量字符串拼接：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python">s1 = <span class="hljs-string">&quot;hello&quot;</span><br>s2 = <span class="hljs-string">&quot;world&quot;</span><br><span class="hljs-built_in">print</span>(s1 + <span class="hljs-string">&quot; &quot;</span> + s2)  <span class="hljs-comment"># hello world</span><br></code></pre></td></tr></table></figure>
+
+<p>⚠️ 性能问题：因为字符串不可变，每一次 <code>+</code> 拼接都会生成一个新的字符串对象。如果循环拼接大量字符串，会频繁申请内存、销毁对象，效率极低。</p>
+<p>（2）join () 方法（推荐批量拼接）</p>
+<p><code>str.join(可迭代对象)</code>：将可迭代对象中的字符串元素，用指定的分隔符拼接成一个完整字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 列表字符串拼接</span><br>words = [<span class="hljs-string">&quot;我&quot;</span>, <span class="hljs-string">&quot;在&quot;</span>, <span class="hljs-string">&quot;学&quot;</span>, <span class="hljs-string">&quot;Python&quot;</span>]<br>result = <span class="hljs-string">&quot;&quot;</span>.join(words)  <span class="hljs-comment"># 用空字符串拼接</span><br><span class="hljs-built_in">print</span>(result)  <span class="hljs-comment"># 我在学Python</span><br><br><span class="hljs-comment"># 用逗号分隔</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;,&quot;</span>.join(words))  <span class="hljs-comment"># 我,在,学,Python</span><br></code></pre></td></tr></table></figure>
+
+<p>✅ 性能优势：join 方法会先计算所有字符串的总长度，一次性申请内存，再把所有字符复制过去，只生成一个新对象。大量字符串拼接时，性能比 <code>+</code> 号高几十上百倍。</p>
+<p>（3）* 号重复</p>
+<p>将字符串重复指定次数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-&quot;</span> * <span class="hljs-number">20</span>)  <span class="hljs-comment"># 打印20个减号，常用做分割线</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-2-分割与拆分"><a href="#3-2-分割与拆分" class="headerlink" title="3.2 分割与拆分"></a>3.2 分割与拆分</h2><p>（1）split ()：按指定分隔符分割</p>
+<p><code>str.split(sep, maxsplit)</code>：按分隔符把字符串拆分成列表，默认按空格分割。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;Python Java C++ Go&quot;</span><br><span class="hljs-built_in">print</span>(s.split())      <span class="hljs-comment"># [&#x27;Python&#x27;, &#x27;Java&#x27;, &#x27;C++&#x27;, &#x27;Go&#x27;]，默认按空格分割</span><br><br>s2 = <span class="hljs-string">&quot;apple,banana,orange&quot;</span><br><span class="hljs-built_in">print</span>(s2.split(<span class="hljs-string">&quot;,&quot;</span>))  <span class="hljs-comment"># [&#x27;apple&#x27;, &#x27;banana&#x27;, &#x27;orange&#x27;]，按逗号分割</span><br><br><span class="hljs-comment"># maxsplit指定最大分割次数</span><br><span class="hljs-built_in">print</span>(s2.split(<span class="hljs-string">&quot;,&quot;</span>, <span class="hljs-number">1</span>))  <span class="hljs-comment"># [&#x27;apple&#x27;, &#x27;banana,orange&#x27;]，只分割1次</span><br></code></pre></td></tr></table></figure>
+
+<p>（2）rsplit ()：从右边开始分割</p>
+<p>用法和 split 完全一致，只是从字符串右侧开始分割，配合 maxsplit 使用时有区别。</p>
+<p>（3）splitlines ()：按换行符分割</p>
+<p>专门用来处理多行文本，按换行符 <code>\n</code> 分割成列表，比 split (‘\n’) 更智能，会自动处理不同系统的换行符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;第一行\n第二行\n第三行&quot;</span><br><span class="hljs-built_in">print</span>(s.splitlines())  <span class="hljs-comment"># [&#x27;第一行&#x27;, &#x27;第二行&#x27;, &#x27;第三行&#x27;]</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-3-去除空白字符"><a href="#3-3-去除空白字符" class="headerlink" title="3.3 去除空白字符"></a>3.3 去除空白字符</h2><p>strip ()：去除首尾空白</p>
+<p>默认去除字符串首尾的空格、制表符<code>\t</code>、换行符<code>\n</code>，也可以指定要去除的字符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;  hello world  \n&quot;</span><br><span class="hljs-built_in">print</span>(s.strip())  <span class="hljs-comment"># &quot;hello world&quot;，去除首尾空白</span><br><br><span class="hljs-comment"># 指定去除的字符</span><br>s2 = <span class="hljs-string">&quot;***Python***&quot;</span><br><span class="hljs-built_in">print</span>(s2.strip(<span class="hljs-string">&quot;*&quot;</span>))  <span class="hljs-comment"># Python</span><br></code></pre></td></tr></table></figure>
+
+<p>对应的还有 <code>lstrip()</code>（只去除左边空白）和 <code>rstrip()</code>（只去除右边空白）。</p>
+<h2 id="3-4-查找与替换"><a href="#3-4-查找与替换" class="headerlink" title="3.4 查找与替换"></a>3.4 查找与替换</h2><p>（1）find () &#x2F;index ()：查找子串位置</p>
+<p>两者都用来查找子串第一次出现的索引位置，区别在于：</p>
+<ul>
+<li><code>find()</code>：找不到子串时返回 <code>-1</code></li>
+<li><code>index()</code>：找不到子串时直接报错 <code>ValueError</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;hello python&quot;</span><br><span class="hljs-built_in">print</span>(s.find(<span class="hljs-string">&quot;python&quot;</span>))  <span class="hljs-comment"># 6，子串起始索引</span><br><span class="hljs-built_in">print</span>(s.find(<span class="hljs-string">&quot;java&quot;</span>))    <span class="hljs-comment"># -1，找不到返回-1</span><br><br><span class="hljs-built_in">print</span>(s.index(<span class="hljs-string">&quot;python&quot;</span>)) <span class="hljs-comment"># 6</span><br><span class="hljs-built_in">print</span>(s.index(<span class="hljs-string">&quot;java&quot;</span>))   <span class="hljs-comment"># 报错</span><br></code></pre></td></tr></table></figure>
+
+<p>对应的还有 <code>rfind()</code> 和 <code>rindex()</code>，从右边开始查找，返回最后一次出现的位置。</p>
+<p>（2）count ()：统计子串出现次数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;ababa&quot;</span><br><span class="hljs-built_in">print</span>(s.count(<span class="hljs-string">&quot;aba&quot;</span>))  <span class="hljs-comment"># 2，统计子串出现的次数</span><br></code></pre></td></tr></table></figure>
+
+<p>（3）replace ()：替换子串</p>
+<p><code>str.replace(old, new, count)</code>：把字符串中的 old 子串替换成 new，count 指定替换次数，默认全部替换。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;hello world world&quot;</span><br><span class="hljs-built_in">print</span>(s.replace(<span class="hljs-string">&quot;world&quot;</span>, <span class="hljs-string">&quot;python&quot;</span>))       <span class="hljs-comment"># hello python python，全部替换</span><br><span class="hljs-built_in">print</span>(s.replace(<span class="hljs-string">&quot;world&quot;</span>, <span class="hljs-string">&quot;python&quot;</span>, <span class="hljs-number">1</span>))    <span class="hljs-comment"># hello python world，只替换1次</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>💡 注意：replace 返回的是新字符串，原字符串不会改变，符合不可变特性。</p>
+</blockquote>
+<h2 id="3-5-大小写转换"><a href="#3-5-大小写转换" class="headerlink" title="3.5 大小写转换"></a>3.5 大小写转换</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;Hello Python&quot;</span><br><br><span class="hljs-built_in">print</span>(s.upper())      <span class="hljs-comment"># HELLO PYTHON，全部转大写</span><br><span class="hljs-built_in">print</span>(s.lower())      <span class="hljs-comment"># hello python，全部转小写</span><br><span class="hljs-built_in">print</span>(s.capitalize()) <span class="hljs-comment"># Hello python，首字母大写，其余小写</span><br><span class="hljs-built_in">print</span>(s.title())      <span class="hljs-comment"># Hello Python，每个单词首字母大写</span><br><span class="hljs-built_in">print</span>(s.swapcase())   <span class="hljs-comment"># hELLO pYTHON，大小写互换</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-6-判断类方法"><a href="#3-6-判断类方法" class="headerlink" title="3.6 判断类方法"></a>3.6 判断类方法</h2><p>返回布尔值，用来判断字符串的特征，数据清洗时非常常用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;12345&quot;</span><br><span class="hljs-built_in">print</span>(s.isdigit())    <span class="hljs-comment"># True，判断是否全是数字</span><br><span class="hljs-built_in">print</span>(s.isalpha())    <span class="hljs-comment"># False，判断是否全是字母</span><br><span class="hljs-built_in">print</span>(s.isalnum())    <span class="hljs-comment"># True，判断是否只有字母和数字</span><br><span class="hljs-built_in">print</span>(s.isspace())    <span class="hljs-comment"># False，判断是否全是空白字符</span><br><br>s2 = <span class="hljs-string">&quot;hello.py&quot;</span><br><span class="hljs-built_in">print</span>(s2.startswith(<span class="hljs-string">&quot;hello&quot;</span>))  <span class="hljs-comment"># True，判断是否以指定前缀开头</span><br><span class="hljs-built_in">print</span>(s2.endswith(<span class="hljs-string">&quot;.py&quot;</span>))      <span class="hljs-comment"># True，判断是否以指定后缀结尾</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-7-对齐填充"><a href="#3-7-对齐填充" class="headerlink" title="3.7 对齐填充"></a>3.7 对齐填充</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;Python&quot;</span><br><span class="hljs-built_in">print</span>(s.ljust(<span class="hljs-number">10</span>, <span class="hljs-string">&quot;*&quot;</span>))   <span class="hljs-comment"># Python****，左对齐，总长10，用*填充</span><br><span class="hljs-built_in">print</span>(s.rjust(<span class="hljs-number">10</span>, <span class="hljs-string">&quot;*&quot;</span>))   <span class="hljs-comment"># ****Python，右对齐</span><br><span class="hljs-built_in">print</span>(s.center(<span class="hljs-number">10</span>, <span class="hljs-string">&quot;*&quot;</span>))  <span class="hljs-comment"># **Python**，居中对齐</span><br><span class="hljs-built_in">print</span>(s.zfill(<span class="hljs-number">10</span>))         <span class="hljs-comment"># 0000Python，用0填充到指定长度，适合处理数字</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="四、字符串格式化：四种方式与最佳实践"><a href="#四、字符串格式化：四种方式与最佳实践" class="headerlink" title="四、字符串格式化：四种方式与最佳实践"></a>四、字符串格式化：四种方式与最佳实践</h1><p>字符串格式化是日常开发最高频的操作之一，Python 提供了四种格式化方式，各有适用场景，我们逐一讲解并给出最佳实践建议。</p>
+<h2 id="4-1-方式一：-占位符格式化（老式语法）"><a href="#4-1-方式一：-占位符格式化（老式语法）" class="headerlink" title="4.1 方式一：% 占位符格式化（老式语法）"></a>4.1 方式一：% 占位符格式化（老式语法）</h2><p>Python 最早期的格式化方式，借鉴了 C 语言的 printf 语法，用 <code>%</code> 加占位符表示变量位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">name = <span class="hljs-string">&quot;张三&quot;</span><br>age = <span class="hljs-number">20</span><br><span class="hljs-comment"># 语法：&quot;格式化字符串&quot; % (变量1, 变量2)</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;我叫%s，今年%d岁&quot;</span> % (name, age))<br></code></pre></td></tr></table></figure>
+
+<p>常用占位符：</p>
+<ul>
+<li><code>%s</code>：字符串占位，最通用，任何类型都能转成字符串</li>
+<li><code>%d</code>：整数占位</li>
+<li><code>%f</code>：浮点数占位，默认保留 6 位小数</li>
+<li><code>%.2f</code>：保留 2 位小数</li>
+</ul>
+<blockquote>
+<p>📌 评价：语法老旧，可读性差，参数顺序不能错，不推荐日常使用，只需要能看懂老代码即可。</p>
+</blockquote>
+<h2 id="4-2-方式二：str-format-方法"><a href="#4-2-方式二：str-format-方法" class="headerlink" title="4.2 方式二：str.format () 方法"></a>4.2 方式二：str.format () 方法</h2><p>Python2.7 推出的格式化方式，用 <code>{}</code> 做占位符，比 % 更灵活，支持位置参数、关键字参数、索引取值。</p>
+<p><strong>基础用法</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 1. 按顺序传参</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;我叫&#123;&#125;，今年&#123;&#125;岁&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-number">20</span>))<br><br><span class="hljs-comment"># 2. 按索引传参，可重复使用</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&#123;0&#125;岁的&#123;1&#125;，&#123;1&#125;正在学Python&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-number">20</span>, <span class="hljs-string">&quot;张三&quot;</span>))<br><br><span class="hljs-comment"># 3. 关键字参数，可读性最好</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;我叫&#123;name&#125;，今年&#123;age&#125;岁&quot;</span>.<span class="hljs-built_in">format</span>(name=<span class="hljs-string">&quot;张三&quot;</span>, age=<span class="hljs-number">20</span>))<br></code></pre></td></tr></table></figure>
+
+<p><strong>格式控制</strong></p>
+<p>通过 <code>{变量:格式符}</code> 可以控制输出样式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 保留小数</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;圆周率：&#123;:.2f&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-number">3.1415926</span>))  <span class="hljs-comment"># 3.14</span><br><br><span class="hljs-comment"># 千分位分隔</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;金额：&#123;:,&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-number">1234567</span>))  <span class="hljs-comment"># 1,234,567</span><br><br><span class="hljs-comment"># 对齐填充：&lt;左对齐，&gt;右对齐，^居中</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&#123;:&lt;10&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;Python&quot;</span>))  <span class="hljs-comment"># 左对齐，总长10</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&#123;:*^10&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;Python&quot;</span>)) <span class="hljs-comment"># 居中，用*填充</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📌 评价：功能强大，兼容性好（支持 Python 全版本），适合需要兼容旧版本的场景；但写法略繁琐，长字符串时代码可读性一般。</p>
+</blockquote>
+<h2 id="4-3-方式三：f-string-字面量格式化（推荐首选）"><a href="#4-3-方式三：f-string-字面量格式化（推荐首选）" class="headerlink" title="4.3 方式三：f-string 字面量格式化（推荐首选）"></a>4.3 方式三：f-string 字面量格式化（推荐首选）</h2><p>Python3.6 推出的格式化方式，也是目前官方推荐的最佳方案。在字符串前加 <code>f</code>，直接在 <code>{}</code> 里写变量、表达式、函数调用，语法最简洁，可读性最高，性能也最好。</p>
+<p><strong>基础用法</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python">name = <span class="hljs-string">&quot;张三&quot;</span><br>age = <span class="hljs-number">20</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;我叫<span class="hljs-subst">&#123;name&#125;</span>，今年<span class="hljs-subst">&#123;age&#125;</span>岁&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>高级用法</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 1. 支持表达式计算</span><br>a = <span class="hljs-number">10</span><br>b = <span class="hljs-number">20</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;两数之和：<span class="hljs-subst">&#123;a + b&#125;</span>&quot;</span>)<br><br><span class="hljs-comment"># 2. 支持函数调用</span><br>s = <span class="hljs-string">&quot;python&quot;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;转大写：<span class="hljs-subst">&#123;s.upper()&#125;</span>&quot;</span>)<br><br><span class="hljs-comment"># 3. 格式控制，和format用法一致</span><br>pi = <span class="hljs-number">3.1415926</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;保留两位小数：<span class="hljs-subst">&#123;pi:<span class="hljs-number">.2</span>f&#125;</span>&quot;</span>)  <span class="hljs-comment"># 3.14</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;千分位：<span class="hljs-subst">&#123;<span class="hljs-number">1234567</span>:,&#125;</span>&quot;</span>)     <span class="hljs-comment"># 1,234,567</span><br><br><span class="hljs-comment"># 4. 日期格式化（配合datetime）</span><br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime<br>now = datetime.now()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;当前时间：<span class="hljs-subst">&#123;now:%Y-%m-%d %H:%M:%S&#125;</span>&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📌 评价：语法简洁、可读性强、性能最优，是 Python3.6 + 版本的首选格式化方式，日常开发优先使用。</p>
+</blockquote>
+<h2 id="4-4-方式四：string-Template-模板字符串"><a href="#4-4-方式四：string-Template-模板字符串" class="headerlink" title="4.4 方式四：string.Template 模板字符串"></a>4.4 方式四：string.Template 模板字符串</h2><p>Python 标准库提供的模板格式化方式，用 <code>$变量名</code> 做占位符，需要导入 string 模块。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> string <span class="hljs-keyword">import</span> Template<br><br>t = Template(<span class="hljs-string">&quot;我叫$name，今年$age岁&quot;</span>)<br>result = t.substitute(name=<span class="hljs-string">&quot;张三&quot;</span>, age=<span class="hljs-number">20</span>)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📌 评价：功能最简单，安全性高，适合处理用户输入的模板字符串，防止注入攻击；日常开发很少用，特殊安全场景才会用到。</p>
+</blockquote>
+<h2 id="4-5-四种方式对比与最佳实践"><a href="#4-5-四种方式对比与最佳实践" class="headerlink" title="4.5 四种方式对比与最佳实践"></a>4.5 四种方式对比与最佳实践</h2><table>
+<thead>
+<tr>
+<th>格式化方式</th>
+<th>可读性</th>
+<th>灵活性</th>
+<th>性能</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>% 占位符</td>
+<td>差</td>
+<td>低</td>
+<td>一般</td>
+<td>老代码维护，了解即可</td>
+</tr>
+<tr>
+<td>str.format()</td>
+<td>中等</td>
+<td>高</td>
+<td>较好</td>
+<td>需要兼容 Python3.6 以下版本</td>
+</tr>
+<tr>
+<td>f-string</td>
+<td>最好</td>
+<td>最高</td>
+<td>最好</td>
+<td>Python3.6+ 日常开发首选</td>
+</tr>
+<tr>
+<td>Template</td>
+<td>一般</td>
+<td>低</td>
+<td>一般</td>
+<td>用户输入模板、安全要求高的场景</td>
+</tr>
+</tbody></table>
+<p>✅ 最佳实践：没有特殊兼容需求的情况下，一律优先使用 f-string。</p>
+<h1 id="五、字符编码：彻底搞懂乱码的本质"><a href="#五、字符编码：彻底搞懂乱码的本质" class="headerlink" title="五、字符编码：彻底搞懂乱码的本质"></a>五、字符编码：彻底搞懂乱码的本质</h1><p>很多新手学 Python 都会遇到乱码问题：文件打开乱码、爬虫爬下来的内容乱码、打印中文乱码。本质上都是没有搞懂字符编码的核心逻辑，这一节我们用大白话讲透编码原理。</p>
+<h2 id="5-1-什么是字符编码？"><a href="#5-1-什么是字符编码？" class="headerlink" title="5.1  什么是字符编码？"></a>5.1  什么是字符编码？</h2><p>计算机只能存储和识别二进制的 0 和 1，人类用的文字、符号、数字都需要转换成二进制才能存在电脑里。</p>
+<p><strong>字符编码****就是一张「映射表」：规定了人类的字符和二进制数字之间的对应关系</strong>。</p>
+<p>同一个字符，用不同的编码标准，转成的二进制是不一样的；如果编码和解码用的不是同一张映射表，就会出现乱码。</p>
+<h2 id="5-2-常见编码标准"><a href="#5-2-常见编码标准" class="headerlink" title="5.2 常见编码标准"></a>5.2 常见编码标准</h2><p>（1）ASCII 码</p>
+<p>最早的编码标准，只收录了英文大小写字母、数字、英文标点，一共 128 个字符，用 1 个字节（8 位）存储。</p>
+<ul>
+<li>缺点：不支持中文、日文等非英文字符。</li>
+</ul>
+<p>（2）GBK &#x2F; GB2312</p>
+<p>中国制定的编码标准，专门用来处理中文。</p>
+<ul>
+<li>GB2312：收录了 6763 个常用汉字</li>
+<li>GBK：在 GB2312 基础上扩充，收录了两万多汉字，还支持繁体</li>
+<li>特点：中文用 2 个字节存储，英文兼容 ASCII（1 个字节）</li>
+</ul>
+<p>（3）Unicode</p>
+<p>也叫万国码，把全球所有语言的字符都收录到了同一个映射表里，每个字符都有唯一的编号。</p>
+<ul>
+<li>特点：解决了不同编码标准不兼容的问题，所有语言都能用</li>
+<li>缺点：直接存储的话，每个字符都要占 4 个字节，非常浪费空间</li>
+</ul>
+<p>（4）UTF-8</p>
+<p>是 Unicode 的一种实现方式（变长编码），也是目前互联网最主流的编码标准。</p>
+<ul>
+<li>特点：变长存储，英文占 1 个字节（兼容 ASCII），中文占 3 个字节</li>
+<li>优势：兼顾了兼容性和存储空间，是跨语言、跨平台的首选编码</li>
+</ul>
+<h2 id="5-3-Python3-中的字符串与字节串"><a href="#5-3-Python3-中的字符串与字节串" class="headerlink" title="5.3 Python3 中的字符串与字节串"></a>5.3 Python3 中的字符串与字节串</h2><p>Python3 最大的改进之一，就是严格区分了字符串和字节串：</p>
+<ul>
+<li>str 字符串：Unicode 字符串，人类可读的文本，内存中以 Unicode 编码存储</li>
+<li>bytes 字节串：二进制数据，机器可读的字节序列，用于网络传输、文件存储</li>
+</ul>
+<p><strong>bytes 的定义</strong></p>
+<p>在字符串前加 <code>b</code> 就是字节串，只能包含 ASCII 字符：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">b = <span class="hljs-string">b&quot;hello&quot;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(b))  <span class="hljs-comment"># &lt;class &#x27;bytes&#x27;&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="5-4-编码与解码"><a href="#5-4-编码与解码" class="headerlink" title="5.4 编码与解码"></a>5.4 编码与解码</h2><p><strong>编码 encode ()</strong>：把人类可读的 str 字符串，转成机器可读的 bytes 字节串</p>
+<p><strong>解码 decode ()</strong>：把 bytes 字节串，转成人类可读的 str 字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;你好Python&quot;</span><br><br><span class="hljs-comment"># 编码：str -&gt; bytes，默认用UTF-8</span><br>b = s.encode(<span class="hljs-string">&quot;utf-8&quot;</span>)<br><span class="hljs-built_in">print</span>(b)  <span class="hljs-comment"># b&#x27;\xe4\xbd\xa0\xe5\xa5\xbdPython&#x27;，中文变成了十六进制表示的字节</span><br><br><span class="hljs-comment"># 解码：bytes -&gt; str</span><br>s2 = b.decode(<span class="hljs-string">&quot;utf-8&quot;</span>)<br><span class="hljs-built_in">print</span>(s2)  <span class="hljs-comment"># 你好Python</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="5-5-乱码的根本原因与解决方法"><a href="#5-5-乱码的根本原因与解决方法" class="headerlink" title="5.5 乱码的根本原因与解决方法"></a>5.5 乱码的根本原因与解决方法</h2><p><strong>根本原因</strong></p>
+<p>编码和解码用的字符集不一致。比如用 GBK 编码的字节串，用 UTF-8 去解码，就会出现乱码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python">s = <span class="hljs-string">&quot;你好&quot;</span><br>b_gbk = s.encode(<span class="hljs-string">&quot;gbk&quot;</span>)  <span class="hljs-comment"># 用GBK编码</span><br><span class="hljs-built_in">print</span>(b_gbk.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))  <span class="hljs-comment"># 用UTF-8解码，出现乱码：���</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>常见乱码场景与解决</strong></p>
+<ol>
+<li>读取文件乱码：文件保存时用的 GBK，读取时没指定编码，默认用 UTF-8<ol>
+<li>解决：<code>open(&quot;文件.txt&quot;, encoding=&quot;gbk&quot;)</code>，指定和文件保存一致的编码</li>
+</ol>
+</li>
+<li>爬虫网页乱码：网页是 GBK 编码，requests 默认按 ISO-8859-1 解码<ol>
+<li>解决：手动设置响应编码 <code>response.encoding = &quot;utf-8&quot;</code> 或 <code>response.apparent_encoding</code></li>
+</ol>
+</li>
+<li>最佳实践：所有代码、文件、数据统一使用 UTF-8 编码，从根源避免乱码</li>
+</ol>
+<blockquote>
+<p>⚠️ 新手避坑：decode () 时如果遇到无法识别的字节，默认会报错，可以加 <code>errors=&quot;ignore&quot;</code> 忽略错误字符（不推荐，会丢失数据）。</p>
+</blockquote>
+<h1 id="六、正则表达式：文本处理的瑞士军刀"><a href="#六、正则表达式：文本处理的瑞士军刀" class="headerlink" title="六、正则表达式：文本处理的瑞士军刀"></a>六、正则表达式：文本处理的瑞士军刀</h1><p>普通的字符串方法只能处理固定规则的文本，遇到复杂的匹配需求（比如提取手机号、邮箱、身份证号）就无能为力了。正则表达式是一套专门用来匹配文本的规则语法，配合 Python 的 re 模块，可以实现几乎所有复杂的文本处理需求。</p>
+<h2 id="6-1-re-模块五个核心方法"><a href="#6-1-re-模块五个核心方法" class="headerlink" title="6.1 re 模块五个核心方法"></a>6.1 re 模块五个核心方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>功能</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>re.match(pattern, string)</td>
+<td>从字符串开头匹配正则</td>
+<td>匹配成功返回匹配对象，失败返回 None</td>
+</tr>
+<tr>
+<td>re.search(pattern, string)</td>
+<td>查找字符串中第一个匹配的内容</td>
+<td>匹配成功返回匹配对象，失败返回 None</td>
+</tr>
+<tr>
+<td>re.findall(pattern, string)</td>
+<td>查找字符串中所有匹配的内容</td>
+<td>返回匹配结果的列表</td>
+</tr>
+<tr>
+<td>re.sub(pattern, repl, string)</td>
+<td>替换所有匹配的内容</td>
+<td>返回替换后的字符串</td>
+</tr>
+<tr>
+<td>re.split(pattern, string)</td>
+<td>按正则规则分割字符串</td>
+<td>返回分割后的列表</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>📌 日常开发最常用的是 <code>findall()</code> 和 <code>sub()</code>，重点掌握。</p>
+</blockquote>
+<h2 id="6-2-基础正则语法（高频常用）"><a href="#6-2-基础正则语法（高频常用）" class="headerlink" title="6.2 基础正则语法（高频常用）"></a>6.2 基础正则语法（高频常用）</h2><p><strong>（1）字符类：匹配单个字符</strong></p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>匹配任意单个字符（除了换行符 \n）</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配任意数字，等价于 [0-9]</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配任意非数字</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母、数字、下划线，等价于 [a-zA-Z0-9_]</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配非字母数字下划线</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任意空白字符（空格、制表符、换行符等）</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任意非空白字符</td>
+</tr>
+<tr>
+<td>[abc]</td>
+<td>匹配括号中任意一个字符，比如 a、b、c</td>
+</tr>
+<tr>
+<td>[a-z]</td>
+<td>匹配 a 到 z 之间任意一个小写字母</td>
+</tr>
+<tr>
+<td>[^abc]</td>
+<td>匹配除了 a、b、c 之外的任意字符</td>
+</tr>
+</tbody></table>
+<p><strong>（2）量词：控制匹配的次数</strong></p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>匹配前一个字符 0 次或多次，可有可无</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前一个字符 1 次或多次，至少一次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前一个字符 0 次或 1 次，最多一次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配前一个字符恰好 n 次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>匹配前一个字符 n 到 m 次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>匹配前一个字符至少 n 次</td>
+</tr>
+</tbody></table>
+<p><strong>（3）贪婪与非贪婪（重点避坑）</strong></p>
+<ul>
+<li>贪婪匹配：默认模式，量词会尽可能多地匹配字符</li>
+<li>非贪婪匹配：在量词后面加 <code>?</code>，会尽可能少地匹配字符</li>
+</ul>
+<p>这是正则入门最容易踩的坑，举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> re<br>s = <span class="hljs-string">&quot;&lt;div&gt;标题&lt;/div&gt;&lt;div&gt;内容&lt;/div&gt;&quot;</span><br><br><span class="hljs-comment"># 贪婪匹配：.* 会尽可能长地匹配</span><br>result1 = re.findall(<span class="hljs-string">r&quot;&lt;div&gt;.*&lt;/div&gt;&quot;</span>, s)<br><span class="hljs-built_in">print</span>(result1)  <span class="hljs-comment"># [&#x27;&lt;div&gt;标题&lt;/div&gt;&lt;div&gt;内容&lt;/div&gt;&#x27;]，只匹配到1个</span><br><br><span class="hljs-comment"># 非贪婪匹配：.*? 会尽可能短地匹配</span><br>result2 = re.findall(<span class="hljs-string">r&quot;&lt;div&gt;.*?&lt;/div&gt;&quot;</span>, s)<br><span class="hljs-built_in">print</span>(result2)  <span class="hljs-comment"># [&#x27;&lt;div&gt;标题&lt;/div&gt;&#x27;, &#x27;&lt;div&gt;内容&lt;/div&gt;&#x27;]，匹配到2个</span><br></code></pre></td></tr></table></figure>
+
+<p>✅ 实战建议：提取标签、括号内容等场景，一律用非贪婪匹配，避免匹配过度。</p>
+<p><strong>（4）分组与边界</strong></p>
+<ul>
+<li><p>分组 ()：把括号里的内容作为一个整体，提取时只会返回分组里的内容</p>
+<ul>
+<li><pre><code class="language-Python">s = &quot;我的手机号是13812345678&quot;
+# 提取手机号，用分组只返回数字部分
+result = re.findall(r&quot;手机号是(\d{11})&quot;, s)
+print(result)  # [&#39;13812345678&#39;]
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>- 边界匹配<br><br>  - `^`：匹配字符串开头<br>  - `$`：匹配字符串结尾<br><br><span class="hljs-comment">## 6.3 实战案例</span><br><br><span class="hljs-comment">### 案例 1：提取文本中所有手机号</span><br><br>手机号规则：<span class="hljs-number">1</span> 开头，第二位 <span class="hljs-number">3</span>-<span class="hljs-number">9</span>，一共 <span class="hljs-number">11</span> 位数字<br><br>```Python<br><span class="hljs-keyword">import</span> re<br>text = <span class="hljs-string">&quot;客服电话：400-123-4567，销售经理：13812345678，技术支持：15987654321&quot;</span><br><span class="hljs-comment"># 正则规则</span><br>pattern = <span class="hljs-string">r&quot;1[3-9]\d&#123;9&#125;&quot;</span><br>phones = re.findall(pattern, text)<br><span class="hljs-built_in">print</span>(phones)  <span class="hljs-comment"># [&#x27;13812345678&#x27;, &#x27;15987654321&#x27;]</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="案例-2：替换敏感词"><a href="#案例-2：替换敏感词" class="headerlink" title="案例 2：替换敏感词"></a><strong>案例 2：替换敏感词</strong></h3><p>把文本中的 “垃圾”、“差评” 替换成 ***</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">text = <span class="hljs-string">&quot;这个产品是垃圾，服务太差了，必须差评&quot;</span><br>pattern = <span class="hljs-string">r&quot;垃圾|差评&quot;</span><br>result = re.sub(pattern, <span class="hljs-string">&quot;***&quot;</span>, text)<br><span class="hljs-built_in">print</span>(result)  <span class="hljs-comment"># 这个产品是***，服务太差了，必须***</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="案例-3：提取-HTML-标签中的文本"><a href="#案例-3：提取-HTML-标签中的文本" class="headerlink" title="案例 3：提取 HTML 标签中的文本"></a><strong>案例 3：提取 HTML 标签中的文本</strong></h3><p>提取所有 p 标签中的文本内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">html = <span class="hljs-string">&quot;&lt;p&gt;第一篇文章&lt;/p&gt;&lt;p&gt;第二篇文章&lt;/p&gt;&lt;div&gt;其他内容&lt;/div&gt;&quot;</span><br>pattern = <span class="hljs-string">r&quot;&lt;p&gt;(.*?)&lt;/p&gt;&quot;</span>  <span class="hljs-comment"># 分组+非贪婪匹配</span><br>result = re.findall(pattern, html)<br><span class="hljs-built_in">print</span>(result)  <span class="hljs-comment"># [&#x27;第一篇文章&#x27;, &#x27;第二篇文章&#x27;]</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="七、动手练习题（深度进阶版）"><a href="#七、动手练习题（深度进阶版）" class="headerlink" title="七、动手练习题（深度进阶版）"></a>七、动手练习题（深度进阶版）</h1><p>五道题目覆盖基础操作、实战场景、原理辨析，难度循序渐进，建议先独立思考再看答案。</p>
+<h2 id="练习题-1：日志-IP-统计（实战应用）"><a href="#练习题-1：日志-IP-统计（实战应用）" class="headerlink" title="练习题 1：日志 IP 统计（实战应用）"></a><strong>练习题 1：日志 IP 统计（实战应用）</strong></h2><p>给定一段服务器日志文本，要求：</p>
+<ol>
+<li>提取文本中所有的 IP 地址（IP 规则：4 段 0-255 的数字，用点分隔）</li>
+<li>统计每个 IP 出现的次数</li>
+<li>按出现次数从高到低排序输出</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python">log_text = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">192.168.1.100 - - [10/Oct/2024:10:00:01 +0800] &quot;GET /index.html HTTP/1.1&quot; 200 1234</span><br><span class="hljs-string">192.168.1.101 - - [10/Oct/2024:10:00:02 +0800] &quot;POST /login HTTP/1.1&quot; 200 567</span><br><span class="hljs-string">192.168.1.100 - - [10/Oct/2024:10:00:03 +0800] &quot;GET /user HTTP/1.1&quot; 200 890</span><br><span class="hljs-string">10.0.0.1 - - [10/Oct/2024:10:00:04 +0800] &quot;GET /admin HTTP/1.1&quot; 403 123</span><br><span class="hljs-string">192.168.1.101 - - [10/Oct/2024:10:00:05 +0800] &quot;GET /list HTTP/1.1&quot; 200 456</span><br><span class="hljs-string">192.168.1.100 - - [10/Oct/2024:10:00:06 +0800] &quot;GET /detail HTTP/1.1&quot; 200 789</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>解题思路</strong></p>
+<ol>
+<li>IP 正则匹配：用正则提取所有符合规则的 IP 地址，注意 IP 每段数字不能超过 255，入门阶段可以先用简化版正则（4 段 1-3 位数字）</li>
+<li>次数统计：用字典统计每个 IP 的出现次数</li>
+<li>排序：按字典的值从大到小排序</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> re<br><br>log_text = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">192.168.1.100 - - [10/Oct/2024:10:00:01 +0800] &quot;GET /index.html HTTP/1.1&quot; 200 1234</span><br><span class="hljs-string">192.168.1.101 - - [10/Oct/2024:10:00:02 +0800] &quot;POST /login HTTP/1.1&quot; 200 567</span><br><span class="hljs-string">192.168.1.100 - - [10/Oct/2024:10:00:03 +0800] &quot;GET /user HTTP/1.1&quot; 200 890</span><br><span class="hljs-string">10.0.0.1 - - [10/Oct/2024:10:00:04 +0800] &quot;GET /admin HTTP/1.1&quot; 403 123</span><br><span class="hljs-string">192.168.1.101 - - [10/Oct/2024:10:00:05 +0800] &quot;GET /list HTTP/1.1&quot; 200 456</span><br><span class="hljs-string">192.168.1.100 - - [10/Oct/2024:10:00:06 +0800] &quot;GET /detail HTTP/1.1&quot; 200 789</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 1. 提取所有IP（简化版正则，适合入门；严格版需要校验每段0-255）</span><br>pattern = <span class="hljs-string">r&quot;\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;&quot;</span><br>ip_list = re.findall(pattern, log_text)<br><br><span class="hljs-comment"># 2. 统计出现次数</span><br>ip_count = &#123;&#125;<br><span class="hljs-keyword">for</span> ip <span class="hljs-keyword">in</span> ip_list:<br>    ip_count[ip] = ip_count.get(ip, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span><br><br><span class="hljs-comment"># 3. 按次数从高到低排序</span><br>sorted_ip = <span class="hljs-built_in">sorted</span>(ip_count.items(), key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)<br><br><span class="hljs-comment"># 输出结果</span><br><span class="hljs-keyword">for</span> ip, count <span class="hljs-keyword">in</span> sorted_ip:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;IP：<span class="hljs-subst">&#123;ip&#125;</span>，出现次数：<span class="hljs-subst">&#123;count&#125;</span>&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Bash">IP：192.168.1.100，出现次数：3<br>IP：192.168.1.101，出现次数：2<br>IP：10.0.0.1，出现次数：1<br></code></pre></td></tr></table></figure>
+
+<p><strong>易错点分析</strong></p>
+<ol>
+<li>IP 正则不要写得太复杂，入门阶段能匹配常规 IP 即可；严格校验 0-255 的正则会非常冗长，工作中可以用第三方库处理</li>
+<li>排序时注意是按值排序，返回的是元组列表</li>
+</ol>
+<h2 id="练习题-2：按字节截断字符串（编码原理应用）"><a href="#练习题-2：按字节截断字符串（编码原理应用）" class="headerlink" title="练习题 2：按字节截断字符串（编码原理应用）"></a>练习题 2：按字节截断字符串（编码原理应用）</h2><p>实现一个函数 <code>truncate_by_byte(s, length, encoding=&quot;utf-8&quot;)</code>：</p>
+<ul>
+<li>功能：按字节数截断字符串，保证截断后的字符串字节数不超过 length</li>
+<li>要求：不能出现半个汉字的乱码（比如 UTF-8 中一个中文占 3 字节，不能只截断前 1、2 字节）</li>
+<li>示例：<code>truncate_by_byte(&quot;Python编程&quot;, 8)</code> 应该返回 <code>&quot;Python编&quot;</code>（”Python” 占 6 字节，”编” 占 2 字节？不对，”编”UTF-8 占 3 字节，6+3&#x3D;9 超过 8，所以应该返回 “Python”？不对，重新算：”Python”6 字节，”编”3 字节，6+3&#x3D;9&gt;8，所以截断到 “Python”，6 字节。如果 length&#x3D;9，返回 “Python 编”）</li>
+</ul>
+<blockquote>
+<p>这道题非常考验对字符编码的理解，也是很多公司的笔试真题。</p>
+</blockquote>
+<p><strong>解题思路</strong></p>
+<ol>
+<li>先把字符串编码成指定编码的字节串</li>
+<li>截取前 length 个字节</li>
+<li>解码的时候会因为截断半个汉字报错，利用这个特性逐步减少字节数，直到解码成功</li>
+<li>返回解码后的字符串</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">truncate_by_byte</span>(<span class="hljs-params">s, length, encoding=<span class="hljs-string">&quot;utf-8&quot;</span></span>):<br>    <span class="hljs-comment"># 先编码成字节串</span><br>    byte_data = s.encode(encoding)<br>    <span class="hljs-comment"># 如果总长度不超过限制，直接返回原字符串</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(byte_data) &lt;= length:<br>        <span class="hljs-keyword">return</span> s<br>    <br>    <span class="hljs-comment"># 从最大长度开始尝试解码，失败就长度减1，直到成功</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-comment"># 尝试解码前i个字节</span><br>            <span class="hljs-keyword">return</span> byte_data[:i].decode(encoding)<br>        <span class="hljs-keyword">except</span> UnicodeDecodeError:<br>            <span class="hljs-comment"># 解码失败说明截断了半个字符，继续减长度</span><br>            <span class="hljs-keyword">continue</span><br>    <span class="hljs-comment"># 极端情况返回空字符串</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br><br><span class="hljs-comment"># 测试</span><br><span class="hljs-built_in">print</span>(truncate_by_byte(<span class="hljs-string">&quot;Python编程&quot;</span>, <span class="hljs-number">8</span>))   <span class="hljs-comment"># Python</span><br><span class="hljs-built_in">print</span>(truncate_by_byte(<span class="hljs-string">&quot;Python编程&quot;</span>, <span class="hljs-number">9</span>))   <span class="hljs-comment"># Python编</span><br><span class="hljs-built_in">print</span>(truncate_by_byte(<span class="hljs-string">&quot;Python编程&quot;</span>, <span class="hljs-number">100</span>)) <span class="hljs-comment"># Python编程</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>优化思路</strong></p>
+<p>上面的写法简单易懂，但极端情况下效率低。更高效的做法是：UTF-8 编码有固定的编码规则，首字节可以判断字符长度，直接定位截断位置。入门阶段掌握上面的写法即可。</p>
+<p><strong>易错点分析</strong></p>
+<ol>
+<li>直接截断字节后强行解码，会报 <code>UnicodeDecodeError</code> 错误，这就是半个汉字乱码的根源</li>
+<li>不同编码的中文字节数不一样，GBK 是 2 字节，UTF-8 是 3 字节，所以函数要支持指定编码</li>
+</ol>
+<h2 id="练习题-3：下划线转大驼峰（字符串方法综合）"><a href="#练习题-3：下划线转大驼峰（字符串方法综合）" class="headerlink" title="练习题 3：下划线转大驼峰（字符串方法综合）"></a>练习题 3：下划线转大驼峰（字符串方法综合）</h2><p>实现一个函数 <code>snake_to_camel(s)</code>：</p>
+<ul>
+<li>功能：把下划线命名法的字符串转换成大驼峰命名法</li>
+<li>要求： <ul>
+<li>首尾的下划线要忽略</li>
+<li>连续的多个下划线只算一个分隔</li>
+<li>保证转换后每个单词首字母大写</li>
+</ul>
+</li>
+<li>示例： <ul>
+<li><code>snake_to_camel(&quot;user_name&quot;)</code> → <code>&quot;UserName&quot;</code></li>
+<li><code>snake_to_camel(&quot;__hello_world__&quot;)</code> → <code>&quot;HelloWorld&quot;</code></li>
+<li><code>snake_to_camel(&quot;python__programming_language&quot;)</code> → <code>&quot;PythonProgrammingLanguage&quot;</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>解题思路</strong></p>
+<p>方法一：纯字符串方法</p>
+<ol>
+<li>先去除首尾的下划线</li>
+<li>按下划线分割字符串</li>
+<li>过滤掉分割后产生的空字符串（对应连续下划线）</li>
+<li>把每个单词首字母大写，再拼接起来</li>
+</ol>
+<p>方法二：正则分割，更简洁</p>
+<p><strong>完整代码（方法一：纯字符串方法）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">snake_to_camel</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-comment"># 1. 去除首尾下划线</span><br>    s = s.strip(<span class="hljs-string">&quot;_&quot;</span>)<br>    <span class="hljs-comment"># 2. 按下划线分割</span><br>    words = s.split(<span class="hljs-string">&quot;_&quot;</span>)<br>    <span class="hljs-comment"># 3. 过滤空字符串，每个单词首字母大写</span><br>    camel_words = [word.capitalize() <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> words <span class="hljs-keyword">if</span> word]<br>    <span class="hljs-comment"># 4. 拼接</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>.join(camel_words)<br><br><span class="hljs-comment"># 测试</span><br><span class="hljs-built_in">print</span>(snake_to_camel(<span class="hljs-string">&quot;user_name&quot;</span>))                    <span class="hljs-comment"># UserName</span><br><span class="hljs-built_in">print</span>(snake_to_camel(<span class="hljs-string">&quot;__hello_world__&quot;</span>))              <span class="hljs-comment"># HelloWorld</span><br><span class="hljs-built_in">print</span>(snake_to_camel(<span class="hljs-string">&quot;python__programming_language&quot;</span>)) <span class="hljs-comment"># PythonProgrammingLanguage</span><br></code></pre></td></tr></table></figure>
+
+<p>完整代码（方法二：正则分割）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> re<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">snake_to_camel</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-comment"># 用正则按一个或多个下划线分割，自动处理连续下划线</span><br>    words = re.split(<span class="hljs-string">r&quot;_+&quot;</span>, s.strip(<span class="hljs-string">&quot;_&quot;</span>))<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>.join(word.capitalize() <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> words)<br></code></pre></td></tr></table></figure>
+
+<p><strong>易错点分析</strong></p>
+<ol>
+<li>容易忽略首尾下划线，导致首字母空大写</li>
+<li>连续下划线分割后会产生空字符串，不过滤的话 capitalize () 后还是空，不影响结果，但不严谨</li>
+<li>不要用 replace 把下划线删掉再首字母大写，那样无法区分单词边界</li>
+</ol>
+<h2 id="练习题-4：回文字符串判断（切片-逻辑应用）"><a href="#练习题-4：回文字符串判断（切片-逻辑应用）" class="headerlink" title="练习题 4：回文字符串判断（切片 + 逻辑应用）"></a>练习题 4：回文字符串判断（切片 + 逻辑应用）</h2><p>给定一个字符串，判断它是不是回文字符串（正读和反读完全一样）。</p>
+<ul>
+<li>要求：忽略大小写、忽略空格和标点符号，只考虑字母和数字</li>
+<li>示例： <ul>
+<li><code>&quot;A man, a plan, a canal: Panama&quot;</code> → True</li>
+<li><code>&quot;race a car&quot;</code> → False</li>
+</ul>
+</li>
+</ul>
+<p><strong>解题思路</strong></p>
+<ol>
+<li>预处理字符串：统一转小写，只保留字母和数字，去掉其他所有字符</li>
+<li>比较处理后的字符串和它的倒序是否一致</li>
+<li>进阶优化：双指针法，不用额外空间，从两头向中间遍历比较</li>
+</ol>
+<p><strong>完整代码（方法一：简洁切片法）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">is_palindrome</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-comment"># 预处理：只保留字母数字，转小写</span><br>    clean_s = <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> s:<br>        <span class="hljs-keyword">if</span> char.isalnum():<br>            clean_s += char.lower()<br>    <span class="hljs-comment"># 比较正序和倒序</span><br>    <span class="hljs-keyword">return</span> clean_s == clean_s[::-<span class="hljs-number">1</span>]<br><br><span class="hljs-comment"># 测试</span><br><span class="hljs-built_in">print</span>(is_palindrome(<span class="hljs-string">&quot;A man, a plan, a canal: Panama&quot;</span>))  <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(is_palindrome(<span class="hljs-string">&quot;race a car&quot;</span>))                        <span class="hljs-comment"># False</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>完整代码（方法二：双指针法，空间复杂度 O (1)）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">is_palindrome</span>(<span class="hljs-params">s</span>):<br>    left = <span class="hljs-number">0</span><br>    right = <span class="hljs-built_in">len</span>(s) - <span class="hljs-number">1</span><br>    <br>    <span class="hljs-keyword">while</span> left &lt; right:<br>        <span class="hljs-comment"># 左指针跳过非字母数字</span><br>        <span class="hljs-keyword">while</span> left &lt; right <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> s[left].isalnum():<br>            left += <span class="hljs-number">1</span><br>        <span class="hljs-comment"># 右指针跳过非字母数字</span><br>        <span class="hljs-keyword">while</span> left &lt; right <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> s[right].isalnum():<br>            right -= <span class="hljs-number">1</span><br>        <br>        <span class="hljs-comment"># 比较字符，不区分大小写</span><br>        <span class="hljs-keyword">if</span> s[left].lower() != s[right].lower():<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <br>        left += <span class="hljs-number">1</span><br>        right -= <span class="hljs-number">1</span><br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>易错点分析</strong></p>
+<ol>
+<li>容易忽略大小写，题目要求忽略大小写，必须统一转大写或小写再比较</li>
+<li>容易只忽略空格，忘记标点符号，题目要求忽略所有非字母数字</li>
+<li>空字符串和单个字符默认是回文，代码要能处理边界情况</li>
+</ol>
+<h2 id="练习题-5：原理辨析题"><a href="#练习题-5：原理辨析题" class="headerlink" title="练习题 5：原理辨析题"></a>练习题 5：原理辨析题</h2><p>请回答以下问题，并说明原因：</p>
+<ol>
+<li>为什么大量字符串拼接时，推荐用 join () 而不是 + 号？请从内存和性能角度解释。</li>
+<li>字符串是不可变对象，那 <code>s += &quot;abc&quot;</code> 这种写法，和 <code>s = s + &quot;abc&quot;</code> 有区别吗？会不会优化性能？</li>
+<li>正则表达式中，贪婪匹配和非贪婪匹配的核心区别是什么？分别适合什么场景？</li>
+</ol>
+<h3 id="①-为什么-join-比-号拼接性能好？"><a href="#①-为什么-join-比-号拼接性能好？" class="headerlink" title="① 为什么 join 比 + 号拼接性能好？"></a>① 为什么 join 比 + 号拼接性能好？</h3><p>核心原因是字符串的不可变性：</p>
+<ul>
+<li><code>+</code> 号拼接：每执行一次 <code>a + b</code>，都会申请一块新内存，创建一个全新的字符串对象。如果在循环里拼接 n 次，就会创建 n 个中间对象，频繁申请内存、销毁对象，时间复杂度是 O (n²)，数据量大时性能极差。</li>
+<li><code>join()</code> 方法：会先遍历所有待拼接的字符串，计算出总长度，然后一次性申请一块足够大的内存，把所有字符依次复制进去。整个过程只创建 1 个新对象，时间复杂度是 O (n)，性能远高于循环 + 号拼接。</li>
+</ul>
+<h3 id="②-s-“abc”-和-s-s-“abc”-有区别吗？"><a href="#②-s-“abc”-和-s-s-“abc”-有区别吗？" class="headerlink" title="② s +&#x3D; “abc” 和 s &#x3D; s + “abc” 有区别吗？"></a>② s +&#x3D; “abc” 和 s &#x3D; s + “abc” 有区别吗？</h3><p>对于字符串这种不可变对象，本质上没有区别，最终都会生成新的字符串对象，重新赋值给变量 s，性能也没有差异。</p>
+<ul>
+<li><code>s = s + &quot;abc&quot;</code>：先计算右边的 s + “abc”，生成新对象，再把 s 指向新对象</li>
+<li><code>s += &quot;abc&quot;</code>：语法糖，底层执行逻辑和上面完全一致，也是生成新对象</li>
+</ul>
+<blockquote>
+<p>补充：如果是列表这种可变对象，<code>+=</code> 和 <code>+</code> 是有本质区别的：<code>list += [1,2]</code> 是原地修改列表，不会创建新对象；<code>list = list + [1,2]</code> 会创建新列表。但字符串是不可变对象，不存在原地修改，所以两者没有区别。</p>
+</blockquote>
+<h3 id="③-贪婪匹配和非贪婪匹配的区别与适用场景"><a href="#③-贪婪匹配和非贪婪匹配的区别与适用场景" class="headerlink" title="③ 贪婪匹配和非贪婪匹配的区别与适用场景"></a>③ 贪婪匹配和非贪婪匹配的区别与适用场景</h3><ul>
+<li>核心区别：量词的匹配长度不同 <ul>
+<li>贪婪匹配：默认模式，量词会尽可能多地匹配字符，只要整体能匹配成功，就尽量往长了匹配</li>
+<li>非贪婪匹配：量词后加<code>?</code>，会尽可能少地匹配字符，只要整体能匹配成功，就尽量往短了匹配</li>
+</ul>
+</li>
+<li>适用场景<ul>
+<li>贪婪匹配：适合匹配长度不确定、且没有重复边界的内容，比如匹配一段完整的文本</li>
+<li>非贪婪匹配：适合提取有明确左右边界的内容，比如提取 HTML 标签内容、括号内的文本等，避免匹配过度包含多个边界</li>
+</ul>
+</li>
+<li>注意：非贪婪匹配只是量词的匹配策略，整体还是要保证整个正则表达式能匹配成功，不是越短就一定停。</li>
+</ul>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>字符串是 Python 日常开发中接触最多的数据类型之一，看似简单，实则包含了操作方法、格式化、编码原理、正则应用等多个维度的知识。 掌握好字符串处理，能极大提升日常办公、爬虫、数据分析等场景的开发效率。下一篇我们会讲解 Python 的容器类型：列表、元组、字典、集合的进阶用法与底层原理。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Python 基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>05 | 一文吃透python字符串</div>
+      <div>https://nicepeng.github.io/2026/07/23/05-一文吃透python字符串/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>nicepeng</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年7月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/23/04-%E8%AF%A6%E8%A7%A3Python%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" title="04 | 详解Python中的所有数据类型与运算符">
+                        <span class="hidden-mobile">04 | 详解Python中的所有数据类型与运算符</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/openkounter.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

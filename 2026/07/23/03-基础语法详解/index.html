@@ -1,0 +1,1111 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="nicepeng">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="上一篇我们搭好了 Python 开发环境，成功写出了人生第一行代码 print(&quot;Hello World&quot;)。很多同学跑完程序后会好奇：  为什么有的代码前面要空几格？不空就直接报错？ 变量名为什么不能随便起？有的名字一写就红名报错？ 我写的这些代码，在电脑里到底是怎么运行的？  这些问题，本质上都属于 Python 的「基础语法规则」。就像写作文要遵守标点、分段规范，写代码也">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04 | 详解Python中的所有数据类型与运算符">
+<meta property="og:url" content="https://nicepeng.github.io/2026/07/23/03-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="上一篇我们搭好了 Python 开发环境，成功写出了人生第一行代码 print(&quot;Hello World&quot;)。很多同学跑完程序后会好奇：  为什么有的代码前面要空几格？不空就直接报错？ 变量名为什么不能随便起？有的名字一写就红名报错？ 我写的这些代码，在电脑里到底是怎么运行的？  这些问题，本质上都属于 Python 的「基础语法规则」。就像写作文要遵守标点、分段规范，写代码也">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://x08gmb9mcg3.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjcxODgyZDZjNWRhMWVkZjcwOTIzYzk4M2UwNDYyMTlfT2xMR25vUmh2RHptTjJGRVR1clJNZ2xhOTRPd0VhVFVfVG9rZW46SU8zTmJBYUdLb0kxTlF4RTlUYWM0R3VRbnNkXzE3ODQ4MTc3NDY6MTc4NDgyMTM0Nl9WNA&add_watermark=true&scene_type=CCM">
+<meta property="article:published_time" content="2026-07-23T14:41:02.000Z">
+<meta property="article:modified_time" content="2026-07-23T14:42:48.966Z">
+<meta property="article:author" content="nicepeng">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://x08gmb9mcg3.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjcxODgyZDZjNWRhMWVkZjcwOTIzYzk4M2UwNDYyMTlfT2xMR25vUmh2RHptTjJGRVR1clJNZ2xhOTRPd0VhVFVfVG9rZW46SU8zTmJBYUdLb0kxTlF4RTlUYWM0R3VRbnNkXzE3ODQ4MTc3NDY6MTc4NDgyMTM0Nl9WNA&add_watermark=true&scene_type=CCM">
+  
+  
+  
+  <title>04 | 详解Python中的所有数据类型与运算符 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nicepeng.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>nicepeng</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="04 | 详解Python中的所有数据类型与运算符"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-23 22:41" pubdate>
+          2026年7月23日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          64 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">04 | 详解Python中的所有数据类型与运算符</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>上一篇我们搭好了 Python 开发环境，成功写出了人生第一行代码 <code>print(&quot;Hello World&quot;)</code>。很多同学跑完程序后会好奇：</p>
+<ul>
+<li>为什么有的代码前面要空几格？不空就直接报错？</li>
+<li>变量名为什么不能随便起？有的名字一写就红名报错？</li>
+<li>我写的这些代码，在电脑里到底是怎么运行的？</li>
+</ul>
+<p>这些问题，本质上都属于 Python 的「基础语法规则」。就像写作文要遵守标点、分段规范，写代码也有一套固定的规则 —— 规则不多，但非常严格，写错一个细节，程序就会直接罢工。</p>
+<p>今天这篇文章，我们就把 Python 入门最核心的基础语法一次性讲透。全程大白话讲解 + 可运行代码示例 + 新手避坑指南，看完你不仅能看懂代码的基本结构，还能知道「为什么这么写」，写出规范、不易出错的代码。</p>
+<hr>
+<h1 id="一、Python-最独特的规则：缩进（代码块的灵魂）"><a href="#一、Python-最独特的规则：缩进（代码块的灵魂）" class="headerlink" title="一、Python 最独特的规则：缩进（代码块的灵魂）"></a>一、Python 最独特的规则：缩进（代码块的灵魂）</h1><p>如果说 Python 和 C、Java、JavaScript 等语言最大的区别是什么，那一定是「缩进」。</p>
+<p>① 其他语言怎么划分代码块？</p>
+<p>在大多数编程语言里，代码块是用一对大括号 <code>{}</code> 包裹起来的。比如 Java 里的判断逻辑：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">if</span> (age &gt;= <span class="hljs-number">18</span>) &#123;<br>    System.out.println(<span class="hljs-string">&quot;成年了&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;可以独立做事&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>大括号里面的两行，就是满足条件才会执行的代码块。大括号是边界，缩进只是为了好看，不缩进也能运行。</p>
+<p>② Python 用缩进划分代码块</p>
+<p>Python 里没有大括号，完全靠缩进（行首的空格）来区分代码的层级和归属。同一级别的代码，缩进量必须完全一致。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Python">age = <span class="hljs-number">20</span><br><span class="hljs-keyword">if</span> age &gt;= <span class="hljs-number">18</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;成年了&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;可以独立做事&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;程序结束&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>上面的代码里：</p>
+<ul>
+<li>第 2 行 <code>if</code> 是顶层代码，前面没有空格；</li>
+<li>第 3、4 行前面有 4 个空格，属于 <code>if</code> 条件满足时才执行的代码块；</li>
+<li>第 5 行又回到顶层，不管条件是否满足都会执行。</li>
+</ul>
+<p>③ 缩进的硬性规则</p>
+<p>推荐用 4 个空格作为一个缩进层级，这是 PEP8 官方规范的标准写法。</p>
+<p>同一层级的代码，缩进量必须完全相同，多一个少一个都会报错。</p>
+<p>Tab 和空格绝对不能混用，不然会报 <code>IndentationError</code> 缩进错误，新手最容易踩这个坑。</p>
+<p>缩进不能随便加，顶层代码前面不能有空格。</p>
+<blockquote>
+<p>💡 新手小技巧：VS Code 和 PyCharm 都默认开启了 Tab 自动转 4 空格，直接按 Tab 键就行，不用手动敲 4 下空格。</p>
+</blockquote>
+<p>④ 常见缩进错误</p>
+<ul>
+<li>缩进不一致：同一代码块有的行 3 个空格，有的行 4 个</li>
+<li>该缩进的没缩进：<code>if</code>、<code>for</code>、<code>def</code> 等语句后面的代码块忘记缩进</li>
+<li>不该缩进的乱缩进：顶层代码前面莫名加了空格</li>
+</ul>
+<p>缩进错误虽然常见，但也好排查 —— 报错信息会直接告诉你第几行缩进有问题，对着改就行。</p>
+<h1 id="二、标识符：给变量、函数起名字的规则"><a href="#二、标识符：给变量、函数起名字的规则" class="headerlink" title="二、标识符：给变量、函数起名字的规则"></a>二、标识符：给变量、函数起名字的规则</h1><p>我们写代码时，会给变量、函数、类起名字，这些名字就叫做「标识符」。名字不能乱起，有一套明确的规则。</p>
+<h2 id="2-1-硬性规则（违反就报错）"><a href="#2-1-硬性规则（违反就报错）" class="headerlink" title="2.1 硬性规则（违反就报错）"></a>2.1 硬性规则（违反就报错）</h2><ol>
+<li><strong>只能由字母、数字、下划线</strong> <strong><code>_</code></strong> <strong>组成</strong>，不能有空格、特殊符号（比如 @、#、￥ 都不行）。</li>
+<li><strong>不能以数字开头</strong>。比如 <code>123name</code> 是错误的，<code>name123</code> 是正确的。</li>
+<li><strong>严格区分大小写</strong>。<code>Age</code> 和 <code>age</code> 是两个完全不同的变量。</li>
+<li><strong>不能使用 Python 的关键字（保留字）</strong>，下一节会讲。</li>
+</ol>
+<h2 id="2-2-软性规范（专业写法，PEP8-规范）"><a href="#2-2-软性规范（专业写法，PEP8-规范）" class="headerlink" title="2.2 软性规范（专业写法，PEP8 规范）"></a>2.2 软性规范（专业写法，PEP8 规范）</h2><p>规则是必须遵守的，规范是让你的代码更专业、更好读的约定：</p>
+<ol>
+<li><strong>见名知意</strong>：尽量用有意义的英文单词，不要用 <code>a</code>、<code>b</code>、<code>x</code> 这种无意义的名字。比如存姓名用 <code>name</code>，不要用 <code>n</code>。</li>
+<li><strong>变量名、函数名用「蛇形命名法」</strong>：全部小写，多个单词之间用下划线连接。比如 <code>user_name</code>、<code>student_age</code>。</li>
+<li><strong>类名用「大驼峰命名法」</strong>：每个单词首字母大写，比如 <code>StudentInfo</code>，面向对象篇我们再细讲。</li>
+<li><strong>常量约定全大写</strong>：Python 没有真正的常量，我们约定全大写的变量就是常量，告诉别人这个值不要修改，比如 <code>MAX_SIZE = 1024</code>。</li>
+</ol>
+<p>❌ 错误标识符举例</p>
+<ul>
+<li><code>123abc</code>：数字开头</li>
+<li><code>user name</code>：有空格</li>
+<li><code>user@name</code>：有特殊符号</li>
+<li><code>if</code>：是关键字</li>
+</ul>
+<h1 id="三、关键字：Python-自带的「保留词」"><a href="#三、关键字：Python-自带的「保留词」" class="headerlink" title="三、关键字：Python 自带的「保留词」"></a>三、关键字：Python 自带的「保留词」</h1><p>关键字也叫保留字，是 Python 语言内部已经占用、有特殊功能和含义的单词。绝对不能用来当变量名、函数名、类名，不然会直接报错。</p>
+<p>查看所有关键字：<code>help(&quot;keywords&quot;)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">help</span>(<span class="hljs-string">&quot;keywords&quot;</span>)<br><br>Here <span class="hljs-keyword">is</span> a <span class="hljs-built_in">list</span> of the Python keywords.  Enter <span class="hljs-built_in">any</span> keyword to get more <span class="hljs-built_in">help</span>.<br><br><span class="hljs-literal">False</span>               <span class="hljs-keyword">class</span>               <span class="hljs-title class_">from</span>                <span class="hljs-keyword">or</span><br><span class="hljs-literal">None</span>                <span class="hljs-keyword">continue</span>            <span class="hljs-keyword">global</span>              <span class="hljs-keyword">pass</span><br><span class="hljs-literal">True</span>                <span class="hljs-keyword">def</span>                 <span class="hljs-title function_">if</span>                  <span class="hljs-keyword">raise</span><br><span class="hljs-keyword">and</span>                 <span class="hljs-keyword">del</span>                 <span class="hljs-keyword">import</span>              <span class="hljs-keyword">return</span><br><span class="hljs-keyword">as</span>                  <span class="hljs-keyword">elif</span>                <span class="hljs-keyword">in</span>                  <span class="hljs-keyword">try</span><br><span class="hljs-keyword">assert</span>              <span class="hljs-keyword">else</span>                <span class="hljs-keyword">is</span>                  <span class="hljs-keyword">while</span><br><span class="hljs-keyword">async</span>               <span class="hljs-keyword">except</span>              <span class="hljs-keyword">lambda</span>              <span class="hljs-keyword">with</span><br><span class="hljs-keyword">await</span>               <span class="hljs-keyword">finally</span>             <span class="hljs-keyword">nonlocal</span>            <span class="hljs-keyword">yield</span><br><span class="hljs-keyword">break</span>               <span class="hljs-keyword">for</span>                 <span class="hljs-keyword">not</span><br></code></pre></td></tr></table></figure>
+
+<p>运行后会列出所有关键字，还会按首字母分类。</p>
+<p>常见关键字一览</p>
+<ul>
+<li>流程控制：<code>if</code>、<code>elif</code>、<code>else</code>、<code>for</code>、<code>while</code>、<code>break</code>、<code>continue</code></li>
+<li>函数与类：<code>def</code>、<code>return</code>、<code>class</code>、<code>pass</code></li>
+<li>逻辑与值：<code>True</code>、<code>False</code>、<code>None</code>、<code>and</code>、<code>or</code>、<code>not</code>、<code>in</code>、<code>is</code></li>
+<li>异常处理：<code>try</code>、<code>except</code>、<code>finally</code>、<code>raise</code></li>
+<li>其他：<code>import</code>、<code>from</code>、<code>as</code>、<code>global</code>、<code>nonlocal</code>、<code>lambda</code>、<code>yield</code></li>
+</ul>
+<p>⚠️ 新手避坑</p>
+<ol>
+<li><code>True</code>、<code>False</code>、<code>None</code> 首字母都是大写，写成小写 <code>true</code>、<code>false</code> 会报错，这是新手最常犯的错误之一。</li>
+<li>不用刻意背所有关键字，你的代码编辑器会自动给关键字高亮变色，一看就知道是关键字，不会拿来当变量名。</li>
+</ol>
+<h1 id="四、注释：给人看的说明文字"><a href="#四、注释：给人看的说明文字" class="headerlink" title="四、注释：给人看的说明文字"></a>四、注释：给人看的说明文字</h1><p>代码是写给机器运行的，但更是写给人看的 —— 可能是同事，也可能是三个月后的你自己。注释就是用来说明代码的文字，程序运行时会直接忽略注释，不会执行。</p>
+<h2 id="4-1-三种注释方式"><a href="#4-1-三种注释方式" class="headerlink" title="4.1 三种注释方式"></a>4.1 三种注释方式</h2><p>1）单行注释：<code>#</code> 开头</p>
+<p>用 <code>#</code> 号开头，后面跟注释内容，从 <code>#</code> 开始到行尾都是注释。</p>
+<p>可以单独占一行，用来解释下面的代码；也可以跟在代码后面，用来补充说明当前行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 定义用户年龄</span><br>age = <span class="hljs-number">20</span><br><br>gender = <span class="hljs-string">&quot;男&quot;</span>  <span class="hljs-comment"># 用户性别</span><br></code></pre></td></tr></table></figure>
+
+<p>2）多行注释：三引号包裹</p>
+<p>如果注释内容很多，一行写不下，可以用三个单引号 <code>&#39;&#39;&#39;</code> 或者三个双引号 <code>&quot;&quot;&quot;</code> 包裹起来，实现多行注释。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">这是多行注释</span><br><span class="hljs-string">第一行说明</span><br><span class="hljs-string">第二行说明</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">也可以用三个双引号</span><br><span class="hljs-string">效果是一样的</span><br><span class="hljs-string">一般文件开头、函数开头的大段说明用双引号</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Hello Python&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>3）文档字符串（Docstring）</p>
+<p>文档字符串本质上就是三引号注释，专门写在函数、类、模块的开头，用来说明这个函数 &#x2F; 类的功能、参数、返回值。它有特殊作用，可以通过 <code>help()</code> 函数查看，后面函数篇我们会详细讲。</p>
+<h2 id="4-2-注释的最佳实践"><a href="#4-2-注释的最佳实践" class="headerlink" title="4.2 注释的最佳实践"></a>4.2 注释的最佳实践</h2><ol>
+<li>注释是解释「为什么这么写」，而不是「写了什么」。比如 <code>age = age + 1</code> 不用写注释「年龄加 1」，代码本身已经说清楚了，你要写的是「为什么要加 1」。</li>
+<li>不用每行都加注释，只在逻辑复杂、容易踩坑、业务特殊的地方加。</li>
+<li>注释要和代码同步更新，代码改了注释也要改，不然过时的注释反而会误导人。</li>
+<li>尽量用清晰的代码命名来减少注释，好的代码本身就是说明书。</li>
+</ol>
+<h1 id="五、变量：数据的「标签」"><a href="#五、变量：数据的「标签」" class="headerlink" title="五、变量：数据的「标签」"></a>五、变量：数据的「标签」</h1><p>变量是编程里最基础的概念，简单来说，变量就是给数据起个名字，方便我们后面反复使用。</p>
+<h2 id="5-1-变量的本质：标签，不是盒子"><a href="#5-1-变量的本质：标签，不是盒子" class="headerlink" title="5.1 变量的本质：标签，不是盒子"></a>5.1 变量的本质：标签，不是盒子</h2><p>很多教程会说「变量是装数据的盒子」，这个说法在 Python 里是不准确的。</p>
+<ul>
+<li>其他语言（比如 C 语言）的变量是盒子：你创建一个变量，就申请一块内存空间，把数据放进去。</li>
+<li>Python 的变量是标签：数据本身存在内存里，变量只是贴在数据上的一个名字标签。一个数据可以贴多个标签，标签可以撕下来贴到别的数据上。</li>
+</ul>
+<p>举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">a = <span class="hljs-number">10</span><br>b = a<br>a = <span class="hljs-number">20</span><br><span class="hljs-built_in">print</span>(b)  <span class="hljs-comment"># 输出结果是多少？</span><br></code></pre></td></tr></table></figure>
+
+<p>答案是 <code>10</code>。因为 <code>b = a</code> 是给 10 这个数据又贴了一个 <code>b</code> 标签；<code>a = 20</code> 是把 <code>a</code> 标签从 10 上撕下来，贴到 20 上，<code>b</code> 标签还在 10 上，所以 b 的值还是 10。</p>
+<p><img src="https://x08gmb9mcg3.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjcxODgyZDZjNWRhMWVkZjcwOTIzYzk4M2UwNDYyMTlfT2xMR25vUmh2RHptTjJGRVR1clJNZ2xhOTRPd0VhVFVfVG9rZW46SU8zTmJBYUdLb0kxTlF4RTlUYWM0R3VRbnNkXzE3ODQ4MTc3NDY6MTc4NDgyMTM0Nl9WNA&add_watermark=true&scene_type=CCM" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>理解了「标签」这个概念，后面的内存管理、可变不可变类型就都好懂了。</p>
+<h2 id="5-2-变量的定义与赋值"><a href="#5-2-变量的定义与赋值" class="headerlink" title="5.2 变量的定义与赋值"></a>5.2 变量的定义与赋值</h2><p>Python 里变量不用提前声明类型，直接赋值就能创建变量。</p>
+<p>语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python">变量名 = 值<br></code></pre></td></tr></table></figure>
+
+<p><code>=</code> 是赋值符号，不是数学里的「等于」，意思是「把右边的值，赋值给左边的变量」。</p>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">name = <span class="hljs-string">&quot;张三&quot;</span>  <span class="hljs-comment"># 字符串类型</span><br>age = <span class="hljs-number">20</span>       <span class="hljs-comment"># 整数类型</span><br>height = <span class="hljs-number">1.75</span>  <span class="hljs-comment"># 浮点数类型</span><br>is_student = <span class="hljs-literal">True</span>  <span class="hljs-comment"># 布尔类型</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="5-3-变量的使用规则"><a href="#5-3-变量的使用规则" class="headerlink" title="5.3 变量的使用规则"></a>5.3 变量的使用规则</h2><ol>
+<li><p>变量必须先赋值，再使用。没赋值直接用会报 <code>NameError: name &#39;xxx&#39; is not defined</code> 错误。</p>
+</li>
+<li><p>同一个变量可以反复赋值不同类型的值，这叫「动态类型」。比如先赋值数字，再赋值字符串，是完全可以的：</p>
+<ol>
+<li><pre><code class="language-Python">a = 10
+a = &quot;hello&quot;  # 合法，不会报错
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><br><span class="hljs-number">3</span>. 变量名要遵守上一节讲的标识符规则和命名规范。<br><br><span class="hljs-meta">## 5.4 查看变量的类型</span><br><br><span class="hljs-type">Python</span> 是动态类型，但每个数据都有自己的类型。我们可以用 `<span class="hljs-class"><span class="hljs-keyword">type</span>()` 函数查看变量的数据类型：</span><br><br>```<span class="hljs-type">Python</span><br><span class="hljs-title">name</span> = <span class="hljs-string">&quot;张三&quot;</span><br><span class="hljs-title">age</span> = <span class="hljs-number">20</span><br><span class="hljs-title">print</span>(<span class="hljs-class"><span class="hljs-keyword">type</span>(<span class="hljs-title">name</span>))   # &lt;class &#x27;str&#x27;&gt; 字符串类型</span><br><span class="hljs-title">print</span>(<span class="hljs-class"><span class="hljs-keyword">type</span>(<span class="hljs-title">age</span>))    # &lt;class &#x27;int&#x27;&gt; 整数类型</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+<p>还可以用 <code>isinstance()</code> 函数判断变量是不是某个类型，返回布尔值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python">age = <span class="hljs-number">20</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>(age, <span class="hljs-built_in">int</span>))    <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>(age, <span class="hljs-built_in">str</span>))    <span class="hljs-comment"># False</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="5-5-多变量赋值技巧"><a href="#5-5-多变量赋值技巧" class="headerlink" title="5.5 多变量赋值技巧"></a>5.5 多变量赋值技巧</h2><p>Python 有很灵活的赋值方式，能简化代码：</p>
+<p>① 多个变量赋同一个值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python">a = b = c = <span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+
+<p>② 多个变量同时赋不同值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python">name, age, gender = <span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-number">20</span>, <span class="hljs-string">&quot;男&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>③ 最经典的用法：不用第三个变量，直接交换两个变量的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">a, b = <span class="hljs-number">10</span>, <span class="hljs-number">20</span><br>a, b = b, a  <span class="hljs-comment"># 交换完成，a=20, b=10</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="六、输入与输出：和程序交互"><a href="#六、输入与输出：和程序交互" class="headerlink" title="六、输入与输出：和程序交互"></a>六、输入与输出：和程序交互</h1><p>程序不是自顾自运行的，它需要和用户交互：接收用户输入的内容，然后把结果输出给用户。Python 里用 <code>input()</code> 做输入，<code>print()</code> 做输出。</p>
+<h2 id="6-1-输出：print-函数"><a href="#6-1-输出：print-函数" class="headerlink" title="6.1 输出：print() 函数"></a>6.1 输出：<code>print()</code> 函数</h2><p><code>print()</code> 是我们最熟悉的函数，用来把内容输出到控制台。它不止能输出单个内容，还有很多实用用法。</p>
+<p>（1）输出单个内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Hello World&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-number">2024</span>)<br></code></pre></td></tr></table></figure>
+
+<p>（2）输出多个内容</p>
+<p>用逗号隔开多个内容，输出时默认用空格分隔：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">name = <span class="hljs-string">&quot;张三&quot;</span><br>age = <span class="hljs-number">20</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;姓名：&quot;</span>, name, <span class="hljs-string">&quot;年龄：&quot;</span>, age)<br><span class="hljs-comment"># 输出：姓名： 张三 年龄： 20</span><br></code></pre></td></tr></table></figure>
+
+<p>（3）<code>sep</code> 参数：设置分隔符</p>
+<p>多个内容之间默认是空格，用 <code>sep</code> 参数可以自定义分隔符：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-built_in">print</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, sep=<span class="hljs-string">&quot;-&quot;</span>)  <span class="hljs-comment"># 输出：1-2-3</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>, sep=<span class="hljs-string">&quot;&quot;</span>)  <span class="hljs-comment"># 输出：abc</span><br></code></pre></td></tr></table></figure>
+
+<p>（4）<code>end</code> 参数：设置结尾字符</p>
+<p><code>print()</code> 默认输出完会换行，因为 <code>end</code> 参数默认是 <code>\n</code>（换行符）。我们可以修改 <code>end</code> 参数，让它不换行或者结尾加别的字符：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;第一行&quot;</span>, end=<span class="hljs-string">&quot; &quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;第二行&quot;</span>, end=<span class="hljs-string">&quot;&quot;</span>)<br><span class="hljs-comment"># 输出：第一行 第二行</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="6-2-输入：input-函数"><a href="#6-2-输入：input-函数" class="headerlink" title="6.2 输入：input() 函数"></a>6.2 输入：<code>input()</code> 函数</h2><p><code>input()</code> 用来接收用户从键盘输入的内容，程序会暂停等待，用户输入完按回车后，程序继续运行。</p>
+<p>（1）基本用法</p>
+<p><code>input()</code> 可以加提示文字，告诉用户该输入什么：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">name = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入你的名字：&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;你好，&quot;</span>, name)<br></code></pre></td></tr></table></figure>
+
+<p>⚠️ 新手第一大坑：<strong><code>input()</code></strong> <strong>返回的永远是字符串</strong></p>
+<p>这是 90% 的新手都会踩的坑：不管用户输入的是数字还是文字，<code>input()</code> 返回的结果都是字符串类型。</p>
+<p>如果你直接拿输入的内容去做数学运算，就会报错：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">age = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入你的年龄：&quot;</span>)<br><span class="hljs-built_in">print</span>(age + <span class="hljs-number">1</span>)  <span class="hljs-comment"># 报错！字符串不能和数字相加</span><br></code></pre></td></tr></table></figure>
+
+<p>解决方法：类型转换</p>
+<p>需要用数字的时候，手动用 <code>int()</code> 转成整数，用 <code>float()</code> 转成小数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python">age = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入你的年龄：&quot;</span>)<br>age = <span class="hljs-built_in">int</span>(age)  <span class="hljs-comment"># 把字符串转成整数</span><br><span class="hljs-built_in">print</span>(age + <span class="hljs-number">1</span>)  <span class="hljs-comment"># 正常运行</span><br></code></pre></td></tr></table></figure>
+
+<p>也可以写在一行里：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python">age = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入你的年龄：&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>💡 拓展：如果用户输入的不是数字，转 int 会报错，后面异常处理篇我们会讲怎么解决。</p>
+</blockquote>
+<h1 id="七、Python-内存管理与垃圾回收（入门理解版）"><a href="#七、Python-内存管理与垃圾回收（入门理解版）" class="headerlink" title="七、Python 内存管理与垃圾回收（入门理解版）"></a>七、Python 内存管理与垃圾回收（入门理解版）</h1><p>很多新手会好奇：我创建的变量、数据，都存在哪里？用完了要不要手动删除？会不会占内存？</p>
+<p>这就涉及到 Python 的内存管理机制。简单来说：Python 会自动帮你管理内存，不用手动申请和释放。它有一套完整的垃圾回收（Garbage Collection，简称 GC）机制，自动清理没用的数据，释放内存。</p>
+<h2 id="7-1-数据在内存里的样子"><a href="#7-1-数据在内存里的样子" class="headerlink" title="7.1  数据在内存里的样子"></a>7.1  数据在内存里的样子</h2><p>我们写 <code>age = 20</code> 时，Python 做了两件事：</p>
+<ol>
+<li>在内存里开辟一块空间，存储整数 <code>20</code> 这个数据；</li>
+<li>创建变量名 <code>age</code>，把它贴在 <code>20</code> 这块内存空间上，也就是建立引用关系。</li>
+</ol>
+<p>当我们写 <code>age = 30</code> 时：</p>
+<ol>
+<li>在内存里又开辟一块新空间，存储整数 <code>30</code>；</li>
+<li>把 <code>age</code> 标签从 <code>20</code> 上撕下来，贴到 <code>30</code> 上；</li>
+<li>这时候 <code>20</code> 就没有任何变量引用它了，成了「垃圾」。</li>
+</ol>
+<h2 id="7-2-垃圾回收核心：引用计数"><a href="#7-2-垃圾回收核心：引用计数" class="headerlink" title="7.2 垃圾回收核心：引用计数"></a>7.2 垃圾回收核心：引用计数</h2><p>Python 垃圾回收以引用计数为主。简单来说，每个数据对象身上都有一个计数器，记录着有多少个变量引用（指向）它。</p>
+<p>引用计数 +1 的情况</p>
+<ul>
+<li>变量被赋值：<code>a = 10</code>，10 的计数 +1</li>
+<li>变量被其他变量引用：<code>b = a</code>，10 的计数再 +1</li>
+<li>数据被放入容器（列表、字典、元组）：<code>lst = [a, 20]</code>，10 的计数 +1</li>
+<li>作为参数传入函数</li>
+</ul>
+<p>引用计数 -1 的情况</p>
+<ul>
+<li>变量被删除：<code>del a</code>，10 的计数 -1</li>
+<li>变量被重新赋值：<code>a = 20</code>，原来的 10 计数 -1</li>
+<li>容器被删除，或者元素从容器中移除</li>
+<li>函数执行结束，局部变量被销毁</li>
+</ul>
+<p>当引用计数变成 0 的时候，这个数据对象就会被立刻销毁，占用的内存空间被回收。</p>
+<h2 id="7-3-引用计数的缺陷：循环引用"><a href="#7-3-引用计数的缺陷：循环引用" class="headerlink" title="7.3 引用计数的缺陷：循环引用"></a>7.3 引用计数的缺陷：循环引用</h2><p>引用计数简单高效，但有一个致命问题：循环引用（也叫交叉引用）。</p>
+<p>举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python">a = [<span class="hljs-number">1</span>]<br>b = [<span class="hljs-number">2</span>]<br>a.append(b)  <span class="hljs-comment"># a 里面放了 b</span><br>b.append(a)  <span class="hljs-comment"># b 里面放了 a</span><br><br><span class="hljs-keyword">del</span> a<br><span class="hljs-keyword">del</span> b<br></code></pre></td></tr></table></figure>
+
+<p>删除 a 和 b 之后，两个列表的引用计数都变成 1（互相引用），但外面已经没有任何变量能访问到它们了。它们的引用计数永远不会变成 0，引用计数机制回收不了它们，就会造成内存泄漏。</p>
+<h2 id="7-4-补充机制：分代回收"><a href="#7-4-补充机制：分代回收" class="headerlink" title="7.4 补充机制：分代回收"></a>7.4 补充机制：分代回收</h2><p>为了解决循环引用的问题，Python 引入了分代回收作为补充。</p>
+<p>分代回收的核心思想很简单：存活时间越长的对象，越不可能是垃圾，就越少去检查它。</p>
+<p>Python 把所有对象分成三代：</p>
+<ul>
+<li>0 代（年轻代）：新创建的对象都是 0 代。检查最频繁，因为大部分新对象很快就会变成垃圾。</li>
+<li>1 代（中年代）：0 代对象经过一次垃圾回收还存活，就升级到 1 代。检查频率次之。</li>
+<li>2 代（老年代）：1 代对象经过一次垃圾回收还存活，就升级到 2 代。检查频率最低。</li>
+</ul>
+<p>当某一代对象数量达到阈值时，就会触发这一代的垃圾回收，清理掉没用的对象，包括循环引用的对象。</p>
+<h2 id="7-5-新手要知道的几点"><a href="#7-5-新手要知道的几点" class="headerlink" title="7.5 新手要知道的几点"></a>7.5 新手要知道的几点</h2><ol>
+<li>绝大多数情况下，你完全不用管内存管理，Python 自动帮你处理得很好。</li>
+<li>尽量避免写循环引用的代码，减少内存泄漏的可能。</li>
+<li>特别大的数据用完之后，可以手动 <code>del 变量名</code> 删除，加速回收（一般场景不需要）。</li>
+<li>不用一开始就死磕底层原理，先会用代码，进阶阶段再深入研究。</li>
+</ol>
+<h1 id="八、补充：语句与换行的小技巧"><a href="#八、补充：语句与换行的小技巧" class="headerlink" title="八、补充：语句与换行的小技巧"></a>八、补充：语句与换行的小技巧</h1><p>最后补充两个写代码时的小细节，让你的代码更规范好看。</p>
+<p>1）一行一个语句</p>
+<p>Python 默认一行写一条语句，结尾不用加分号 <code>;</code>（加了也不报错，但不符合规范，不推荐）。</p>
+<p>2）一行写多个语句</p>
+<p>如果非要在一行写多条语句，用分号隔开，但非常不推荐，影响可读性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python">a = <span class="hljs-number">10</span>; b = <span class="hljs-number">20</span>; <span class="hljs-built_in">print</span>(a + b)<br></code></pre></td></tr></table></figure>
+
+<p>3）长语句换行</p>
+<p>如果一行代码特别长，读起来很费劲，可以换行写：</p>
+<ul>
+<li>普通语句换行：在行尾加反斜杠 <code>\</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">total = <span class="hljs-number">1</span> + <span class="hljs-number">2</span> + <span class="hljs-number">3</span> + <span class="hljs-number">4</span> \<br>        + <span class="hljs-number">5</span> + <span class="hljs-number">6</span> + <span class="hljs-number">7</span> + <span class="hljs-number">8</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>括号内换行：如果代码在 <code>()</code>、<code>[]</code>、<code>{}</code> 里面，可以直接换行，不用加反斜杠，这是推荐的写法：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">total = (<span class="hljs-number">1</span> + <span class="hljs-number">2</span> + <span class="hljs-number">3</span> + <span class="hljs-number">4</span><br>         + <span class="hljs-number">5</span> + <span class="hljs-number">6</span> + <span class="hljs-number">7</span> + <span class="hljs-number">8</span>)<br></code></pre></td></tr></table></figure>
+
+<h1 id="九、动手练习题"><a href="#九、动手练习题" class="headerlink" title="九、动手练习题"></a>九、动手练习题</h1><p>编程是练出来的，不是看出来的。今天的知识点一定要亲手敲一遍，下面 5 道练习题，从易到难，覆盖今天所有核心知识点，建议全部完成。</p>
+<p>练习题 1：基础变量输出</p>
+<p>定义 3 个变量，分别存储你的姓名、年龄、所在城市，然后用 <code>print()</code> 输出一句完整的话，格式如下：<code>我叫XXX，今年XX岁，来自XX市。</code></p>
+<p>练习题 2：数字计算器</p>
+<p>写一个程序，让用户依次输入两个数字，程序计算并输出它们的和、差、积、商四个结果。</p>
+<blockquote>
+<p>提示：注意 <code>input()</code> 返回的是字符串，需要转成数字类型。</p>
+</blockquote>
+<p>练习题 3：变量交换</p>
+<p>定义两个变量 <code>a</code> 和 <code>b</code>，分别赋值 <code>100</code> 和 <code>200</code>。不使用第三个变量，交换两个变量的值，然后输出交换后的 <code>a</code> 和 <code>b</code>。</p>
+<p>练习题 4：找错改错</p>
+<p>请问下面这段代码会不会报错？如果会，说出有几处错误，分别是什么，然后改成正确的代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">age = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入你的年龄：&quot;</span>)<br><span class="hljs-keyword">if</span> age &gt;= <span class="hljs-number">18</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;你成年了&quot;</span>)<br>  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;测试一下&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>练习题 5：思考题</p>
+<p>你觉得 <code>print()</code> 函数为什么默认输出完会换行？试着用今天学到的 <code>end</code> 参数，实现输出 1 到 5，所有数字在同一行，用空格隔开。</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>今天这篇文章，我们把 Python 最基础的语法规则全部过了一遍：从缩进、标识符、关键字，到变量、输入输出，再到底层的内存管理。</p>
+<p>这些知识点看起来零散，但都是写代码的根基 —— 后面所有的复杂语法、项目实战，都是在这些规则之上搭建的。一定要亲手敲代码、做练习题，把基础打牢，后面的学习才会越来越顺。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Python 基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>04 | 详解Python中的所有数据类型与运算符</div>
+      <div>https://nicepeng.github.io/2026/07/23/03-基础语法详解/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>nicepeng</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年7月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/07/23/04-%E8%AF%A6%E8%A7%A3Python%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" title="04 | 详解Python中的所有数据类型与运算符">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">04 | 详解Python中的所有数据类型与运算符</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/23/02-python%E5%AE%89%E8%A3%85/" title="02 | Python 开发环境搭建：10 分钟搞定，写出你的第一行代码">
+                        <span class="hidden-mobile">02 | Python 开发环境搭建：10 分钟搞定，写出你的第一行代码</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/openkounter.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
