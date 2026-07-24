@@ -28,8 +28,6 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
-    <meta name="referrer" content="no-referrer-when-downgrade">
-  
   
   <title>Hexo</title>
 
@@ -63,7 +61,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"nicepeng.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"nicepeng.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -105,7 +103,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>nicepeng 的 个人博客</strong>
+      <strong>nicepeng の 空间</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -432,7 +430,7 @@
       
       <a class="index-excerpt " href="/2026/07/24/03-kafka/" target="_self">
         <div>
-          摘要：在前两篇文章中，我们搞懂了 Kafka 的定位以及它与其他 MQ 的区别。这篇我们将正式进入 Kafka 的内部世界。很多人觉得 Kafka 的术语太多、架构太绕，其实只要掌握了它的 “物理、逻辑、客户端” 三层架构模型，一切都会豁然开朗。今天，我们就用”开一家超级物流公司”的类比，把 Kafka 的核心组件拆解得明明白白。  一、宏观视角：Kafka 的三层架构模型要理解 Kafka，绝
+          摘要：在前两篇文章中，我们搞懂了 Kafka 的定位以及它与其他 MQ 的区别。这篇我们将正式进入 Kafka 的内部世界。很多人觉得 Kafka 的术语太多、架构太绕，其实只要掌握了它的 “物理、逻辑、客户端” 三层架构模型，一切都会豁然开朗。今天，我们就用”开一家超级物流公司”的类比，把 Kafka 的核心组件拆解得明明白白。  1&lt;!-- more --&gt;  一、宏观视角：Ka
         </div>
       </a>
 
@@ -499,7 +497,7 @@
       
       <a class="index-excerpt " href="/2026/07/24/02-kafka/" target="_self">
         <div>
-          摘要：在技术选型时，面对市面上琳琅满目的消息中间件，很多团队都会陷入纠结：”Kafka 吞吐量最高，是不是无脑选它就行？”、”RocketMQ 是阿里开源的，用在大厂同款架构里肯定稳？”、”RabbitMQ 老牌经典，是不是最安全？” 这篇文章我们将抛开干瘪的参数表，从底层基因、核心机制、业务场景三个维度，把这三款主流 MQ 扒个底朝天，帮你做出最靠谱的选型决策。  一、三大 MQ 的”人设”与
+          摘要：在技术选型时，面对市面上琳琅满目的消息中间件，很多团队都会陷入纠结：”Kafka 吞吐量最高，是不是无脑选它就行？”、”RocketMQ 是阿里开源的，用在大厂同款架构里肯定稳？”、”RabbitMQ 老牌经典，是不是最安全？” 这篇文章我们将抛开干瘪的参数表，从底层基因、核心机制、业务场景三个维度，把这三款主流 MQ 扒个底朝天，帮你做出最靠谱的选型决策。  1&lt;!-- more
         </div>
       </a>
 
@@ -566,7 +564,7 @@
       
       <a class="index-excerpt " href="/2026/07/24/01-kafka/" target="_self">
         <div>
-          摘要：如果你正在调研消息中间件，或者刚接触 Kafka 却被各种术语搞得一头雾水，那么这篇文章就是为你准备的。我们将从”为什么需要消息队列”讲起，用最通俗的语言带你彻底搞懂 Kafka 到底是什么、能干什么、为什么这么强。  一、先搞清楚：为什么我们需要”消息队列”？在聊 Kafka 之前，我们先回答一个更根本的问题：消息队列（Message Queue，简称 MQ）到底是什么？为什么现代系统都
+          摘要：如果你正在调研消息中间件，或者刚接触 Kafka 却被各种术语搞得一头雾水，那么这篇文章就是为你准备的。我们将从”为什么需要消息队列”讲起，用最通俗的语言带你彻底搞懂 Kafka 到底是什么、能干什么、为什么这么强。  1&lt;!-- more --&gt;  一、先搞清楚：为什么我们需要”消息队列”？在聊 Kafka 之前，我们先回答一个更根本的问题：消息队列（Message Queu
         </div>
       </a>
 
@@ -1075,32 +1073,6 @@
     </div>
   
   
-    <div class="statistics">
-  
-  
-
-  
-    
-      <span id="busuanzi_container_site_pv" style="display: none">
-        总访问量 
-        <span id="busuanzi_value_site_pv"></span>
-         次
-      </span>
-    
-    
-      <span id="busuanzi_container_site_uv" style="display: none">
-        总访客数 
-        <span id="busuanzi_value_site_uv"></span>
-         人
-      </span>
-    
-    
-
-  
-
-</div>
-
-  
   
 </div>
 
@@ -1154,8 +1126,6 @@
   <script defer src="/js/openkounter.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

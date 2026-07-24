@@ -19,23 +19,21 @@
   <meta name="author" content="nicepeng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="摘要：在前两篇文章中，我们搞懂了 Kafka 的定位以及它与其他 MQ 的区别。这篇我们将正式进入 Kafka 的内部世界。很多人觉得 Kafka 的术语太多、架构太绕，其实只要掌握了它的 “物理、逻辑、客户端” 三层架构模型，一切都会豁然开朗。今天，我们就用”开一家超级物流公司”的类比，把 Kafka 的核心组件拆解得明明白白。  一、宏观视角：Kafka 的三层架构模型要理解 Kafka，绝">
+    <meta name="description" content="摘要：在前两篇文章中，我们搞懂了 Kafka 的定位以及它与其他 MQ 的区别。这篇我们将正式进入 Kafka 的内部世界。很多人觉得 Kafka 的术语太多、架构太绕，其实只要掌握了它的 “物理、逻辑、客户端” 三层架构模型，一切都会豁然开朗。今天，我们就用”开一家超级物流公司”的类比，把 Kafka 的核心组件拆解得明明白白。  1&lt;!-- more --&gt;  一、宏观视角：Ka">
 <meta property="og:type" content="article">
 <meta property="og:title" content="03 | 五分钟读懂 Kafka 整体架构：Broker、Topic、Partition、Producer、Consumer">
 <meta property="og:url" content="https://nicepeng.github.io/2026/07/24/03-kafka/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="摘要：在前两篇文章中，我们搞懂了 Kafka 的定位以及它与其他 MQ 的区别。这篇我们将正式进入 Kafka 的内部世界。很多人觉得 Kafka 的术语太多、架构太绕，其实只要掌握了它的 “物理、逻辑、客户端” 三层架构模型，一切都会豁然开朗。今天，我们就用”开一家超级物流公司”的类比，把 Kafka 的核心组件拆解得明明白白。  一、宏观视角：Kafka 的三层架构模型要理解 Kafka，绝">
+<meta property="og:description" content="摘要：在前两篇文章中，我们搞懂了 Kafka 的定位以及它与其他 MQ 的区别。这篇我们将正式进入 Kafka 的内部世界。很多人觉得 Kafka 的术语太多、架构太绕，其实只要掌握了它的 “物理、逻辑、客户端” 三层架构模型，一切都会豁然开朗。今天，我们就用”开一家超级物流公司”的类比，把 Kafka 的核心组件拆解得明明白白。  1&lt;!-- more --&gt;  一、宏观视角：Ka">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://nicepeng.github.io/img/post/03.jpg">
 <meta property="article:published_time" content="2026-07-24T13:12:26.000Z">
-<meta property="article:modified_time" content="2026-07-24T14:37:25.937Z">
+<meta property="article:modified_time" content="2026-07-24T15:33:45.084Z">
 <meta property="article:author" content="nicepeng">
 <meta property="article:tag" content="消息中间件">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://nicepeng.github.io/img/post/03.jpg">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>03 | 五分钟读懂 Kafka 整体架构：Broker、Topic、Partition、Producer、Consumer - Hexo</title>
@@ -76,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"nicepeng.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"nicepeng.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -118,7 +116,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>nicepeng 的 个人博客</strong>
+      <strong>nicepeng の 空间</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -317,7 +315,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/bg/03.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -404,6 +402,8 @@
                 <blockquote>
 <p>摘要：在前两篇文章中，我们搞懂了 Kafka 的定位以及它与其他 MQ 的区别。这篇我们将正式进入 Kafka 的内部世界。很多人觉得 Kafka 的术语太多、架构太绕，其实只要掌握了它的 “物理、逻辑、客户端” 三层架构模型，一切都会豁然开朗。今天，我们就用”开一家超级物流公司”的类比，把 Kafka 的核心组件拆解得明明白白。</p>
 </blockquote>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">&lt;!-- more --&gt;<br></code></pre></td></tr></table></figure>
+
 <h1 id="一、宏观视角：Kafka-的三层架构模型"><a href="#一、宏观视角：Kafka-的三层架构模型" class="headerlink" title="一、宏观视角：Kafka 的三层架构模型"></a>一、宏观视角：Kafka 的三层架构模型</h1><p>要理解 Kafka，绝对不能死记硬背概念。我们可以把 Kafka 的整体架构分为三个维度来看：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Java">┌─────────────────────────────────────────────────────────┐<br>│                    Kafka 整体架构                        │<br>├──────────────┬──────────────────┬───────────────────────┤<br>│  <span class="hljs-number">1.</span> 物理层   │  <span class="hljs-number">2.</span> 逻辑层       │  <span class="hljs-number">3.</span> 客户端层          │<br>│ (硬件/部署)  │ (数据/存储组织)  │ (收发/交互方式)       │<br>├──────────────┼──────────────────┼───────────────────────┤<br>│ • Broker     │ • Topic          │ • Producer            │<br>│ • Cluster    │ • Partition      │ • Consumer            │<br>│ • Controller │ • Replica        │ • Consumer Group      │<br>│              │ • Offset         │                       │<br>└──────────────┴──────────────────┴───────────────────────┘<br></code></pre></td></tr></table></figure>
 
@@ -935,32 +935,6 @@
     </div>
   
   
-    <div class="statistics">
-  
-  
-
-  
-    
-      <span id="busuanzi_container_site_pv" style="display: none">
-        总访问量 
-        <span id="busuanzi_value_site_pv"></span>
-         次
-      </span>
-    
-    
-      <span id="busuanzi_container_site_uv" style="display: none">
-        总访客数 
-        <span id="busuanzi_value_site_uv"></span>
-         人
-      </span>
-    
-    
-
-  
-
-</div>
-
-  
   
 </div>
 
@@ -1171,8 +1145,6 @@
   <script defer src="/js/openkounter.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
