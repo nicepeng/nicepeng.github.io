@@ -1,0 +1,1237 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="nicepeng">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="上一篇我们系统讲解了字符串 ——Python 中最常用的字符序列。而在实际开发中，我们需要存储的远不止字符：数字、对象、甚至其他容器，都需要一个通用的有序容器来承载，这就是列表（list）与元组（tuple）。 很多新手刚接触时会疑惑：不都是存一组数据吗？为什么要做两个类型？元组不能修改，存在的意义是什么？为什么同样是拷贝，改嵌套列表会互相影响？ 这篇文章我们会从基础用法、核心特性、底层原理、最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06 | 列表与元组：从基础用法到底层原理，彻底搞懂 Python 最常用的序列容器">
+<meta property="og:url" content="https://nicepeng.github.io/2026/07/25/06-python%E5%88%97%E8%A1%A8%E5%85%83%E7%BB%84/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="上一篇我们系统讲解了字符串 ——Python 中最常用的字符序列。而在实际开发中，我们需要存储的远不止字符：数字、对象、甚至其他容器，都需要一个通用的有序容器来承载，这就是列表（list）与元组（tuple）。 很多新手刚接触时会疑惑：不都是存一组数据吗？为什么要做两个类型？元组不能修改，存在的意义是什么？为什么同样是拷贝，改嵌套列表会互相影响？ 这篇文章我们会从基础用法、核心特性、底层原理、最">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images.wallpaperscraft.com/image/single/boat_mountains_lake_135258_1280x720.jpg">
+<meta property="article:published_time" content="2026-07-24T16:37:13.000Z">
+<meta property="article:modified_time" content="2026-07-24T16:42:36.607Z">
+<meta property="article:author" content="nicepeng">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://images.wallpaperscraft.com/image/single/boat_mountains_lake_135258_1280x720.jpg">
+  
+  
+  
+  <title>06 | 列表与元组：从基础用法到底层原理，彻底搞懂 Python 最常用的序列容器 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nicepeng.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>nicepeng の 空间</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://images.wallpaperscraft.com/image/single/landscape_mountains_lake_1531062_300x188.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="06 | 列表与元组：从基础用法到底层原理，彻底搞懂 Python 最常用的序列容器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-25 00:37" pubdate>
+          2026年7月25日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          83 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">06 | 列表与元组：从基础用法到底层原理，彻底搞懂 Python 最常用的序列容器</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>上一篇我们系统讲解了字符串 ——Python 中最常用的字符序列。而在实际开发中，我们需要存储的远不止字符：数字、对象、甚至其他容器，都需要一个通用的有序容器来承载，这就是列表（list）与元组（tuple）。</p>
+<p>很多新手刚接触时会疑惑：不都是存一组数据吗？为什么要做两个类型？元组不能修改，存在的意义是什么？为什么同样是拷贝，改嵌套列表会互相影响？</p>
+<p>这篇文章我们会从基础用法、核心特性、底层原理、最佳实践四个维度，彻底讲透列表与元组，覆盖从入门到面试的所有核心知识点。</p>
+</blockquote>
+<hr>
+<h1 id="一、核心本质：序列、可变与不可变"><a href="#一、核心本质：序列、可变与不可变" class="headerlink" title="一、核心本质：序列、可变与不可变"></a>一、核心本质：序列、可变与不可变</h1><h2 id="1-1-什么是序列（Sequence）"><a href="#1-1-什么是序列（Sequence）" class="headerlink" title="1.1 什么是序列（Sequence）"></a>1.1 什么是序列（Sequence）</h2><p>列表和元组都属于 Python 的序列类型，序列是一组有序元素的集合，所有序列都有一套通用的操作规则：</p>
+<ul>
+<li>有序性：每个元素有固定的位置索引，从 0 开始编号</li>
+<li>共性操作：支持索引访问、切片截取、遍历、长度计算、成员判断等</li>
+<li>Python 中常见的序列：字符串（str）、列表（list）、元组（tuple）、字节串（bytes）</li>
+</ul>
+<h2 id="1-2-列表（list）：动态可变的通用容器"><a href="#1-2-列表（list）：动态可变的通用容器" class="headerlink" title="1.2 列表（list）：动态可变的通用容器"></a>1.2 列表（list）：动态可变的通用容器</h2><p>列表是 Python 中最灵活的有序容器，核心特性是可变（Mutable）—— 创建之后，可以随时增加、删除、修改内部元素。</p>
+<ul>
+<li><p>定义方式：用方括号<code>[]</code>包裹，元素之间用逗号分隔</p>
+</li>
+<li><p>元素规则：支持任意数据类型（数字、字符串、列表、对象等），元素可重复</p>
+</li>
+<li><p>创建方式：</p>
+<ul>
+<li><pre><code class="language-Python"># 1. 字面量创建（最常用）
+nums = [1, 2, 3, &quot;Python&quot;, True]
+
+# 2. list()构造函数，可将其他可迭代对象转成列表
+chars = list(&quot;hello&quot;)  # [&#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;]
+
+# 3. 列表推导式（进阶，后面详解）
+squares = [i*i for i in range(1, 6)]
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>## <span class="hljs-number">1.3</span> 元组（tuple）：静态不可变的容器<br><br>元组和列表几乎完全对称，核心特性是不可变（Immutable）—— 创建之后，不能增加、删除、修改内部元素。<br><br>- 定义方式：用圆括号`()`包裹，元素之间用逗号分隔<br>- 元素规则：和列表一致，支持任意数据类型，可重复<br><br>⚠️ 新手第一大坑：单个元素的元组<br><br>如果元组只有一个元素，必须在元素后面加逗号，否则括号会被当成运算符，不是元组：<br><br>```Python<br>t1 = (<span class="hljs-number">1</span>)      # 这是整数<span class="hljs-number">1</span>，不是元组<br>t2 = (<span class="hljs-number">1</span>,)     # 这才是单个元素的元组<br>print(type(t1), type(t2))  # &lt;<span class="hljs-keyword">class</span> <span class="hljs-string">&#x27;int&#x27;</span>&gt; &lt;<span class="hljs-keyword">class</span> <span class="hljs-string">&#x27;tuple&#x27;</span>&gt;<br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>创建方式：</p>
+<ul>
+<li><pre><code class="language-Python"># 1. 字面量创建
+info = (&quot;张三&quot;, 20, &quot;北京&quot;)
+
+# 2. tuple()构造函数
+nums = tuple([1,2,3])  # 列表转元组
+
+# 3. 省略括号（Python自动识别）
+a, b = 1, 2  # 右边本质就是一个元组
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><br><br><br><span class="hljs-meta"># 二、通用序列操作：列表和元组都能用</span><br><br>作为序列类型，列表和元组有 <span class="hljs-number">80</span>% 的操作是完全通用的，这些语法和字符串也高度一致，学习成本极低。<br><br><span class="hljs-meta">## 2.1 索引访问</span><br><br>通过索引定位单个元素，支持正索引（从 <span class="hljs-number">0</span> 开始）和负索引（从 - <span class="hljs-number">1</span> 开始，倒数）。<br><br>```Python<br>lst = [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;d&quot;</span>]<br><span class="hljs-keyword">print</span>(lst[<span class="hljs-number">0</span>])   <span class="hljs-meta"># 第一个元素：a</span><br><span class="hljs-keyword">print</span>(lst[<span class="hljs-number">-1</span>])  <span class="hljs-meta"># 最后一个元素：d</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>⚠️ 注意：索引超出范围会直接报 <code>IndexError: list index out of range</code> 错误。</p>
+<h2 id="2-2-切片操作"><a href="#2-2-切片操作" class="headerlink" title="2.2 切片操作"></a>2.2 切片操作</h2><p>截取序列中的一段子序列，语法和规则和字符串完全一致：<code>序列[start:end:step]</code></p>
+<ul>
+<li><strong>左闭右开规则</strong>：包含 start 索引元素，不包含 end 索引元素</li>
+<li><strong>参数缺省</strong>：start 缺省从头开始，end 缺省到末尾结束，step 缺省为 1</li>
+<li><strong>步长为负</strong>：从右往左截取，可实现倒序</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">lst = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br><span class="hljs-built_in">print</span>(lst[<span class="hljs-number">1</span>:<span class="hljs-number">4</span>])    <span class="hljs-comment"># [2, 3, 4]</span><br><span class="hljs-built_in">print</span>(lst[:<span class="hljs-number">3</span>])     <span class="hljs-comment"># [1, 2, 3]</span><br><span class="hljs-built_in">print</span>(lst[::-<span class="hljs-number">1</span>])   <span class="hljs-comment"># [5, 4, 3, 2, 1] 倒序</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-3-拼接与重复"><a href="#2-3-拼接与重复" class="headerlink" title="2.3 拼接与重复"></a>2.3 拼接与重复</h2><ul>
+<li><code>+</code>：拼接两个同类型序列，生成一个新序列</li>
+<li><code>*</code>：将序列重复 n 次，生成一个新序列</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-built_in">print</span>([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>] + [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])  <span class="hljs-comment"># [1, 2, 3, 4]</span><br><span class="hljs-built_in">print</span>((<span class="hljs-number">1</span>,<span class="hljs-number">2</span>) * <span class="hljs-number">3</span>)       <span class="hljs-comment"># (1, 2, 1, 2, 1, 2)</span><br></code></pre></td></tr></table></figure>
+
+<p>⚠️ <strong>经典坑：列表乘法的引用问题</strong></p>
+<p>用<code>*</code>重复列表时，如果元素是可变对象，重复的是<strong>内存****引用</strong>，不是拷贝。修改一个元素，所有重复的元素都会跟着变：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 错误写法：三个子列表指向同一个内存地址</span><br>lst = [[]] * <span class="hljs-number">3</span><br>lst[<span class="hljs-number">0</span>].append(<span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(lst)  <span class="hljs-comment"># [[1], [1], [1]] 三个都变了</span><br><br><span class="hljs-comment"># 正确写法：用列表推导式，每次创建新的空列表</span><br>lst = [[] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>)]<br>lst[<span class="hljs-number">0</span>].append(<span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(lst)  <span class="hljs-comment"># [[1], [], []] 只有第一个变</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-4-成员运算与公共函数"><a href="#2-4-成员运算与公共函数" class="headerlink" title="2.4 成员运算与公共函数"></a>2.4 成员运算与公共函数</h2><ul>
+<li><code>in</code> &#x2F; <code>not in</code>：判断元素是否在序列中，返回布尔值</li>
+<li>公共内置函数： <ul>
+<li><code>len()</code>：返回序列长度</li>
+<li><code>max()</code> &#x2F; <code>min()</code>：返回最大值 &#x2F; 最小值（元素类型需可比较）</li>
+<li><code>sum()</code>：对数字序列求和</li>
+<li><code>sorted()</code>：对序列排序，返回新的列表</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-5-遍历方式"><a href="#2-5-遍历方式" class="headerlink" title="2.5 遍历方式"></a>2.5 遍历方式</h2><p><strong>普通遍历</strong>：只获取元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>]:<br>    <span class="hljs-built_in">print</span>(item)<br></code></pre></td></tr></table></figure>
+
+<p><strong>带索引遍历</strong>：同时获取索引和元素（推荐，非常常用）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">for</span> index, item <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>([<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>]):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;索引<span class="hljs-subst">&#123;index&#125;</span>，元素<span class="hljs-subst">&#123;item&#125;</span>&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="三、列表专属操作：可变带来的丰富方法"><a href="#三、列表专属操作：可变带来的丰富方法" class="headerlink" title="三、列表专属操作：可变带来的丰富方法"></a>三、列表专属操作：可变带来的丰富方法</h1><p>因为列表是可变对象，所以拥有大量增、删、改的内置方法 —— 这也是列表和元组最大的功能区别。我们按功能分类拆解，每个方法讲清用法、区别和踩坑点。</p>
+<h2 id="3-1-增加元素"><a href="#3-1-增加元素" class="headerlink" title="3.1 增加元素"></a>3.1 增加元素</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>核心特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>append(item)</td>
+<td>末尾追加一个元素</td>
+<td>把参数整体当成一个元素追加，会产生嵌套</td>
+</tr>
+<tr>
+<td>extend(iterable)</td>
+<td>末尾追加可迭代对象的所有元素</td>
+<td>把参数拆开，逐个追加到末尾</td>
+</tr>
+<tr>
+<td>insert(index, item)</td>
+<td>在指定索引位置插入元素</td>
+<td>插入位置后所有元素都会后移，性能比尾部追加差</td>
+</tr>
+</tbody></table>
+<p>✅ 高频对比：append vs extend</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python">lst = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br>lst.append([<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br><span class="hljs-built_in">print</span>(lst)  <span class="hljs-comment"># [1, 2, [3, 4]] 把列表当单个元素加进去</span><br><br>lst = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br>lst.extend([<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br><span class="hljs-built_in">print</span>(lst)  <span class="hljs-comment"># [1, 2, 3, 4] 把列表元素拆开逐个加</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-2-删除元素"><a href="#3-2-删除元素" class="headerlink" title="3.2 删除元素"></a>3.2 删除元素</h2><table>
+<thead>
+<tr>
+<th>方法 &#x2F; 语句</th>
+<th>作用</th>
+<th>核心特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pop(index&#x3D;-1)</td>
+<td>删除并返回指定索引的元素</td>
+<td>默认删除最后一个；有返回值；索引越界报错</td>
+</tr>
+<tr>
+<td>remove(item)</td>
+<td>删除第一个匹配的元素</td>
+<td>按值删除；无返回值；元素不存在会报ValueError</td>
+</tr>
+<tr>
+<td>del 语句</td>
+<td>删除指定索引 &#x2F; 切片的元素，或删除整个变量</td>
+<td>Python 关键字，不是列表方法</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>清空整个列表</td>
+<td>列表变成空列表，对象本身还在</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python">lst = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>]<br><span class="hljs-built_in">print</span>(lst.pop())    <span class="hljs-comment"># 4 删除最后一个，返回被删元素</span><br><br>lst.remove(<span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(lst)          <span class="hljs-comment"># [1, 3, 2] 只删除第一个匹配的2</span><br><br><span class="hljs-keyword">del</span> lst[<span class="hljs-number">0</span>]<br><span class="hljs-built_in">print</span>(lst)          <span class="hljs-comment"># [3, 2]</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-3-修改元素"><a href="#3-3-修改元素" class="headerlink" title="3.3 修改元素"></a>3.3 修改元素</h2><p>单个修改：通过索引直接赋值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">lst = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br>lst[<span class="hljs-number">0</span>] = <span class="hljs-number">100</span><br></code></pre></td></tr></table></figure>
+
+<p>批量修改：通过切片赋值，支持不等长替换（删除切片区域，插入新元素）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python">lst = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]<br>lst[<span class="hljs-number">1</span>:<span class="hljs-number">3</span>] = [<span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>]  <span class="hljs-comment"># 替换2个元素为3个</span><br><span class="hljs-built_in">print</span>(lst)  <span class="hljs-comment"># [1, 20, 30, 40, 4]</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-4-查找与统计"><a href="#3-4-查找与统计" class="headerlink" title="3.4 查找与统计"></a>3.4 查找与统计</h2><p><code>index(item, start, end)</code>：查找元素第一次出现的索引，找不到报错</p>
+<p><code>count(item)</code>：统计元素出现的次数</p>
+<h2 id="3-5-排序与反转"><a href="#3-5-排序与反转" class="headerlink" title="3.5 排序与反转"></a>3.5 排序与反转</h2><p>这里是新手最容易混淆的知识点，重点区分原地操作和返回新对象。</p>
+<table>
+<thead>
+<tr>
+<th>方法 &#x2F; 函数</th>
+<th>作用</th>
+<th>核心特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>list.sort(reverse&#x3D;False)</td>
+<td>对列表原地排序</td>
+<td>列表方法，直接修改原列表，无返回值（返回 None）</td>
+</tr>
+<tr>
+<td>sorted(iterable)</td>
+<td>对可迭代对象排序</td>
+<td>Python 内置函数，返回全新的排序后列表，原数据不变</td>
+</tr>
+<tr>
+<td>list.reverse()</td>
+<td>原地反转列表</td>
+<td>列表方法，直接修改原列表</td>
+</tr>
+<tr>
+<td>list[::-1]</td>
+<td>切片反转</td>
+<td>返回全新的反转后列表，原列表不变</td>
+</tr>
+</tbody></table>
+<p>⚠️ <strong>经典坑：排序的返回值</strong></p>
+<p>很多新手会写<code>a = a.sort()</code>，结果得到<code>None</code>—— 因为 sort 是<strong>原地修改</strong>，没有返回值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">lst = [<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br>new_lst = lst.sort()<br><span class="hljs-built_in">print</span>(new_lst)  <span class="hljs-comment"># None 错误写法</span><br><span class="hljs-built_in">print</span>(lst)      <span class="hljs-comment"># [1, 2, 3] 原列表已经被修改</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="四、元组：不可变的真相与独有价值"><a href="#四、元组：不可变的真相与独有价值" class="headerlink" title="四、元组：不可变的真相与独有价值"></a>四、元组：不可变的真相与独有价值</h1><p>很多新手觉得元组就是 “不能改的列表”，除了省点内存没别的用，这是对元组最大的误解。不可变本身就是元组最核心的价值。</p>
+<h2 id="4-1-元组支持的操作"><a href="#4-1-元组支持的操作" class="headerlink" title="4.1 元组支持的操作"></a>4.1 元组支持的操作</h2><p>因为不可变，元组没有增、删、改的方法，只支持：</p>
+<ul>
+<li>所有通用序列操作：索引、切片、拼接、遍历等</li>
+<li>两个查询方法：<code>index()</code>、<code>count()</code>，用法和列表完全一致</li>
+</ul>
+<h2 id="4-2-不可变的真正含义"><a href="#4-2-不可变的真正含义" class="headerlink" title="4.2 不可变的真正含义"></a>4.2 不可变的真正含义</h2><p>⚠️ 经典面试题：<strong>元组****的元素真的完全不能改吗？</strong></p>
+<p>答案是：元组不可变，指的是元素的「内存引用」不可变；如果元素本身是可变对象，它的内部内容可以修改。</p>
+<p>元组里存的不是元素本身，而是元素的内存地址。不可变指的是 “地址不能变”—— 你不能让这个位置指向另一个对象；但如果地址指向的对象本身是可变的（比如列表、字典），修改这个对象的内部内容是允许的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python">t = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>])<br><br><span class="hljs-comment"># 错误：修改元组元素的指向，报错</span><br>t[<span class="hljs-number">2</span>] = [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>]  <span class="hljs-comment"># TypeError: &#x27;tuple&#x27; object does not support item assignment</span><br><br><span class="hljs-comment"># 正确：修改可变元素的内部内容，合法</span><br>t[<span class="hljs-number">2</span>].append(<span class="hljs-number">5</span>)<br><span class="hljs-built_in">print</span>(t)  <span class="hljs-comment"># (1, 2, [3, 4, 5])</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="4-3-元组的核心优势"><a href="#4-3-元组的核心优势" class="headerlink" title="4.3 元组的核心优势"></a>4.3 元组的核心优势</h2><ol>
+<li>性能更优<ol>
+<li>元组创建速度比列表快，占用内存更小。</li>
+<li>Python 会对长度较小的元组做缓存优化，重复创建时直接复用内存，不需要向系统申请新空间。</li>
+</ol>
+</li>
+<li>安全性更高<ol>
+<li>作为常量数据使用时，不用担心被意外修改；作为函数返回值传递时，比列表更安全。</li>
+</ol>
+</li>
+<li>可作为字典的键<ol>
+<li>字典的键必须是不可变且可哈希的，列表因为可变不能当键；元素全为不可变类型的元组，可以作为字典的键。</li>
+</ol>
+</li>
+<li>天然支持解包语法<ol>
+<li>Python 的多变量赋值、函数多返回值，本质都是元组解包，语法简洁优雅。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h1 id="五、进阶语法：列表推导式与元组解包"><a href="#五、进阶语法：列表推导式与元组解包" class="headerlink" title="五、进阶语法：列表推导式与元组解包"></a>五、进阶语法：列表推导式与元组解包</h1><p>这两个是 Python 的特色语法，是区分入门和熟练使用者的标志，简洁高效，日常开发使用频率极高。</p>
+<h2 id="5-1-列表推导式（List-Comprehension）"><a href="#5-1-列表推导式（List-Comprehension）" class="headerlink" title="5.1 列表推导式（List Comprehension）"></a>5.1 列表推导式（List Comprehension）</h2><p>列表推导式是 Python 专门用来快速生成列表的语法，可以用一行代码替代简单的<code>for循环+append</code>写法，代码更简洁，执行效率也更高（底层 C 优化）。</p>
+<p><strong>基础语法</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 语法：[表达式 for 变量 in 可迭代对象]</span><br><br><span class="hljs-comment"># 例子：生成1-10的平方列表</span><br><span class="hljs-comment"># 普通写法</span><br>squares = []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>):<br>    squares.append(i*i)<br><br><span class="hljs-comment"># 列表推导式写法</span><br>squares = [i*i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>)]<br></code></pre></td></tr></table></figure>
+
+<p><strong>带条件的列表推导式</strong></p>
+<p>只把满足条件的元素加入结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 生成1-10中所有偶数的平方</span><br>even_squares = [i*i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>) <span class="hljs-keyword">if</span> i % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>]<br></code></pre></td></tr></table></figure>
+
+<p><strong>嵌套列表推导式</strong></p>
+<p>支持多层循环，顺序和普通 for 循环一致：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 扁平化二维列表</span><br>matrix = [[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>], [<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]]<br>flat = [num <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> matrix <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> row]<br><span class="hljs-comment"># 等价于</span><br>flat = []<br><span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> matrix:<br>    <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> row:<br>        flat.append(num)<br></code></pre></td></tr></table></figure>
+
+<p>✅ 最佳实践：</p>
+<ul>
+<li>简单逻辑优先用列表推导式，简洁高效</li>
+<li>超过 3 层循环、复杂逻辑不要用推导式，牺牲可读性得不偿失</li>
+<li>除了列表推导式，Python 还有集合推导式、字典推导式，语法类似</li>
+</ul>
+<h2 id="5-2-元组解包（Tuple-Unpacking）"><a href="#5-2-元组解包（Tuple-Unpacking）" class="headerlink" title="5.2 元组解包（Tuple Unpacking）"></a>5.2 元组解包（Tuple Unpacking）</h2><p>解包就是把容器里的元素，一次性赋值给多个变量。元组是 Python 解包语法的核心载体。</p>
+<p><strong>基础解包</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 右边本质是元组，括号可以省略</span><br>name, age, city = (<span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-number">20</span>, <span class="hljs-string">&quot;北京&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>经典应用：交换两个变量</strong></p>
+<p>Python 中不需要中间变量，一行就能完成交换，底层就是元组解包：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">a, b = <span class="hljs-number">10</span>, <span class="hljs-number">20</span><br>a, b = b, a  <span class="hljs-comment"># 交换完成</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>进阶：用<code>\*</code>接收剩余元素</strong></p>
+<p><code>*变量名</code>可以接收剩下的所有元素，最终会封装成列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 第一个给a，最后一个给c，中间所有都给b</span><br>a, *b, c = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br><span class="hljs-built_in">print</span>(a, b, c)  <span class="hljs-comment"># 1 [2, 3, 4] 5</span><br></code></pre></td></tr></table></figure>
+
+<p>⚠️ 注意：一个解包表达式中，<code>*</code>只能出现一次。</p>
+<p><strong>常见应用场景</strong></p>
+<ul>
+<li>函数返回多个值（Python 函数默认返回元组）</li>
+<li>遍历字典的键值对：<code>for k, v in dict.items()</code></li>
+<li>快速拆分列表 &#x2F; 元组数据</li>
+</ul>
+<h1 id="六、底层原理：动态数组与深浅拷贝"><a href="#六、底层原理：动态数组与深浅拷贝" class="headerlink" title="六、底层原理：动态数组与深浅拷贝"></a>六、底层原理：动态数组与深浅拷贝</h1><p>想真正吃透列表和元组，不能只停留在 API 用法，理解底层实现才能应对复杂场景和面试问题。</p>
+<h2 id="6-1-底层存储结构"><a href="#6-1-底层存储结构" class="headerlink" title="6.1 底层存储结构"></a>6.1 底层存储结构</h2><h3 id="列表：动态数组（Dynamic-Array）"><a href="#列表：动态数组（Dynamic-Array）" class="headerlink" title="列表：动态数组（Dynamic Array）"></a><strong>列表：动态数组（Dynamic Array）</strong></h3><p>列表的底层是一个<strong>存储元素引用的****动态数组</strong>：</p>
+<ul>
+<li>数组里存的不是元素本身，是每个元素的内存地址（指针）</li>
+<li>动态扩容：当元素数量超过数组当前容量时，Python 会自动申请一块更大的内存空间，把旧数据复制过去，再释放旧空间</li>
+<li>扩容策略：CPython 中扩容比例约为原容量的 1.125 倍，加上少量固定偏移</li>
+</ul>
+<p><strong>性能影响：</strong></p>
+<ul>
+<li>尾部追加元素（append）：平均时间复杂度 O (1)，效率极高</li>
+<li>中间插入 &#x2F; 删除元素：需要移动插入位置后面的所有元素，时间复杂度 O (n)，数据量大时性能差</li>
+<li>索引访问：通过下标直接定位，时间复杂度 O (1)，极快</li>
+</ul>
+<h3 id="元组：静态数组"><a href="#元组：静态数组" class="headerlink" title="元组：静态数组"></a>元组：静态数组</h3><p>元组的底层也是引用数组，但大小固定，不能扩容。</p>
+<ul>
+<li>因为不可变，Python 对元组做了很多缓存优化：长度 0-20 的元组会被缓存，重复创建时直接复用，不需要向系统申请内存</li>
+<li>创建速度、访问速度都略优于列表，内存占用更小</li>
+</ul>
+<h2 id="6-2-浅拷贝与深拷贝"><a href="#6-2-浅拷贝与深拷贝" class="headerlink" title="6.2 浅拷贝与深拷贝"></a>6.2 浅拷贝与深拷贝</h2><p>⚠️ 超级高频考点，也是新手头号大坑</p>
+<p>当列表中嵌套了可变对象时，不同的拷贝方式会带来完全不同的结果，很多人踩过坑。</p>
+<p>（1）直接赋值：不是拷贝</p>
+<p>用<code>=</code>赋值只是给同一个对象贴了新标签，两个变量指向完全相同的内存地址，改一个另一个必然跟着变：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]]<br>b = a  <span class="hljs-comment"># 直接赋值，指向同一个对象</span><br>b.append(<span class="hljs-number">5</span>)<br><span class="hljs-built_in">print</span>(a)  <span class="hljs-comment"># [1, 2, [3, 4], 5] a也变了</span><br></code></pre></td></tr></table></figure>
+
+<p>（2）浅拷贝（Shallow Copy）</p>
+<p>创建一个新的列表对象，但新列表里的元素，还是原列表元素的引用 —— 只拷贝最外层，内层嵌套的对象不拷贝。</p>
+<p>实现方式：切片<code>[:]</code>、<code>list()</code>构造、<code>copy.copy()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> copy<br>a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]]<br>b = a[:]  <span class="hljs-comment"># 浅拷贝</span><br><br><span class="hljs-comment"># 修改外层不可变元素：互不影响</span><br>b[<span class="hljs-number">0</span>] = <span class="hljs-number">100</span><br><span class="hljs-built_in">print</span>(a[<span class="hljs-number">0</span>])  <span class="hljs-comment"># 1 a不变</span><br><br><span class="hljs-comment"># 修改内层可变对象：互相影响</span><br>b[<span class="hljs-number">2</span>].append(<span class="hljs-number">5</span>)<br><span class="hljs-built_in">print</span>(a[<span class="hljs-number">2</span>])  <span class="hljs-comment"># [3, 4, 5] a也变了</span><br></code></pre></td></tr></table></figure>
+
+<p>（3）深拷贝（Deep Copy）</p>
+<p>完全递归拷贝所有层级的对象，新列表和原列表从外到内完全独立，互不影响。</p>
+<p>实现方式：<code>copy.deepcopy()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> copy<br>a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]]<br>b = copy.deepcopy(a)  <span class="hljs-comment"># 深拷贝</span><br><br>b[<span class="hljs-number">2</span>].append(<span class="hljs-number">5</span>)<br><span class="hljs-built_in">print</span>(a[<span class="hljs-number">2</span>])  <span class="hljs-comment"># [3, 4] a完全不变</span><br></code></pre></td></tr></table></figure>
+
+<p>总结与选型</p>
+<table>
+<thead>
+<tr>
+<th>拷贝方式</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>直接赋值</td>
+<td>完全共享，同生共死</td>
+<td>只是给对象起别名</td>
+</tr>
+<tr>
+<td>浅拷贝</td>
+<td>只拷贝外层，内层共享</td>
+<td>一维列表，元素都是不可变类型</td>
+</tr>
+<tr>
+<td>深拷贝</td>
+<td>完全拷贝，彻底独立</td>
+<td>嵌套了可变对象，需要完全隔离</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="七、最佳实践与常见避坑"><a href="#七、最佳实践与常见避坑" class="headerlink" title="七、最佳实践与常见避坑"></a>七、最佳实践与常见避坑</h1><h2 id="7-1-列表-vs-元组，怎么选？"><a href="#7-1-列表-vs-元组，怎么选？" class="headerlink" title="7.1 列表 vs 元组，怎么选？"></a>7.1 列表 vs 元组，怎么选？</h2><p>✅ 选列表：数据需要频繁增删改；需要动态变化的容器</p>
+<p>✅ 选元组：数据固定不变，只用于读取遍历；作为字典的键；函数返回多个值；作为常量提升安全性</p>
+<h2 id="7-2-循环中删除列表元素的坑"><a href="#7-2-循环中删除列表元素的坑" class="headerlink" title="7.2 循环中删除列表元素的坑"></a>7.2 循环中删除列表元素的坑</h2><p>正序遍历列表并删除元素，会导致后续元素前移，漏掉下一个元素，出现漏删：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 错误写法：删不干净</span><br>lst = [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br><span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> lst:<br>    <span class="hljs-keyword">if</span> item == <span class="hljs-number">2</span>:<br>        lst.remove(item)<br><span class="hljs-built_in">print</span>(lst)  <span class="hljs-comment"># [2, 3] 漏掉了第二个2</span><br></code></pre></td></tr></table></figure>
+
+<p>✅ 正确方案（推荐优先级从高到低）：</p>
+<p><strong>列表推导式</strong>：生成新列表，最简洁高效</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python">lst = [item <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> lst <span class="hljs-keyword">if</span> item != <span class="hljs-number">2</span>]<br></code></pre></td></tr></table></figure>
+
+<p><strong>倒序遍历删除</strong>：从后往前删，删除元素不影响前面的索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(lst)-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>    <span class="hljs-keyword">if</span> lst[i] == <span class="hljs-number">2</span>:<br>        lst.pop(i)<br></code></pre></td></tr></table></figure>
+
+<p><strong>遍历副本，删原列表</strong>：不推荐，浪费内存</p>
+<h2 id="7-3-其他避坑点"><a href="#7-3-其他避坑点" class="headerlink" title="7.3 其他避坑点"></a>7.3 其他避坑点</h2><ul>
+<li>不要用<code>list</code>、<code>tuple</code>当变量名，会覆盖 Python 内置函数</li>
+<li><code>sort()</code>是原地修改，没有返回值，不要写<code>a = a.sort()</code></li>
+<li>列表乘法不要用于嵌套可变对象，用列表推导式替代</li>
+<li>元组单个元素别忘了加逗号</li>
+</ul>
+<hr>
+<h1 id="八、动手练习题（深度进阶版）"><a href="#八、动手练习题（深度进阶版）" class="headerlink" title="八、动手练习题（深度进阶版）"></a>八、动手练习题（深度进阶版）</h1><h2 id="练习题-1：列表去重并保持原有顺序"><a href="#练习题-1：列表去重并保持原有顺序" class="headerlink" title="练习题 1：列表去重并保持原有顺序"></a>练习题 1：列表去重并保持原有顺序</h2><p>给定列表<code>lst = [3, 2, 1, 2, 3, 4, 5, 4]</code>，请对列表去重，并且保留元素第一次出现的顺序，不能直接用<code>set()</code>（集合会打乱顺序）。</p>
+<blockquote>
+<p>提示：可以借助辅助集合判断是否已存在，遍历原列表生成新列表</p>
+</blockquote>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>用一个辅助集合记录已经出现过的元素，遍历原列表，遇到没出现过的元素就加入结果列表，同时更新集合。利用集合 O (1) 的查找速度，整体时间复杂度 O (n)。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python">lst = [<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>]<br>seen = <span class="hljs-built_in">set</span>()<br>result = []<br><span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> lst:<br>    <span class="hljs-keyword">if</span> item <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> seen:<br>        seen.add(item)<br>        result.append(item)<br><br><span class="hljs-built_in">print</span>(result)  <span class="hljs-comment"># [3, 2, 1, 4, 5]</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>拓展</strong></p>
+<p>Python 3.7 + 中字典默认保序，也可以用字典键去重：<code>list(dict.fromkeys(lst))</code>，一行即可实现。</p>
+</blockquote>
+<h2 id="练习题-2：扁平化嵌套列表"><a href="#练习题-2：扁平化嵌套列表" class="headerlink" title="练习题 2：扁平化嵌套列表"></a>练习题 2：扁平化嵌套列表</h2><p>给定一个多层嵌套的列表，比如<code>lst = [1, [2, [3, 4], 5], 6, [7]]</code>，请编写函数将其扁平化成一维列表<code>[1, 2, 3, 4, 5, 6, 7]</code>。</p>
+<blockquote>
+<p>提示：递归实现，判断元素是否为列表类型</p>
+</blockquote>
+<h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><p>递归遍历每个元素：如果元素是列表 &#x2F; 元组，就递归扁平化；如果是普通元素，就加入结果。</p>
+<h3 id="完整代码-1"><a href="#完整代码-1" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">flatten</span>(<span class="hljs-params">lst</span>):<br>    result = []<br>    <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> lst:<br>        <span class="hljs-comment"># 判断元素是否为列表或元组</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(item, (<span class="hljs-built_in">list</span>, <span class="hljs-built_in">tuple</span>)):<br>            <span class="hljs-comment"># 递归扁平化，把结果扩展到总列表</span><br>            result.extend(flatten(item))<br>        <span class="hljs-keyword">else</span>:<br>            result.append(item)<br>    <span class="hljs-keyword">return</span> result<br><br>lst = [<span class="hljs-number">1</span>, [<span class="hljs-number">2</span>, [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>], <span class="hljs-number">5</span>], <span class="hljs-number">6</span>, [<span class="hljs-number">7</span>]]<br><span class="hljs-built_in">print</span>(flatten(lst))  <span class="hljs-comment"># [1, 2, 3, 4, 5, 6, 7]</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>易错点：</strong></p>
+<p>不要用<code>append</code>加递归结果，否则会把整个列表当单个元素加进去，要用<code>extend</code>。</p>
+</blockquote>
+<h2 id="练习题-3：深浅拷贝辨析"><a href="#练习题-3：深浅拷贝辨析" class="headerlink" title="练习题 3：深浅拷贝辨析"></a>练习题 3：深浅拷贝辨析</h2><p>请写出下面代码的运行结果，并解释原因。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> copy<br>a = [<span class="hljs-number">1</span>, &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;张三&quot;</span>&#125;, (<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]<br>b = a[:]<br>c = copy.deepcopy(a)<br><br>b[<span class="hljs-number">0</span>] = <span class="hljs-number">100</span><br>b[<span class="hljs-number">1</span>][<span class="hljs-string">&quot;age&quot;</span>] = <span class="hljs-number">20</span><br>b[<span class="hljs-number">2</span>] += (<span class="hljs-number">4</span>, <span class="hljs-number">5</span>)<br><br><span class="hljs-built_in">print</span>(a)<br><span class="hljs-built_in">print</span>(c)<br></code></pre></td></tr></table></figure>
+
+<h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">a = [<span class="hljs-number">1</span>, &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">20</span>&#125;, (<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]<br>c = [<span class="hljs-number">1</span>, &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;张三&#x27;</span>&#125;, (<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]<br></code></pre></td></tr></table></figure>
+
+<h3 id="详细解析"><a href="#详细解析" class="headerlink" title="详细解析"></a>详细解析</h3><p><code>b = a[:]</code>是浅拷贝，只拷贝最外层列表，内层元素都是引用共享：</p>
+<ul>
+<li><code>b[0] = 100</code>：修改外层整数（不可变），相当于给 b [0] 重新赋值，不影响 a，所以 a [0] 还是 1</li>
+<li><code>b[1][&quot;age&quot;] = 20</code>：b [1] 和 a [1] 指向同一个字典（可变对象），修改字典内容，a 也会跟着变</li>
+<li><code>b[2] += (4,5)</code>：元组是不可变的，<code>+=</code>会生成新元组，重新赋值给 b [2]，不影响 a [2]，所以 a [2] 还是原来的元组</li>
+</ul>
+<p><code>c = deepcopy(a)</code>是深拷贝，所有层级的对象都完全复制，和 a 彻底独立，所以 b 的所有修改都不会影响 c。</p>
+<h2 id="练习题-4：找两个列表的交集（考虑重复元素）"><a href="#练习题-4：找两个列表的交集（考虑重复元素）" class="headerlink" title="练习题 4：找两个列表的交集（考虑重复元素）"></a>练习题 4：找两个列表的交集（考虑重复元素）</h2><p>给定两个列表<code>lst1 = [1, 2, 2, 3]</code>，<code>lst2 = [2, 2, 4]</code>，请找出两个列表的交集，重复元素按出现次数保留，最终结果为<code>[2, 2]</code>。</p>
+<blockquote>
+<p>注意：不能直接用集合交集，集合会去重，丢失重复元素的计数</p>
+</blockquote>
+<h3 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h3><p>用字典统计第一个列表每个元素的出现次数，再遍历第二个列表，遇到计数 &gt; 0 的元素就加入结果，同时计数减 1，保证重复次数匹配。</p>
+<h3 id="完整代码-2"><a href="#完整代码-2" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python">lst1 = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br>lst2 = [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>]<br><br><span class="hljs-comment"># 统计第一个列表的元素频次</span><br>count = &#123;&#125;<br><span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> lst1:<br>    count[num] = count.get(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span><br><br>result = []<br><span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> lst2:<br>    <span class="hljs-keyword">if</span> count.get(num, <span class="hljs-number">0</span>) &gt; <span class="hljs-number">0</span>:<br>        result.append(num)<br>        count[num] -= <span class="hljs-number">1</span><br><br><span class="hljs-built_in">print</span>(result)  <span class="hljs-comment"># [2, 2]</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>拓展</strong></p>
+<p>Python 标准库<code>collections.Counter</code>可以直接实现频次统计，写法更简洁：<code>list((Counter(lst1) &amp; Counter(lst2)).elements())</code></p>
+</blockquote>
+<h2 id="练习题-5：学生成绩管理"><a href="#练习题-5：学生成绩管理" class="headerlink" title="练习题 5：学生成绩管理"></a>练习题 5：学生成绩管理</h2><p>用列表存储多个学生字典（每个字典包含 name、score 字段），实现以下功能：</p>
+<ol>
+<li>添加 3 个学生信息</li>
+<li>按分数从高到低排序</li>
+<li>找出分数最高的学生姓名</li>
+<li>计算所有学生的平均分</li>
+</ol>
+<p><strong>完整代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 1. 添加学生信息</span><br>students = [<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">85</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;李四&quot;</span>, <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">92</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;王五&quot;</span>, <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">78</span>&#125;<br>]<br><br><span class="hljs-comment"># 2. 按分数从高到低排序</span><br>students.sort(key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-string">&quot;score&quot;</span>], reverse=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;按分数排序：&quot;</span>, students)<br><br><span class="hljs-comment"># 3. 分数最高的学生</span><br>top_student = students[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;name&quot;</span>]<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;最高分学生：&quot;</span>, top_student)<br><br><span class="hljs-comment"># 4. 计算平均分</span><br>total_score = <span class="hljs-built_in">sum</span>(s[<span class="hljs-string">&quot;score&quot;</span>] <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> students)<br>avg_score = total_score / <span class="hljs-built_in">len</span>(students)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;平均分：&quot;</span>, <span class="hljs-built_in">round</span>(avg_score, <span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+
+<p><strong>核心知识点</strong></p>
+<ul>
+<li>列表<code>sort</code>的<code>key</code>参数：指定排序依据，用 lambda 表达式提取字典的 score 字段</li>
+<li>生成器表达式求和：比列表推导式更省内存</li>
+</ul>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>列表和元组是 Python 开发中使用频率最高的两个容器，看似简单，实则包含了可变 &#x2F; 不可变、动态数组、深浅拷贝等很多核心设计思想。</p>
+<p>把基础用法用熟，把底层原理吃透，把常见坑避开，你的 Python 代码会更高效、更健壮。下一篇我们会讲解字典与集合 ——Python 中查找性能最强的映射容器。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Python 基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>06 | 列表与元组：从基础用法到底层原理，彻底搞懂 Python 最常用的序列容器</div>
+      <div>https://nicepeng.github.io/2026/07/25/06-python列表元组/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>nicepeng</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年7月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/24/04-kafka/" title="04 | Topic 与 Partition：Kafka 消息存储的底层逻辑">
+                        <span class="hidden-mobile">04 | Topic 与 Partition：Kafka 消息存储的底层逻辑</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/openkounter.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
