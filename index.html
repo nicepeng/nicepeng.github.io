@@ -28,6 +28,8 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
   
   <title>Hexo</title>
 
@@ -103,7 +105,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>nicepeng</strong>
+      <strong>nicepeng 的 个人博客</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -346,7 +348,13 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/24/04-kafka/" target="_self">
+          <img src="/img/post/04.jpg" srcset="/img/loading.gif" lazyload alt="04 | Topic 与 Partition：Kafka 消息存储的底层逻辑">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
         <a href="/2026/07/24/04-kafka/" target="_self">
@@ -355,7 +363,7 @@
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/24/04-kafka/" target="_self">
+      <a class="index-excerpt " href="/2026/07/24/04-kafka/" target="_self">
         <div>
           Topic 和分区到底是什么关系？消息真的存在 Topic 里吗？ 为什么都说 “分区越多，吞吐量越高”？ 既然 Kafka 保证消息顺序，为什么还会出现消息乱序？ 这些问题的答案，全都藏在 Kafka 的存储设计里。今天我们就深入底层，把 Topic 和 Partition 彻底讲透，从逻辑概念到物理文件，从设计初衷到查找机制，全程用快递驿站类比 + 原理图，带你看懂 Kafka 高吞吐、高可靠
         </div>
@@ -407,7 +415,13 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/24/03-kafka/" target="_self">
+          <img src="/img/post/03.jpg" srcset="/img/loading.gif" lazyload alt="03 | 五分钟读懂 Kafka 整体架构：Broker、Topic、Partition、Producer、Consumer">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
         <a href="/2026/07/24/03-kafka/" target="_self">
@@ -416,7 +430,7 @@
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/24/03-kafka/" target="_self">
+      <a class="index-excerpt " href="/2026/07/24/03-kafka/" target="_self">
         <div>
           摘要：在前两篇文章中，我们搞懂了 Kafka 的定位以及它与其他 MQ 的区别。这篇我们将正式进入 Kafka 的内部世界。很多人觉得 Kafka 的术语太多、架构太绕，其实只要掌握了它的 “物理、逻辑、客户端” 三层架构模型，一切都会豁然开朗。今天，我们就用”开一家超级物流公司”的类比，把 Kafka 的核心组件拆解得明明白白。  一、宏观视角：Kafka 的三层架构模型要理解 Kafka，绝
         </div>
@@ -468,7 +482,13 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/24/02-kafka/" target="_self">
+          <img src="/img/post/02.jpg" srcset="/img/loading.gif" lazyload alt="02 | 消息队列全景对比 —— Kafka vs RabbitMQ vs RocketMQ 该如何选？">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
         <a href="/2026/07/24/02-kafka/" target="_self">
@@ -477,7 +497,7 @@
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/24/02-kafka/" target="_self">
+      <a class="index-excerpt " href="/2026/07/24/02-kafka/" target="_self">
         <div>
           摘要：在技术选型时，面对市面上琳琅满目的消息中间件，很多团队都会陷入纠结：”Kafka 吞吐量最高，是不是无脑选它就行？”、”RocketMQ 是阿里开源的，用在大厂同款架构里肯定稳？”、”RabbitMQ 老牌经典，是不是最安全？” 这篇文章我们将抛开干瘪的参数表，从底层基因、核心机制、业务场景三个维度，把这三款主流 MQ 扒个底朝天，帮你做出最靠谱的选型决策。  一、三大 MQ 的”人设”与
         </div>
@@ -529,7 +549,13 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/24/01-kafka/" target="_self">
+          <img src="/img/post/01.jpg" srcset="/img/loading.gif" lazyload alt="01 | Kafka 是什么？一篇文章搞懂它的定位与核心价值">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
         <a href="/2026/07/24/01-kafka/" target="_self">
@@ -538,7 +564,7 @@
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/24/01-kafka/" target="_self">
+      <a class="index-excerpt " href="/2026/07/24/01-kafka/" target="_self">
         <div>
           摘要：如果你正在调研消息中间件，或者刚接触 Kafka 却被各种术语搞得一头雾水，那么这篇文章就是为你准备的。我们将从”为什么需要消息队列”讲起，用最通俗的语言带你彻底搞懂 Kafka 到底是什么、能干什么、为什么这么强。  一、先搞清楚：为什么我们需要”消息队列”？在聊 Kafka 之前，我们先回答一个更根本的问题：消息队列（Message Queue，简称 MQ）到底是什么？为什么现代系统都
         </div>
@@ -590,7 +616,13 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/23/vibe-coding-01/" target="_self">
+          <img src="/img/post/04.jpg" srcset="/img/loading.gif" lazyload alt="01 | Vibe Coding 初体验 —— Blot">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
         <a href="/2026/07/23/vibe-coding-01/" target="_self">
@@ -599,7 +631,7 @@
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/23/vibe-coding-01/" target="_self">
+      <a class="index-excerpt " href="/2026/07/23/vibe-coding-01/" target="_self">
         <div>
           Vibe-coding 这个词我经常看到，但是却并没有去深入了解这个词的具体含义。不过，它的确没有精确的定义，大意是：你不需要一行行扣代码，而是把想法、感觉、“氛围”以自然语言的形式描述给 AI，让它帮你把软件“变”出来。 Blot 是一款在线的AI应用生成平台，它不需要安装任何软件，打开浏览器就能使用，而且写完代码立刻就能看到效果，做完之后支持一键发布到网上，完全零门槛。  一、注册Blot1）
         </div>
@@ -653,7 +685,13 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/23/05-%E4%B8%80%E6%96%87%E5%90%83%E9%80%8Fpython%E5%AD%97%E7%AC%A6%E4%B8%B2/" target="_self">
+          <img src="/img/post/04.jpg" srcset="/img/loading.gif" lazyload alt="05 | 一文吃透python字符串">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
         <a href="/2026/07/23/05-%E4%B8%80%E6%96%87%E5%90%83%E9%80%8Fpython%E5%AD%97%E7%AC%A6%E4%B8%B2/" target="_self">
@@ -662,7 +700,7 @@
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/23/05-%E4%B8%80%E6%96%87%E5%90%83%E9%80%8Fpython%E5%AD%97%E7%AC%A6%E4%B8%B2/" target="_self">
+      <a class="index-excerpt " href="/2026/07/23/05-%E4%B8%80%E6%96%87%E5%90%83%E9%80%8Fpython%E5%AD%97%E7%AC%A6%E4%B8%B2/" target="_self">
         <div>
           上一篇我们系统讲解了 Python 全量数据类型与运算符，其中字符串是日常开发中使用频率最高的序列类型 —— 爬虫数据提取、办公文本处理、数据分析清洗、用户交互输出，几乎所有场景都离不开字符串操作。 很多初学者觉得字符串简单，无非是写写文字、拼拼接接，但真正用到时总会踩坑：切片越界、编码乱码、正则匹配不准、拼接效率低下等等。本质上是只记住了零散的 API，没有理解字符串的核心特性和底层逻辑。 今天
         </div>
@@ -714,7 +752,13 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/23/04-%E8%AF%A6%E8%A7%A3Python%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" target="_self">
+          <img src="/img/post/04.jpg" srcset="/img/loading.gif" lazyload alt="04 | 详解Python中的所有数据类型与运算符">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
         <a href="/2026/07/23/04-%E8%AF%A6%E8%A7%A3Python%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" target="_self">
@@ -723,7 +767,7 @@
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/23/04-%E8%AF%A6%E8%A7%A3Python%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" target="_self">
+      <a class="index-excerpt " href="/2026/07/23/04-%E8%AF%A6%E8%A7%A3Python%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" target="_self">
         <div>
           上一篇文章我们搞定了 Python 的基础语法规则，知道了怎么定义变量、怎么和程序交互。但变量只是「贴在数据上的标签」，我们编程的核心，本质上就是对各类数据进行处理。 不同类型的数据，能做的操作、适用的场景完全不同；而运算符，就是操控这些数据的「基础工具」—— 加减乘除做计算，比较大小做判断，逻辑运算做条件组合。可以说，数据类型 + 运算符，是搭建所有 Python 代码的底层积木。 今天这篇文章
         </div>
@@ -775,7 +819,13 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/23/03-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E8%AF%A6%E8%A7%A3/" target="_self">
+          <img src="/img/post/04.jpg" srcset="/img/loading.gif" lazyload alt="03 | Python基础语法详解">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
         <a href="/2026/07/23/03-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E8%AF%A6%E8%A7%A3/" target="_self">
@@ -784,7 +834,7 @@
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/23/03-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E8%AF%A6%E8%A7%A3/" target="_self">
+      <a class="index-excerpt " href="/2026/07/23/03-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E8%AF%A6%E8%A7%A3/" target="_self">
         <div>
           上一篇我们搭好了 Python 开发环境，成功写出了人生第一行代码 print(&quot;Hello World&quot;)。很多同学跑完程序后会好奇：  为什么有的代码前面要空几格？不空就直接报错？ 变量名为什么不能随便起？有的名字一写就红名报错？ 我写的这些代码，在电脑里到底是怎么运行的？  这些问题，本质上都属于 Python 的「基础语法规则」。就像写作文要遵守标点、分段规范，写代码也
         </div>
@@ -836,7 +886,13 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/23/02-python%E5%AE%89%E8%A3%85/" target="_self">
+          <img src="/img/post/04.jpg" srcset="/img/loading.gif" lazyload alt="02 | Python 开发环境搭建：10 分钟搞定，写出你的第一行代码">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
         <a href="/2026/07/23/02-python%E5%AE%89%E8%A3%85/" target="_self">
@@ -845,7 +901,7 @@
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/23/02-python%E5%AE%89%E8%A3%85/" target="_self">
+      <a class="index-excerpt " href="/2026/07/23/02-python%E5%AE%89%E8%A3%85/" target="_self">
         <div>
           上一篇我们聊了 Python 能做什么、零基础该怎么学，很多同学已经摩拳擦掌，想亲手写代码试试了。 学编程的第一步，永远是先把「干活的工具」准备好。很多新手还没开始写代码，就倒在了环境搭建这一步：要么下载错了版本，要么装完运行不了，折腾半天没搞定，直接劝退。 别担心，今天这篇我会用最直白的步骤，带你从零搭好 Python 开发环境。全程跟着点鼠标就行，哪怕你完全不懂电脑，也能 10 分钟搞定，顺利
         </div>
@@ -897,7 +953,13 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/22/01-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" target="_self">
+          <img src="/img/post/04.jpg" srcset="/img/loading.gif" lazyload alt="01 | 并发编程入门：一文吃透进程与线程，手写 4 种线程创建方式">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
         <a href="/2026/07/22/01-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" target="_self">
@@ -906,7 +968,7 @@
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/22/01-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" target="_self">
+      <a class="index-excerpt " href="/2026/07/22/01-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" target="_self">
         <div>
           很多 Java 工程师刚接触并发编程时，都会卡在「进程与线程」这第一步：  背了一堆概念，合上书就分不清谁是资源分配单位，谁是调度单位； 写线程代码只会抄模板，搞不懂start()和run()到底有啥区别； 线程状态记了又忘，更别说理解状态之间的流转逻辑。  其实并发编程一点都不抽象，它本质就是解决「如何让多件事同时高效运行」的问题。今天咱们就从生活类比出发，配上可直接运行的代码和 ASCII 流
         </div>
@@ -1013,6 +1075,32 @@
     </div>
   
   
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
   
 </div>
 
@@ -1066,6 +1154,8 @@
   <script defer src="/js/openkounter.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
